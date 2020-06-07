@@ -2,7 +2,7 @@
   "private": true,
   "name": "interv-timer",
   "description": "My application description",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "author": "Tsubasa Namiki <namikingsoft@gmail.com>",
   "main": "app/background.js",
   "scripts": {
