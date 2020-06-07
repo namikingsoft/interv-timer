@@ -3,7 +3,7 @@
   "name": "interv-timer",
   "description": "My application description",
   "version": "1.0.0",
-  "author": "Yoshihide Shiono <shiono.yoshihide@gmail.com>",
+  "author": "Tsubasa Namiki <namikingsoft@gmail.com>",
   "main": "app/background.js",
   "scripts": {
     "dev": "nextron",
