@@ -1,7 +1,8 @@
 import React from 'react'
 import Document, { Head, Main, NextScript } from 'next/document'
 import { ServerStyleSheets } from '@material-ui/styles'
-import { initializeFonts, theme } from '../lib'
+import { theme } from '../lib/theme'
+import { initializeFonts } from '../lib/fonts'
 
 class MyDocument extends Document {
   componentDidMount(): void {

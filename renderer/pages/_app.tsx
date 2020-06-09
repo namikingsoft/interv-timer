@@ -3,7 +3,7 @@ import App from 'next/app'
 import Head from 'next/head'
 import { ThemeProvider } from '@material-ui/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
-import { theme } from '../lib'
+import { theme, MyCssBaseline } from '../lib/theme'
 
 export default class MyApp extends App {
   componentDidMount(): void {
@@ -23,6 +23,7 @@ export default class MyApp extends App {
         </Head>
         <ThemeProvider theme={theme}>
           <CssBaseline />
+          <MyCssBaseline />
           <Component {...pageProps} />
         </ThemeProvider>
       </React.Fragment>
