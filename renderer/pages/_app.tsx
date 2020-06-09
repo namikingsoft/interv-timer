@@ -6,7 +6,7 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import { theme } from '../lib'
 
 export default class MyApp extends App {
-  componentDidMount (): void {
+  componentDidMount(): void {
     const jssStyles = document.querySelector('#jss-server-side')
     if (jssStyles) {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -14,7 +14,7 @@ export default class MyApp extends App {
     }
   }
 
-  render (): React.ReactElement {
+  render(): React.ReactElement {
     const { Component, pageProps } = this.props
     return (
       <React.Fragment>

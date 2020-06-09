@@ -4,36 +4,48 @@ import { useRouter } from 'next/router'
 import NextLink, { LinkProps as NextLinkProps } from 'next/link'
 import MuiLink, { LinkProps as MuiLinkProps } from '@material-ui/core/Link'
 
-type NextComposedProps = React.AnchorHTMLAttributes<HTMLAnchorElement> & NextLinkProps;
+type NextComposedProps = React.AnchorHTMLAttributes<HTMLAnchorElement> &
+  NextLinkProps
 
-const NextComposed = React.forwardRef<HTMLAnchorElement, NextComposedProps>((props, ref) => {
-  const { as, href, replace, scroll, passHref, shallow, prefetch, ...other } = props
+const NextComposed = React.forwardRef<HTMLAnchorElement, NextComposedProps>(
+  (props, ref) => {
+    const {
+      as,
+      href,
+      replace,
+      scroll,
+      passHref,
+      shallow,
+      prefetch,
+      ...other
+    } = props
 
-  return (
-    <NextLink
-      href={href}
-      prefetch={prefetch}
-      as={as}
-      replace={replace}
-      scroll={scroll}
-      shallow={shallow}
-      passHref={passHref}
-    >
-      <a ref={ref} {...other} />
-    </NextLink>
-  )
-})
+    return (
+      <NextLink
+        href={href}
+        prefetch={prefetch}
+        as={as}
+        replace={replace}
+        scroll={scroll}
+        shallow={shallow}
+        passHref={passHref}
+      >
+        <a ref={ref} {...other} />
+      </NextLink>
+    )
+  },
+)
 NextComposed.displayName = 'NextComposed'
 
 interface LinkPropsBase {
-  activeClassName?: string;
-  innerRef?: React.Ref<HTMLAnchorElement>;
-  naked?: boolean;
+  activeClassName?: string
+  innerRef?: React.Ref<HTMLAnchorElement>
+  naked?: boolean
 }
 
-type LinkProps = LinkPropsBase & NextComposedProps & Omit<MuiLinkProps, 'ref'>;
+type LinkProps = LinkPropsBase & NextComposedProps & Omit<MuiLinkProps, 'ref'>
 
-function LinkComponent (props: LinkProps) {
+function LinkComponent(props: LinkProps) {
   const {
     activeClassName = 'active',
     className: classNameProps,
@@ -50,10 +62,17 @@ function LinkComponent (props: LinkProps) {
   if (naked) {
     return <NextComposed className={className} ref={innerRef} {...other} />
   }
-  return <MuiLink component={NextComposed} className={className} ref={innerRef} {...other} />
+  return (
+    <MuiLink
+      component={NextComposed}
+      className={className}
+      ref={innerRef}
+      {...other}
+    />
+  )
 }
 
-export const Link = React.forwardRef<HTMLAnchorElement, LinkProps>((props, ref) => (
-  <LinkComponent {...props} innerRef={ref} />
-))
+export const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
+  (props, ref) => <LinkComponent {...props} innerRef={ref} />,
+)
 Link.displayName = 'Link'

@@ -4,33 +4,33 @@ module.exports = {
     es2020: true,
   },
   extends: [
-    "plugin:react/recommended",
-    "standard",
-    "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:import/typescript",
-    "plugin:prettier/recommended",
-    "prettier/react",
-    "prettier/@typescript-eslint",
-    "prettier/standard",
+    'plugin:react/recommended',
+    'standard',
+    'plugin:@typescript-eslint/eslint-recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:import/typescript',
+    'plugin:prettier/recommended',
+    'prettier/react',
+    'prettier/@typescript-eslint',
+    'prettier/standard',
   ],
-  parser: "@typescript-eslint/parser",
+  parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
     },
     ecmaVersion: 11,
-    sourceType: "module",
+    sourceType: 'module',
   },
-  plugins: ["react", "prettier", "@typescript-eslint"],
+  plugins: ['react', 'prettier', '@typescript-eslint'],
   rules: {
-    "comma-dangle": ["error", "always-multiline"],
-    "react/prop-types": "off", // alt typescript
-    "prettier/prettier": [
-      "error",
+    'comma-dangle': ['error', 'always-multiline'],
+    'react/prop-types': 'off', // alt typescript
+    'prettier/prettier': [
+      'error',
       {
-        parser: "typescript",
+        parser: 'typescript',
       },
     ],
   },
-};
+}
