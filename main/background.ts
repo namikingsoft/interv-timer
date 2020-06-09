@@ -18,7 +18,8 @@ if (isProd) {
     height: 600,
     transparent: true,
     frame: false,
-    alwaysOnTop: true,
+    // for debug
+    // alwaysOnTop: true,
   })
 
   if (isProd) {
