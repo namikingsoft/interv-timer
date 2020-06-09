@@ -1,9 +1,9 @@
-import React from 'react';
-import Head from 'next/head';
-import { Theme, makeStyles, createStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import { Link } from '../components/atoms/Link';
+import React from 'react'
+import Head from 'next/head'
+import { Theme, makeStyles, createStyles } from '@material-ui/core/styles'
+import Button from '@material-ui/core/Button'
+import Typography from '@material-ui/core/Typography'
+import { Link } from '../components/atoms/Link'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -11,11 +11,11 @@ const useStyles = makeStyles((theme: Theme) =>
       textAlign: 'center',
       paddingTop: theme.spacing(4),
     },
-  })
-);
+  }),
+)
 
-const Next = () => {
-  const classes = useStyles({});
+const Next: React.FC = () => {
+  const classes = useStyles({})
 
   return (
     <React.Fragment>
@@ -38,7 +38,7 @@ const Next = () => {
         </Button>
       </div>
     </React.Fragment>
-  );
-};
+  )
+}
 
-export default Next;
+export default Next

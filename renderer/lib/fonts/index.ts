@@ -1,12 +1,12 @@
-const FontFaceObserver = require('fontfaceobserver');
+import * as FontFaceObserver from 'fontfaceobserver'
 
-require('typeface-roboto');
+require('typeface-roboto')
 
-export const initializeFonts = () => {
-  const roboto = new FontFaceObserver('Roboto');
+export const initializeFonts = (): void => {
+  const roboto = new FontFaceObserver('Roboto')
 
   // non-blocking loading fonts
   roboto.load().then(() => {
-    document.documentElement.classList.add('roboto');
-  });
-};
+    document.documentElement.classList.add('roboto')
+  })
+}

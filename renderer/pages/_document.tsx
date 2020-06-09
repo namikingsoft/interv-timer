@@ -1,17 +1,17 @@
-import React from 'react';
-import Document, { Head, Main, NextScript } from 'next/document';
-import { ServerStyleSheets } from '@material-ui/styles';
+import React from 'react'
+import Document, { Head, Main, NextScript } from 'next/document'
+import { ServerStyleSheets } from '@material-ui/styles'
 import {
   initializeFonts,
   theme,
-} from '../lib';
+} from '../lib'
 
 class MyDocument extends Document {
-  componentDidMount() {
-    initializeFonts();
+  componentDidMount (): void {
+    initializeFonts()
   }
 
-  render() {
+  render (): React.ReactElement {
     return (
       <html lang="en" dir="ltr">
         <Head>
@@ -24,20 +24,20 @@ class MyDocument extends Document {
           <NextScript />
         </body>
       </html>
-    );
+    )
   }
 }
 
 MyDocument.getInitialProps = async ctx => {
-  const sheets = new ServerStyleSheets();
-  const originalRenderPage = ctx.renderPage;
+  const sheets = new ServerStyleSheets()
+  const originalRenderPage = ctx.renderPage
 
   ctx.renderPage = () =>
     originalRenderPage({
       enhanceApp: App => props => sheets.collect(<App {...props} />),
-    });
+    })
 
-  const initialProps = await Document.getInitialProps(ctx);
+  const initialProps = await Document.getInitialProps(ctx)
 
   return {
     ...initialProps,
@@ -47,7 +47,7 @@ MyDocument.getInitialProps = async ctx => {
         {sheets.getStyleElement()}
       </React.Fragment>,
     ],
-  };
-};
+  }
+}
 
-export default MyDocument;
+export default MyDocument

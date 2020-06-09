@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import Head from 'next/head';
-import { Theme, makeStyles, createStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogActions from '@material-ui/core/DialogActions';
-import Typography from '@material-ui/core/Typography';
-import { Link } from '../components/atoms/Link';
+import React, { useState } from 'react'
+import Head from 'next/head'
+import { Theme, makeStyles, createStyles } from '@material-ui/core/styles'
+import Button from '@material-ui/core/Button'
+import Dialog from '@material-ui/core/Dialog'
+import DialogTitle from '@material-ui/core/DialogTitle'
+import DialogContent from '@material-ui/core/DialogContent'
+import DialogContentText from '@material-ui/core/DialogContentText'
+import DialogActions from '@material-ui/core/DialogActions'
+import Typography from '@material-ui/core/Typography'
+import { Link } from '../components/atoms/Link'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -16,14 +16,14 @@ const useStyles = makeStyles((theme: Theme) =>
       textAlign: 'center',
       paddingTop: theme.spacing(4),
     },
-  })
-);
+  }),
+)
 
-const Home = () => {
-  const classes = useStyles({});
-  const [open, setOpen] = useState(false);
-  const handleClose = () => setOpen(false);
-  const handleClick = () => setOpen(true);
+const Home: React.FC = () => {
+  const classes = useStyles({})
+  const [open, setOpen] = useState(false)
+  const handleClose = () => setOpen(false)
+  const handleClick = () => setOpen(true)
 
   return (
     <React.Fragment>
@@ -58,7 +58,7 @@ const Home = () => {
         </Button>
       </div>
     </React.Fragment>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home

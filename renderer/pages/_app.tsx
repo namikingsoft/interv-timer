@@ -1,20 +1,21 @@
-import React from 'react';
-import App from 'next/app';
-import Head from 'next/head';
-import { ThemeProvider } from '@material-ui/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import { theme } from '../lib';
+import React from 'react'
+import App from 'next/app'
+import Head from 'next/head'
+import { ThemeProvider } from '@material-ui/styles'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import { theme } from '../lib'
 
 export default class MyApp extends App {
-  componentDidMount() {
-    const jssStyles = document.querySelector('#jss-server-side');
+  componentDidMount (): void {
+    const jssStyles = document.querySelector('#jss-server-side')
     if (jssStyles) {
-      jssStyles.parentNode!.removeChild(jssStyles);
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      jssStyles.parentNode!.removeChild(jssStyles)
     }
   }
 
-  render() {
-    const { Component, pageProps } = this.props;
+  render (): React.ReactElement {
+    const { Component, pageProps } = this.props
     return (
       <React.Fragment>
         <Head>
@@ -25,6 +26,6 @@ export default class MyApp extends App {
           <Component {...pageProps} />
         </ThemeProvider>
       </React.Fragment>
-    );
+    )
   }
 }
