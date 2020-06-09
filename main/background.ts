@@ -20,6 +20,9 @@ if (isProd) {
     frame: false,
     // for debug
     // alwaysOnTop: true,
+    // avoid white border on top frame
+    // https://github.com/electron/electron/issues/13164#issuecomment-479941434
+    titleBarStyle: 'customButtonsOnHover',
   })
 
   if (isProd) {
