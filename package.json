@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "nextron",
     "build": "nextron build",
+    "test": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "lintfix": "npm run lint -- --fix",
     "postinstall": "electron-builder install-app-deps"

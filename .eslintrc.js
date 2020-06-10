@@ -2,6 +2,7 @@ module.exports = {
   env: {
     browser: true,
     es2020: true,
+    jest: true,
   },
   extends: [
     'plugin:react/recommended',
@@ -10,6 +11,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:import/typescript',
     'plugin:prettier/recommended',
+    'plugin:jest/recommended',
     'prettier/react',
     'prettier/@typescript-eslint',
     'prettier/standard',
@@ -22,7 +24,7 @@ module.exports = {
     ecmaVersion: 11,
     sourceType: 'module',
   },
-  plugins: ['react', 'prettier', '@typescript-eslint'],
+  plugins: ['react', 'prettier', 'jest', '@typescript-eslint'],
   rules: {
     'comma-dangle': ['error', 'always-multiline'],
     'react/prop-types': 'off', // alt typescript
