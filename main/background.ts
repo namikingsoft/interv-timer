@@ -14,14 +14,21 @@ if (isProd) {
   await app.whenReady()
 
   const mainWindow = createWindow('main', {
-    width: 1000,
+    width: 640,
     height: 600,
     transparent: true,
     frame: false,
     alwaysOnTop: true,
+    fullscreenable: false,
+    minimizable: false,
+    maximizable: false,
+    // avoid burn-in shadow
+    // https://stackoverflow.com/questions/59498577/getting-shadow-in-transparent-window-in-electron
+    hasShadow: false,
     // avoid white border on top frame
     // https://github.com/electron/electron/issues/13164#issuecomment-479941434
     titleBarStyle: 'customButtonsOnHover',
+    // closable: false,
   })
 
   if (isProd) {

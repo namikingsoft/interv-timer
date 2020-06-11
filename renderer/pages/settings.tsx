@@ -14,18 +14,41 @@ const useStyles = makeStyles((theme: Theme) =>
       paddingTop: theme.spacing(4),
       color: 'white',
     },
-    buttons: {
+    header: {
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: 50,
       // Icon
       '& svg': {
         filter: 'drop-shadow(0px 0px 1.5px black);',
       },
+      zIndex: 1234,
+      cursor: 'grab',
+      WebkitAppRegion: 'drag',
+    },
+    main: {
+      position: 'fixed',
+      overflowY: 'scroll',
+      overflowX: 'hidden',
+      top: 50,
+      left: 0,
+      width: '100%',
+      bottom: 0,
+      zIndex: 1234,
+      cursor: 'grab',
+      WebkitAppRegion: 'drag',
     },
     form: {
       marginLeft: 14,
     },
     laps: {
-      width: 320,
+      width: '100%',
       WebkitAppRegion: 'no-drag',
+    },
+    floatRight: {
+      float: 'right',
     },
   }),
 )
@@ -68,23 +91,25 @@ const Home: React.FC = () => {
       </Head>
 
       <div className={classes.root}>
-        <Grid container spacing={2}>
-          <Grid item xs={12} className={classes.buttons}>
-            <IconButton color="inherit" onClick={saveAndGotoHome}>
-              <SaveIcon />
-            </IconButton>
-          </Grid>
-          <Grid item xs={12}>
-            <TextareaAutosize
-              className={classes.laps}
-              rowsMin={10}
-              rowsMax={20}
-              placeholder={placeholder}
-              value={lapsText}
-              onChange={onChangeLapsText}
-            />
-          </Grid>
-        </Grid>
+        <div className={classes.header}>
+          <IconButton
+            color="inherit"
+            onClick={saveAndGotoHome}
+            className={classes.floatRight}
+          >
+            <SaveIcon />
+          </IconButton>
+        </div>
+        <div className={classes.main}>
+          <TextareaAutosize
+            className={classes.laps}
+            rowsMin={10}
+            rowsMax={20}
+            placeholder={placeholder}
+            value={lapsText}
+            onChange={onChangeLapsText}
+          />
+        </div>
       </div>
     </React.Fragment>
   )

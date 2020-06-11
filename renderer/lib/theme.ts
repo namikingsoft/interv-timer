@@ -22,6 +22,9 @@ const styles = () => ({
   '@global': {
     body: {
       WebkitAppRegion: 'drag',
+      '&:hover': {
+        backgroundColor: 'rgba(0,0,0,0.2)',
+      },
     },
   },
 })

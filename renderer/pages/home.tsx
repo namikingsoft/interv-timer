@@ -27,11 +27,45 @@ const useStyles = makeStyles((theme: Theme) =>
       fontSize: 24,
       textShadow: `${textBorderColor} 1px 1px 0, ${textBorderColor} -1px -1px 0, ${textBorderColor} -1px 1px 0, ${textBorderColor} 1px -1px 0, ${textBorderColor} 0px 1px 0, ${textBorderColor}  0 -1px 0, ${textBorderColor} -1px 0 0, ${textBorderColor} 1px 0 0`,
     },
-    buttons: {
+    header: {
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: 50,
       // Icon
       '& svg': {
         filter: 'drop-shadow(0px 0px 1.5px black);',
       },
+      zIndex: 1234,
+      cursor: 'grab',
+      WebkitAppRegion: 'drag',
+    },
+    main: {
+      position: 'fixed',
+      overflowY: 'scroll',
+      overflowX: 'hidden',
+      top: 50,
+      left: 0,
+      width: '100%',
+      bottom: 65,
+      borderTop: '1px solid rgba(0,0,0,0.1)',
+      borderBottom: '1px solid rgba(0,0,0,0.1)',
+      zIndex: 1234,
+      cursor: 'grab',
+      WebkitAppRegion: 'drag',
+      paddingTop: 15,
+    },
+    footer: {
+      position: 'fixed',
+      bottom: 0,
+      left: 0,
+      width: '100%',
+      height: 70,
+      zIndex: 1234,
+      cursor: 'grab',
+      WebkitAppRegion: 'drag',
+      paddingTop: 15,
     },
     lap: {
       marginLeft: 14,
@@ -56,8 +90,11 @@ const useStyles = makeStyles((theme: Theme) =>
       animation: '$hurryUp 1s ease-in-out 0s infinite normal',
       transformOrigin: 'center',
     },
-    finished: {
-      opacity: 0.36,
+    nonActive: {
+      opacity: 0.25,
+    },
+    floatRight: {
+      float: 'right',
     },
     '@keyframes hurry': {
       '0%': {
@@ -84,7 +121,7 @@ const Home: React.FC = () => {
   const router = useRouter()
 
   const {
-    state: { lapRemains, lapSeconds },
+    state: { lapRemains, lapSeconds, totalRemainSecond, idealLapRemainSecond },
     dispatch,
   } = useLapTimerReducer()
 
@@ -129,62 +166,88 @@ const Home: React.FC = () => {
       </Head>
 
       <div className={classes.root}>
-        <Grid container spacing={2}>
-          <Grid item xs={12} className={classes.buttons}>
-            <IconButton color="inherit" onClick={goToSetting}>
-              <SettingsIcon />
-            </IconButton>
-            <IconButton color="inherit" onClick={togglePlay}>
-              {isPlay ? <PauseIcon /> : <PlayArrowIcon />}
-            </IconButton>
-            <IconButton color="inherit" onClick={dispatchReset}>
-              <RestoreIcon />
-            </IconButton>
-            <IconButton color="inherit" onClick={dispatchUndo}>
-              <ArrowUpwardIcon />
-            </IconButton>
-            <IconButton color="inherit" onClick={dispatchLap}>
-              <ArrowDownwardIcon />
-            </IconButton>
-          </Grid>
-          {lapRemains.map((remain, i) => {
-            const isActive = i === lapSeconds.length
-            return (
-              <Grid
-                key={remain.label}
-                item
-                xs={12}
-                className={classnames(
-                  classes.lap,
-                  !isActive && classes.finished,
-                )}
-              >
-                <div
+        <div className={classes.header}>
+          <IconButton color="inherit" onClick={togglePlay}>
+            {isPlay ? <PauseIcon /> : <PlayArrowIcon />}
+          </IconButton>
+          <IconButton color="inherit" onClick={dispatchReset}>
+            <RestoreIcon />
+          </IconButton>
+          <IconButton color="inherit" onClick={dispatchUndo}>
+            <ArrowUpwardIcon />
+          </IconButton>
+          <IconButton color="inherit" onClick={dispatchLap}>
+            <ArrowDownwardIcon />
+          </IconButton>
+          <IconButton
+            color="inherit"
+            onClick={goToSetting}
+            className={classes.floatRight}
+          >
+            <SettingsIcon />
+          </IconButton>
+        </div>
+        <div className={classes.main}>
+          <Grid container spacing={2}>
+            {lapRemains.map((remain, i) => {
+              const isActive = i === lapSeconds.length
+              return (
+                <Grid
+                  key={remain.label}
+                  item
+                  xs={12}
                   className={classnames(
-                    classes.label,
-                    isActive && classes.active,
+                    classes.lap,
+                    !isActive && classes.nonActive,
                   )}
                 >
-                  {remain.label}
-                </div>
-                <TimerLabel
-                  remainSecond={remain.second}
-                  className={classnames(
-                    remain.second < 0 && classes.expired,
-                    isActive &&
-                      remain.second > 10 &&
-                      remain.second < 30 &&
-                      classes.hurry,
-                    isActive &&
-                      remain.second >= 0 &&
-                      remain.second <= 10 &&
-                      classes.hurryUp,
-                  )}
-                />
-              </Grid>
-            )
-          })}
-        </Grid>
+                  <div
+                    className={classnames(
+                      classes.label,
+                      isActive && classes.active,
+                    )}
+                  >
+                    {remain.label}
+                  </div>
+                  <TimerLabel
+                    remainSecond={remain.second}
+                    className={classnames(
+                      remain.second < 0 && classes.expired,
+                      isActive &&
+                        remain.second > 10 &&
+                        remain.second < 30 &&
+                        classes.hurry,
+                      isActive &&
+                        remain.second >= 0 &&
+                        remain.second <= 10 &&
+                        classes.hurryUp,
+                    )}
+                  />
+                </Grid>
+              )
+            })}
+          </Grid>
+        </div>
+        <div className={classes.footer}>
+          <Grid container spacing={2}>
+            <Grid item xs className={classes.lap}>
+              <div className={classes.label}>Total</div>
+              <TimerLabel
+                remainSecond={totalRemainSecond}
+                className={classnames(totalRemainSecond < 0 && classes.expired)}
+              />
+            </Grid>
+            <Grid item xs className={classes.lap}>
+              <div className={classes.label}>Margin</div>
+              <TimerLabel
+                remainSecond={idealLapRemainSecond}
+                className={classnames(
+                  idealLapRemainSecond < 0 && classes.expired,
+                )}
+              />
+            </Grid>
+          </Grid>
+        </div>
       </div>
     </React.Fragment>
   )
