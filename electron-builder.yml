@@ -1,6 +1,6 @@
-appId: com.example.nextron
-productName: My Nextron App
-copyright: Copyright © 2018 Yoshihide Shiono
+appId: net.namiking.interv-timer
+productName: IntervTimer
+copyright: Copyright © 2020 Tsubasa Namiki
 directories:
   output: dist
   buildResources: resources
