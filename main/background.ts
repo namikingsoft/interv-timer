@@ -18,8 +18,7 @@ if (isProd) {
     height: 600,
     transparent: true,
     frame: false,
-    // for debug
-    // alwaysOnTop: true,
+    alwaysOnTop: true,
     // avoid white border on top frame
     // https://github.com/electron/electron/issues/13164#issuecomment-479941434
     titleBarStyle: 'customButtonsOnHover',

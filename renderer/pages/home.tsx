@@ -1,29 +1,126 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 import { Theme, makeStyles, createStyles } from '@material-ui/core/styles'
-import Button from '@material-ui/core/Button'
-import Dialog from '@material-ui/core/Dialog'
-import DialogTitle from '@material-ui/core/DialogTitle'
-import DialogContent from '@material-ui/core/DialogContent'
-import DialogContentText from '@material-ui/core/DialogContentText'
-import DialogActions from '@material-ui/core/DialogActions'
-import Typography from '@material-ui/core/Typography'
-import { Link } from '../components/atoms/Link'
+import Grid from '@material-ui/core/Grid'
+import IconButton from '@material-ui/core/IconButton'
+import PlayArrowIcon from '@material-ui/icons/PlayArrow'
+import PauseIcon from '@material-ui/icons/Pause'
+import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward'
+import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward'
+import RestoreIcon from '@material-ui/icons/Restore'
+import SettingsIcon from '@material-ui/icons/Settings'
+import classnames from 'classnames'
+import { TimerLabel } from '../components/atoms/TimerLabel'
+import { useLapTimerReducer } from '../hooks/useLapTimerReducer'
+import { useLapInfoRepository } from '../hooks/useLapInfoRepository'
+
+const textBorderColor = '#333'
+const textBorderColorActive = '#36f'
+const textBorderColorExpired = '#f00'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      textAlign: 'center',
       paddingTop: theme.spacing(4),
+      color: 'white !important',
+      fontSize: 24,
+      textShadow: `${textBorderColor} 1px 1px 0, ${textBorderColor} -1px -1px 0, ${textBorderColor} -1px 1px 0, ${textBorderColor} 1px -1px 0, ${textBorderColor} 0px 1px 0, ${textBorderColor}  0 -1px 0, ${textBorderColor} -1px 0 0, ${textBorderColor} 1px 0 0`,
+    },
+    buttons: {
+      // Icon
+      '& svg': {
+        filter: 'drop-shadow(0px 0px 1.5px black);',
+      },
+    },
+    lap: {
+      marginLeft: 14,
+      userSelect: 'none',
+    },
+    label: {
+      fontSize: 12,
+      marginBottom: -5,
+    },
+    active: {
+      textShadow: `${textBorderColorActive} 1px 1px 0, ${textBorderColorActive} -1px -1px 0, ${textBorderColorActive} -1px 1px 0, ${textBorderColorActive} 1px -1px 0, ${textBorderColorActive} 0px 1px 0, ${textBorderColorActive}  0 -1px 0, ${textBorderColorActive} -1px 0 0, ${textBorderColorActive} 1px 0 0`,
+    },
+    expired: {
+      color: '#000',
+      textShadow: `${textBorderColorExpired} 1px 1px 0, ${textBorderColorExpired} -1px -1px 0, ${textBorderColorExpired} -1px 1px 0, ${textBorderColorExpired} 1px -1px 0, ${textBorderColorExpired} 0px 1px 0, ${textBorderColorExpired}  0 -1px 0, ${textBorderColorExpired} -1px 0 0, ${textBorderColorExpired} 1px 0 0`,
+    },
+    hurry: {
+      animation: '$hurry 1s ease-in-out 0s infinite normal',
+      transformOrigin: 'center',
+    },
+    hurryUp: {
+      animation: '$hurryUp 1s ease-in-out 0s infinite normal',
+      transformOrigin: 'center',
+    },
+    finished: {
+      opacity: 0.36,
+    },
+    '@keyframes hurry': {
+      '0%': {
+        transform: 'scale(1, 1)',
+      },
+      '20%': {
+        transform: 'scale(1.2, 1.2)',
+      },
+    },
+    '@keyframes hurryUp': {
+      '0%': {
+        transform: 'scale(1, 1)',
+      },
+      '20%': {
+        transform: 'scale(1.3, 1.3)',
+        color: '#f33',
+      },
     },
   }),
 )
 
 const Home: React.FC = () => {
   const classes = useStyles({})
-  const [open, setOpen] = useState(false)
-  const handleClose = () => setOpen(false)
-  const handleClick = () => setOpen(true)
+  const router = useRouter()
+
+  const {
+    state: { lapRemains, lapSeconds },
+    dispatch,
+  } = useLapTimerReducer()
+
+  const { loadLapInfoList } = useLapInfoRepository()
+
+  const [isPlay, setIsPlay] = React.useState(false)
+
+  const togglePlay = React.useCallback(() => {
+    setIsPlay(!isPlay)
+  }, [isPlay])
+
+  const dispatchLap = React.useCallback(() => dispatch({ type: 'lap' }), [
+    dispatch,
+  ])
+
+  const dispatchUndo = React.useCallback(() => dispatch({ type: 'undo' }), [
+    dispatch,
+  ])
+
+  const dispatchReset = React.useCallback(() => {
+    setIsPlay(false)
+    dispatch({ type: 'reset', payload: { lapInfoList: loadLapInfoList() } })
+  }, [dispatch])
+
+  const goToSetting = React.useCallback(() => router.push('/settings'), [
+    router,
+  ])
+
+  React.useEffect(() => dispatchReset(), [])
+
+  React.useEffect(() => {
+    const tid = window.setInterval(() => {
+      if (isPlay) dispatch({ type: 'elapsed', payload: { second: 1 } })
+    }, 1000)
+    return () => window.clearInterval(tid)
+  }, [isPlay])
 
   return (
     <React.Fragment>
@@ -32,30 +129,62 @@ const Home: React.FC = () => {
       </Head>
 
       <div className={classes.root}>
-        <Dialog open={open} onClose={handleClose}>
-          <DialogTitle>Super Secret Password</DialogTitle>
-          <DialogContent>
-            <DialogContentText>1-2-3-4-5</DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button color="primary" onClick={handleClose}>
-              OK
-            </Button>
-          </DialogActions>
-        </Dialog>
-        <Typography variant="h4" gutterBottom>
-          Material-UI
-        </Typography>
-        <Typography variant="subtitle1" gutterBottom>
-          with Nextron
-        </Typography>
-        <img src="/images/logo.png" />
-        <Typography gutterBottom>
-          <Link href="/next">Go to the next page</Link>
-        </Typography>
-        <Button variant="contained" color="secondary" onClick={handleClick}>
-          Super Secret Password
-        </Button>
+        <Grid container spacing={2}>
+          <Grid item xs={12} className={classes.buttons}>
+            <IconButton color="inherit" onClick={goToSetting}>
+              <SettingsIcon />
+            </IconButton>
+            <IconButton color="inherit" onClick={togglePlay}>
+              {isPlay ? <PauseIcon /> : <PlayArrowIcon />}
+            </IconButton>
+            <IconButton color="inherit" onClick={dispatchReset}>
+              <RestoreIcon />
+            </IconButton>
+            <IconButton color="inherit" onClick={dispatchUndo}>
+              <ArrowUpwardIcon />
+            </IconButton>
+            <IconButton color="inherit" onClick={dispatchLap}>
+              <ArrowDownwardIcon />
+            </IconButton>
+          </Grid>
+          {lapRemains.map((remain, i) => {
+            const isActive = i === lapSeconds.length
+            return (
+              <Grid
+                key={remain.label}
+                item
+                xs={12}
+                className={classnames(
+                  classes.lap,
+                  !isActive && classes.finished,
+                )}
+              >
+                <div
+                  className={classnames(
+                    classes.label,
+                    isActive && classes.active,
+                  )}
+                >
+                  {remain.label}
+                </div>
+                <TimerLabel
+                  remainSecond={remain.second}
+                  className={classnames(
+                    remain.second < 0 && classes.expired,
+                    isActive &&
+                      remain.second > 10 &&
+                      remain.second < 30 &&
+                      classes.hurry,
+                    isActive &&
+                      remain.second >= 0 &&
+                      remain.second <= 10 &&
+                      classes.hurryUp,
+                  )}
+                />
+              </Grid>
+            )
+          })}
+        </Grid>
       </div>
     </React.Fragment>
   )
