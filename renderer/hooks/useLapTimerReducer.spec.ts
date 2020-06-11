@@ -2,16 +2,29 @@ import { renderHook, act } from '@testing-library/react-hooks'
 import { useLapTimerReducer } from './useLapTimerReducer'
 
 describe('useLapTimerReducer', () => {
-  const lapInfos = [
+  const lapInfoList = [
     { label: 'agenda1', second: 60 },
     { label: 'agenda2', second: 30 },
     { label: 'agenda3', second: 40 },
   ]
 
   it('should behave lap timer', () => {
-    const { result } = renderHook(() => useLapTimerReducer(lapInfos))
+    const { result } = renderHook(() => useLapTimerReducer())
 
     expect(result.current.state).toEqual({
+      lapInfoList: [],
+      elapsedSecond: 0,
+      lapSeconds: [],
+      lapRemains: [],
+      idealLapRemainSecond: 0,
+      totalRemainSecond: 0,
+    })
+
+    act(() => {
+      result.current.dispatch({ type: 'reset', payload: { lapInfoList } })
+    })
+    expect(result.current.state).toEqual({
+      lapInfoList,
       elapsedSecond: 0,
       lapSeconds: [],
       lapRemains: [
@@ -27,6 +40,7 @@ describe('useLapTimerReducer', () => {
       result.current.dispatch({ type: 'elapsed', payload: { second: 1 } })
     })
     expect(result.current.state).toEqual({
+      lapInfoList,
       elapsedSecond: 1,
       lapSeconds: [],
       lapRemains: [
@@ -42,6 +56,7 @@ describe('useLapTimerReducer', () => {
       result.current.dispatch({ type: 'elapsed', payload: { second: 1 } })
     })
     expect(result.current.state).toEqual({
+      lapInfoList,
       elapsedSecond: 2,
       lapSeconds: [],
       lapRemains: [
@@ -57,6 +72,7 @@ describe('useLapTimerReducer', () => {
       result.current.dispatch({ type: 'lap' })
     })
     expect(result.current.state).toEqual({
+      lapInfoList,
       elapsedSecond: 2,
       lapSeconds: [2],
       lapRemains: [
@@ -72,6 +88,7 @@ describe('useLapTimerReducer', () => {
       result.current.dispatch({ type: 'elapsed', payload: { second: 2 } })
     })
     expect(result.current.state).toEqual({
+      lapInfoList,
       elapsedSecond: 4,
       lapSeconds: [2],
       lapRemains: [
@@ -87,6 +104,7 @@ describe('useLapTimerReducer', () => {
       result.current.dispatch({ type: 'lap' })
     })
     expect(result.current.state).toEqual({
+      lapInfoList,
       elapsedSecond: 4,
       lapSeconds: [2, 4],
       lapRemains: [
@@ -102,6 +120,7 @@ describe('useLapTimerReducer', () => {
       result.current.dispatch({ type: 'elapsed', payload: { second: 6 } })
     })
     expect(result.current.state).toEqual({
+      lapInfoList,
       elapsedSecond: 10,
       lapSeconds: [2, 4],
       lapRemains: [
@@ -117,6 +136,7 @@ describe('useLapTimerReducer', () => {
       result.current.dispatch({ type: 'lap' })
     })
     expect(result.current.state).toEqual({
+      lapInfoList,
       elapsedSecond: 10,
       lapSeconds: [2, 4, 10],
       lapRemains: [
@@ -132,6 +152,7 @@ describe('useLapTimerReducer', () => {
       result.current.dispatch({ type: 'elapsed', payload: { second: 2 } })
     })
     expect(result.current.state).toEqual({
+      lapInfoList,
       elapsedSecond: 12,
       lapSeconds: [2, 4, 10],
       lapRemains: [
@@ -147,6 +168,7 @@ describe('useLapTimerReducer', () => {
       result.current.dispatch({ type: 'lap' })
     })
     expect(result.current.state).toEqual({
+      lapInfoList,
       elapsedSecond: 12,
       lapSeconds: [2, 4, 10],
       lapRemains: [
@@ -162,6 +184,7 @@ describe('useLapTimerReducer', () => {
       result.current.dispatch({ type: 'undo' })
     })
     expect(result.current.state).toEqual({
+      lapInfoList,
       elapsedSecond: 12,
       lapSeconds: [2, 4],
       lapRemains: [
@@ -177,6 +200,7 @@ describe('useLapTimerReducer', () => {
       result.current.dispatch({ type: 'elapsed', payload: { second: 2 } })
     })
     expect(result.current.state).toEqual({
+      lapInfoList,
       elapsedSecond: 14,
       lapSeconds: [2, 4],
       lapRemains: [
@@ -192,6 +216,7 @@ describe('useLapTimerReducer', () => {
       result.current.dispatch({ type: 'undo' })
     })
     expect(result.current.state).toEqual({
+      lapInfoList,
       elapsedSecond: 14,
       lapSeconds: [2],
       lapRemains: [
@@ -201,21 +226,6 @@ describe('useLapTimerReducer', () => {
       ],
       idealLapRemainSecond: 76,
       totalRemainSecond: 116,
-    })
-
-    act(() => {
-      result.current.dispatch({ type: 'reset' })
-    })
-    expect(result.current.state).toEqual({
-      elapsedSecond: 0,
-      lapSeconds: [],
-      lapRemains: [
-        { label: 'agenda1', second: 60 },
-        { label: 'agenda2', second: 30 },
-        { label: 'agenda3', second: 40 },
-      ],
-      idealLapRemainSecond: 60,
-      totalRemainSecond: 130,
     })
   })
 })
