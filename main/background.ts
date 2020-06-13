@@ -28,6 +28,7 @@ if (isProd) {
     // avoid white border on top frame
     // https://github.com/electron/electron/issues/13164#issuecomment-479941434
     titleBarStyle: 'customButtonsOnHover',
+    // cannot exit by cmd + q
     // closable: false,
   })
 
