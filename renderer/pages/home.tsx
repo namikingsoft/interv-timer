@@ -14,6 +14,7 @@ import classnames from 'classnames'
 import { TimerLabel } from '../components/atoms/TimerLabel'
 import { useLapTimerReducer } from '../hooks/useLapTimerReducer'
 import { useLapInfoRepository } from '../hooks/useLapInfoRepository'
+import { useIntervalByAudioContext } from '../hooks/useIntervalByAudioContext'
 
 const textBorderColor = '#333'
 const textBorderColorActive = '#36f'
@@ -150,14 +151,13 @@ const Home: React.FC = () => {
     router,
   ])
 
-  React.useEffect(() => dispatchReset(), [])
-
-  React.useEffect(() => {
-    const tid = window.setInterval(() => {
-      if (isPlay) dispatch({ type: 'elapsed', payload: { second: 1 } })
-    }, 1000)
-    return () => window.clearInterval(tid)
+  const intervalCallback = React.useCallback(() => {
+    if (isPlay) dispatch({ type: 'elapsed', payload: { second: 1 } })
   }, [isPlay])
+
+  useIntervalByAudioContext(1, intervalCallback)
+
+  React.useEffect(() => dispatchReset(), [])
 
   return (
     <React.Fragment>
