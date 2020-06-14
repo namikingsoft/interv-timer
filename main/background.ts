@@ -1,4 +1,4 @@
-import { app } from 'electron'
+import { app, ipcMain } from 'electron'
 import serve from 'electron-serve'
 import { createWindow } from './helpers'
 
@@ -42,5 +42,9 @@ if (isProd) {
 })()
 
 app.on('window-all-closed', () => {
+  app.quit()
+})
+
+ipcMain.on('quit', () => {
   app.quit()
 })

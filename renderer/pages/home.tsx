@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) =>
       textShadow: `${textBorderColor} 1px 1px 0, ${textBorderColor} -1px -1px 0, ${textBorderColor} -1px 1px 0, ${textBorderColor} 1px -1px 0, ${textBorderColor} 0px 1px 0, ${textBorderColor}  0 -1px 0, ${textBorderColor} -1px 0 0, ${textBorderColor} 1px 0 0`,
     },
     header: {
-      position: 'fixed',
+      position: 'absolute',
       top: 0,
       left: 0,
       width: '100%',
@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme: Theme) =>
       cursor: 'grab',
     },
     main: {
-      position: 'fixed',
+      position: 'absolute',
       overflowY: 'scroll',
       overflowX: 'hidden',
       top: 50,
@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme: Theme) =>
       paddingTop: 15,
     },
     footer: {
-      position: 'fixed',
+      position: 'absolute',
       bottom: 0,
       left: 0,
       width: '100%',

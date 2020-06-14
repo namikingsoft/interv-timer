@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme: Theme) =>
       color: 'white',
     },
     header: {
-      position: 'fixed',
+      position: 'absolute',
       top: 0,
       left: 0,
       width: '100%',
@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme: Theme) =>
       cursor: 'grab',
     },
     main: {
-      position: 'fixed',
+      position: 'absolute',
       overflowY: 'scroll',
       overflowX: 'hidden',
       top: 50,
