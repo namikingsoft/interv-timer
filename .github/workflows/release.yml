@@ -34,12 +34,6 @@ jobs:
       with:
         name: windows
         path: dist/*.exe
-    # - name: run on mac
-    #   if: matrix.os == 'macos-latest'
-    #   run: ls dist
-    # - name: run on windows
-    #   if: matrix.os == 'windows-latest'
-    #   run: ls dist
       
   release:
     needs: build
