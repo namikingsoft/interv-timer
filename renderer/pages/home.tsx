@@ -39,7 +39,6 @@ const useStyles = makeStyles((theme: Theme) =>
         filter: 'drop-shadow(0px 0px 1.5px black);',
       },
       zIndex: 1234,
-      cursor: 'grab',
     },
     main: {
       position: 'absolute',
@@ -52,7 +51,6 @@ const useStyles = makeStyles((theme: Theme) =>
       borderTop: '1px solid rgba(0,0,0,0.1)',
       borderBottom: '1px solid rgba(0,0,0,0.1)',
       zIndex: 1234,
-      cursor: 'grab',
       paddingTop: 15,
     },
     footer: {
@@ -62,7 +60,6 @@ const useStyles = makeStyles((theme: Theme) =>
       width: '100%',
       height: 70,
       zIndex: 1234,
-      cursor: 'grab',
       paddingTop: 15,
     },
     lap: {
