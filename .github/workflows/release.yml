@@ -59,6 +59,10 @@ jobs:
     - name: Get the version
       id: get_version
       run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+    # TODO: use into asset_name
+    # - name: Get the app name
+    #   id: get_appname
+    #   run: echo ::set-output name=APPNAME::$(< package.json jq .name)
     - name: Upload Release Asset
       uses: actions/upload-release-asset@v1
       env:
@@ -66,7 +70,7 @@ jobs:
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: dist/macos.dmg
-        asset_name: install-${{ steps.get_version.outputs.VERSION }}-macos.dmg
+        asset_name: interv-timer-${{ steps.get_version.outputs.VERSION }}-macos.dmg
         asset_content_type: application/force-download
     # TODO: test on windows
     # - name: Upload Release Asset
@@ -76,5 +80,5 @@ jobs:
     #   with:
     #     upload_url: ${{ steps.create_release.outputs.upload_url }}
     #     asset_path: dist/windows.exe
-    #     asset_name: install-${{ steps.get_version.outputs.VERSION }}-windows.exe
+    #     asset_name: interv-timer-${{ steps.get_version.outputs.VERSION }}-windows.exe
     #     asset_content_type: application/force-download
