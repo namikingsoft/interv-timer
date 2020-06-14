@@ -1,13 +1,13 @@
 import React from 'react'
 import App from 'next/app'
 import Head from 'next/head'
-import { remote } from 'electron'
+import { ipcRenderer } from 'electron'
 import { ThemeProvider } from '@material-ui/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import { theme } from '../lib/theme'
 import { AppFrame } from '../components/templates/AppFrame'
 
-const onClickClose = () => remote.getCurrentWindow().close()
+const onClickClose = () => ipcRenderer.send('quit')
 
 export default class MyApp extends App {
   componentDidMount(): void {
