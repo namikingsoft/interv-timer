@@ -45,6 +45,12 @@ const useStyles = makeStyles(() =>
         color: '#c33',
       },
     },
+    dragIcon: {
+      color: '#666',
+    },
+    closeButton: {
+      cursor: 'pointer',
+    },
     headerNonActive: {
       opacity: 0.1,
     },
@@ -59,12 +65,6 @@ const useStyles = makeStyles(() =>
       position: 'relative',
       width: '100%',
       height: '100%',
-    },
-    dragIcon: {
-      color: '#666',
-    },
-    closeButton: {
-      cursor: 'pointer',
     },
     '@global': {
       html: {
