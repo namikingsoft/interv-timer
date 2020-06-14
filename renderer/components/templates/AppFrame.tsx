@@ -72,9 +72,7 @@ const useStyles = makeStyles(() =>
       },
       body: {
         height: '100%',
-        '&:hover': {
-          backgroundColor: 'rgba(0,0,0,0.75)',
-        },
+        backgroundColor: 'rgba(0,0,0,0.75)',
       },
     },
   }),
@@ -87,27 +85,9 @@ export const AppFrame: React.FC<Props> = ({
 }) => {
   const classes = useStyles({})
 
-  const [isHover, setIsHover] = React.useState(false)
-  const onMouseEnter = React.useCallback(() => setIsHover(true), [])
-  const onMouseLeave = React.useCallback(() => setIsHover(false), [])
-  // TODO: avoid document
-  React.useEffect(() => {
-    document.addEventListener('mouseenter', onMouseEnter)
-    document.addEventListener('mouseleave', onMouseLeave)
-    return () => {
-      document.removeEventListener('mouseenter', onMouseEnter)
-      document.removeEventListener('mouseleave', onMouseLeave)
-    }
-  })
-
   return (
     <div className={classnames(classes.root, className)}>
-      <div
-        className={classnames(
-          classes.header,
-          !isHover && classes.headerNonActive,
-        )}
-      >
+      <div className={classes.header}>
         <div className={classes.dragArea}>
           <DragIndicatorIcon className={classes.dragIcon} />
         </div>
