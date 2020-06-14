@@ -20,18 +20,33 @@ const useStyles = makeStyles(() =>
       bottom: 0,
     },
     header: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
       position: 'absolute',
       top: 0,
       left: 0,
       width: '100%',
       height: 30,
       color: 'white',
-      cursor: 'move',
       paddingTop: 4,
-      paddingLeft: 3,
-      paddingBottom: 3,
-      backgroundColor: '#000',
+      paddingLeft: 4,
+      paddingRight: 5,
+      backgroundColor: '#111',
+    },
+    dragArea: {
+      flex: '1 0 auto',
+      cursor: 'move',
       WebkitAppRegion: 'drag',
+    },
+    closeArea: {
+      width: 20,
+      '&:hover': {
+        color: '#c33',
+      },
+    },
+    headerNonActive: {
+      opacity: 0.1,
     },
     main: {
       position: 'absolute',
@@ -50,11 +65,6 @@ const useStyles = makeStyles(() =>
     },
     closeButton: {
       cursor: 'pointer',
-      float: 'right',
-      WebkitAppRegion: 'no-drag',
-    },
-    none: {
-      display: 'none',
     },
     '@global': {
       html: {
@@ -92,9 +102,18 @@ export const AppFrame: React.FC<Props> = ({
 
   return (
     <div className={classnames(classes.root, className)}>
-      <div className={classnames(classes.header, !isHover && classes.none)}>
-        <DragIndicatorIcon className={classes.dragIcon} />
-        <CloseIcon className={classes.closeButton} onClick={onClickClose} />
+      <div
+        className={classnames(
+          classes.header,
+          !isHover && classes.headerNonActive,
+        )}
+      >
+        <div className={classes.dragArea}>
+          <DragIndicatorIcon className={classes.dragIcon} />
+        </div>
+        <div className={classes.closeArea}>
+          <CloseIcon className={classes.closeButton} onClick={onClickClose} />
+        </div>
       </div>
       <div className={classes.main}>
         <div className={classes.mainRelative}>{children}</div>
