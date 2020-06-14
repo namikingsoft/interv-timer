@@ -42,8 +42,8 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     main: {
       position: 'absolute',
-      overflowY: 'scroll',
       overflowX: 'hidden',
+      overflowY: 'auto',
       top: 50,
       left: 0,
       width: '100%',
