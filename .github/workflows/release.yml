@@ -68,12 +68,13 @@ jobs:
         asset_path: dist/macos.dmg
         asset_name: install-${{ steps.get_version.outputs.VERSION }}-macos.dmg
         asset_content_type: application/force-download
-    - name: Upload Release Asset
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: dist/windows.exe
-        asset_name: install-${{ steps.get_version.outputs.VERSION }}-windows.exe
-        asset_content_type: application/force-download
+    # TODO: test on windows
+    # - name: Upload Release Asset
+    #   uses: actions/upload-release-asset@v1
+    #   env:
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #   with:
+    #     upload_url: ${{ steps.create_release.outputs.upload_url }}
+    #     asset_path: dist/windows.exe
+    #     asset_name: install-${{ steps.get_version.outputs.VERSION }}-windows.exe
+    #     asset_content_type: application/force-download
