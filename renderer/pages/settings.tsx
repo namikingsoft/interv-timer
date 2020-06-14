@@ -26,7 +26,6 @@ const useStyles = makeStyles((theme: Theme) =>
       },
       zIndex: 1234,
       cursor: 'grab',
-      WebkitAppRegion: 'drag',
     },
     main: {
       position: 'fixed',
@@ -38,14 +37,12 @@ const useStyles = makeStyles((theme: Theme) =>
       bottom: 0,
       zIndex: 1234,
       cursor: 'grab',
-      WebkitAppRegion: 'drag',
     },
     form: {
       marginLeft: 14,
     },
     laps: {
       width: '100%',
-      WebkitAppRegion: 'no-drag',
     },
     floatRight: {
       float: 'right',

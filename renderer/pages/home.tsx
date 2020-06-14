@@ -40,7 +40,6 @@ const useStyles = makeStyles((theme: Theme) =>
       },
       zIndex: 1234,
       cursor: 'grab',
-      WebkitAppRegion: 'drag',
     },
     main: {
       position: 'fixed',
@@ -54,7 +53,6 @@ const useStyles = makeStyles((theme: Theme) =>
       borderBottom: '1px solid rgba(0,0,0,0.1)',
       zIndex: 1234,
       cursor: 'grab',
-      WebkitAppRegion: 'drag',
       paddingTop: 15,
     },
     footer: {
@@ -65,7 +63,6 @@ const useStyles = makeStyles((theme: Theme) =>
       height: 70,
       zIndex: 1234,
       cursor: 'grab',
-      WebkitAppRegion: 'drag',
       paddingTop: 15,
     },
     lap: {
