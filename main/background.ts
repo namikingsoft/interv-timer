@@ -44,7 +44,3 @@ if (isProd) {
 app.on('window-all-closed', () => {
   app.quit()
 })
-
-ipcMain.on('quit', () => {
-  app.quit()
-})
