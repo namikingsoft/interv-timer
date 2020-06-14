@@ -1,0 +1,33 @@
+name: Release
+
+on:
+  # TODO: for test
+  push
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2-beta
+      with:
+        node-version: '12'
+    - uses: actions/cache@v2
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+    - name: Install Dependencies
+      run: npm install
+    - name: Build production
+      run: npm run build
+    - name: run on mac
+      if: matrix.os == 'macos-latest'
+      run: ls dist
+    - name: run on windows
+      if: matrix.os == 'windows-latest'
+      run: ls dist
