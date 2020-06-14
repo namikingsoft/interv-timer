@@ -25,7 +25,6 @@ const useStyles = makeStyles((theme: Theme) =>
         filter: 'drop-shadow(0px 0px 1.5px black);',
       },
       zIndex: 1234,
-      cursor: 'grab',
     },
     main: {
       position: 'absolute',
@@ -36,7 +35,6 @@ const useStyles = makeStyles((theme: Theme) =>
       width: '100%',
       bottom: 0,
       zIndex: 1234,
-      cursor: 'grab',
     },
     form: {
       marginLeft: 14,
