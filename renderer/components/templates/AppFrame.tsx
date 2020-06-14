@@ -72,7 +72,7 @@ const useStyles = makeStyles(() =>
       },
       body: {
         height: '100%',
-        backgroundColor: 'rgba(0,0,0,0.75)',
+        backgroundColor: 'rgba(0,0,0,0.7)',
       },
     },
   }),
