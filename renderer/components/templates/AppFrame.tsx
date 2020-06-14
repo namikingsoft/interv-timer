@@ -31,7 +31,7 @@ const useStyles = makeStyles(() =>
       color: 'white',
       paddingTop: 4,
       paddingLeft: 4,
-      paddingRight: 5,
+      paddingRight: 6,
       backgroundColor: '#111',
     },
     dragArea: {
