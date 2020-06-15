@@ -15,6 +15,7 @@ import { TimerLabel } from '../components/atoms/TimerLabel'
 import { useLapTimerReducer } from '../hooks/useLapTimerReducer'
 import { useLapInfoRepository } from '../hooks/useLapInfoRepository'
 import { useIntervalByAudioContext } from '../hooks/useIntervalByAudioContext'
+import { useTranslationWithKey } from '../hooks/useTranslationWithKey'
 
 const textBorderColor = '#333'
 const textBorderColorActive = '#36f'
@@ -114,6 +115,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const Home: React.FC = () => {
   const classes = useStyles({})
   const router = useRouter()
+  const { t, k } = useTranslationWithKey()
 
   const {
     state: { lapRemains, lapSeconds, totalRemainSecond, idealLapRemainSecond },
@@ -225,14 +227,14 @@ const Home: React.FC = () => {
         <div className={classes.footer}>
           <Grid container spacing={2}>
             <Grid item xs className={classes.lap}>
-              <div className={classes.label}>Total</div>
+              <div className={classes.label}>{t(k.total)}</div>
               <TimerLabel
                 remainSecond={totalRemainSecond}
                 className={classnames(totalRemainSecond < 0 && classes.expired)}
               />
             </Grid>
             <Grid item xs className={classes.lap}>
-              <div className={classes.label}>Margin</div>
+              <div className={classes.label}>{t(k.margin)}</div>
               <TimerLabel
                 remainSecond={idealLapRemainSecond}
                 className={classnames(

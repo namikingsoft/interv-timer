@@ -4,8 +4,10 @@ import Head from 'next/head'
 import { ipcRenderer } from 'electron'
 import { ThemeProvider } from '@material-ui/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
-import { theme } from '../lib/theme'
+import { I18nextProvider } from 'react-i18next'
 import { AppFrame } from '../components/templates/AppFrame'
+import { theme } from '../lib/theme'
+import { i18n } from '../i18n'
 
 const onClickClose = () => ipcRenderer.send('quit')
 
@@ -27,9 +29,11 @@ export default class MyApp extends App {
         </Head>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-          <AppFrame onClickClose={onClickClose}>
-            <Component {...pageProps} />
-          </AppFrame>
+          <I18nextProvider i18n={i18n}>
+            <AppFrame onClickClose={onClickClose}>
+              <Component {...pageProps} />
+            </AppFrame>
+          </I18nextProvider>
         </ThemeProvider>
       </React.Fragment>
     )
