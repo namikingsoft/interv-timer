@@ -18,6 +18,16 @@ export default class MyApp extends App {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       jssStyles.parentNode!.removeChild(jssStyles)
     }
+
+    // set browser language
+    const browserLanguage =
+      (window.navigator.languages && window.navigator.languages[0]) ||
+      window.navigator.language ||
+      // @ts-expect-error for legacy browser
+      window.navigator.userLanguage ||
+      // @ts-expect-error for legacy browser
+      window.navigator.browserLanguage
+    i18n.changeLanguage(browserLanguage)
   }
 
   render(): React.ReactElement {
