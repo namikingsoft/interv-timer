@@ -75,11 +75,14 @@ const useStyles = makeStyles(() =>
         backgroundColor: 'rgba(0,0,0,0.7)',
       },
       '::-webkit-scrollbar': {
-        width: 4,
+        width: 6,
+      },
+      '::-webkit-scrollbar-track': {
+        WebkitBoxShadow: 'inset 0 0 6px rgba(0,0,0,0.3)',
       },
       '::-webkit-scrollbar-thumb:window-inactive, ::-webkit-scrollbar-thumb': {
         background: 'rgba(255,255,255,0.4)',
-        borderRadius: 20,
+        borderRadius: 25,
       },
     },
   }),
