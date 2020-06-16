@@ -8,6 +8,15 @@ interface LapRemain {
   second: number
 }
 
+export interface State {
+  lapInfoList: LapInfo[]
+  lapRemains: LapRemain[]
+  lapSeconds: number[]
+  elapsedSecond: number
+  idealLapRemainSecond: number
+  totalRemainSecond: number
+}
+
 interface ResetAction {
   type: 'timer/reset'
   payload: {
@@ -30,13 +39,4 @@ interface UndoAction {
   type: 'timer/undo'
 }
 
-type Action = ResetAction | ElapsedAction | LapAction | UndoAction
-
-export interface State {
-  lapInfoList: LapInfo[]
-  lapRemains: LapRemain[]
-  lapSeconds: number[]
-  elapsedSecond: number
-  idealLapRemainSecond: number
-  totalRemainSecond: number
-}
+export type Action = ResetAction | ElapsedAction | LapAction | UndoAction
