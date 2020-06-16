@@ -4,8 +4,10 @@ import Head from 'next/head'
 import { ipcRenderer } from 'electron'
 import { ThemeProvider } from '@material-ui/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
+import { Provider } from 'react-redux'
 import { I18nextProvider } from 'react-i18next'
 import { AppFrame } from '../components/templates/AppFrame'
+import { createReduxStore } from '../store'
 import { theme } from '../lib/theme'
 import { i18n } from '../i18n'
 
@@ -40,9 +42,11 @@ export default class MyApp extends App {
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <I18nextProvider i18n={i18n}>
-            <AppFrame onClickClose={onClickClose}>
-              <Component {...pageProps} />
-            </AppFrame>
+            <Provider store={createReduxStore()}>
+              <AppFrame onClickClose={onClickClose}>
+                <Component {...pageProps} />
+              </AppFrame>
+            </Provider>
           </I18nextProvider>
         </ThemeProvider>
       </React.Fragment>
