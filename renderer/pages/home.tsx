@@ -11,8 +11,8 @@ import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward'
 import RestoreIcon from '@material-ui/icons/Restore'
 import SettingsIcon from '@material-ui/icons/Settings'
 import classnames from 'classnames'
+import { useSelector, useDispatch } from '../hooks/redux'
 import { TimerLabel } from '../components/atoms/TimerLabel'
-import { useLapTimerReducer } from '../hooks/useLapTimerReducer'
 import { useLapInfoRepository } from '../hooks/useLapInfoRepository'
 import { useIntervalByAudioContext } from '../hooks/useIntervalByAudioContext'
 import { useTranslationWithKey } from '../hooks/useTranslationWithKey'
@@ -117,12 +117,16 @@ const Home: React.FC = () => {
   const router = useRouter()
   const { t, k } = useTranslationWithKey()
 
-  const {
-    state: { lapRemains, lapSeconds, totalRemainSecond, idealLapRemainSecond },
-    dispatch,
-  } = useLapTimerReducer()
-
   const { loadLapInfoList } = useLapInfoRepository()
+
+  const {
+    lapRemains,
+    lapSeconds,
+    totalRemainSecond,
+    idealLapRemainSecond,
+  } = useSelector(({ timer }) => timer)
+
+  const dispatch = useDispatch()
 
   const [isPlay, setIsPlay] = React.useState(false)
 
@@ -130,17 +134,21 @@ const Home: React.FC = () => {
     setIsPlay(!isPlay)
   }, [isPlay])
 
-  const dispatchLap = React.useCallback(() => dispatch({ type: 'lap' }), [
+  const dispatchLap = React.useCallback(() => dispatch({ type: 'timer/lap' }), [
     dispatch,
   ])
 
-  const dispatchUndo = React.useCallback(() => dispatch({ type: 'undo' }), [
-    dispatch,
-  ])
+  const dispatchUndo = React.useCallback(
+    () => dispatch({ type: 'timer/undo' }),
+    [dispatch],
+  )
 
   const dispatchReset = React.useCallback(() => {
     setIsPlay(false)
-    dispatch({ type: 'reset', payload: { lapInfoList: loadLapInfoList() } })
+    dispatch({
+      type: 'timer/reset',
+      payload: { lapInfoList: loadLapInfoList() },
+    })
   }, [dispatch])
 
   const goToSetting = React.useCallback(() => router.push('/settings'), [
@@ -148,7 +156,7 @@ const Home: React.FC = () => {
   ])
 
   const intervalCallback = React.useCallback(() => {
-    if (isPlay) dispatch({ type: 'elapsed', payload: { second: 1 } })
+    if (isPlay) dispatch({ type: 'timer/elapsed', payload: { second: 1 } })
   }, [isPlay])
 
   useIntervalByAudioContext(1, intervalCallback)
