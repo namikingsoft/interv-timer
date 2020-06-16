@@ -34,7 +34,7 @@ export default class MyApp extends App {
     i18n.changeLanguage(browserLanguage)
 
     // initialize app
-    store.dispatch({ type: 'initialize' })
+    store.dispatch({ type: 'app/init' })
   }
 
   render(): React.ReactElement {

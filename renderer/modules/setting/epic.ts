@@ -1,6 +1,6 @@
 import { Epic, ofType } from 'redux-observable'
 import { tap, map, mapTo } from 'rxjs/operators'
-import { Action, InitializeAction } from '../type'
+import { Action, AppInitAction } from '../type'
 import {
   SaveRequestAction,
   SaveSuccessAction,
@@ -11,7 +11,7 @@ import * as api from './api'
 
 export const initialize: Epic<Action, LoadRequestAction> = (action$) =>
   action$.pipe(
-    ofType<Action, InitializeAction>('initialize'),
+    ofType<Action, AppInitAction>('app/init'),
     mapTo({
       type: 'setting/loadRequest',
     }),
