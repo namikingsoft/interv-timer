@@ -11,6 +11,8 @@ import { createReduxStore } from '../store'
 import { theme } from '../lib/theme'
 import { i18n } from '../i18n'
 
+const store = createReduxStore()
+
 const onClickClose = () => ipcRenderer.send('quit')
 
 export default class MyApp extends App {
@@ -30,6 +32,9 @@ export default class MyApp extends App {
       // @ts-expect-error for legacy browser
       window.navigator.browserLanguage
     i18n.changeLanguage(browserLanguage)
+
+    // load setting
+    store.dispatch({ type: 'setting/loadRequest' })
   }
 
   render(): React.ReactElement {
@@ -42,7 +47,7 @@ export default class MyApp extends App {
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <I18nextProvider i18n={i18n}>
-            <Provider store={createReduxStore()}>
+            <Provider store={store}>
               <AppFrame onClickClose={onClickClose}>
                 <Component {...pageProps} />
               </AppFrame>

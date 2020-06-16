@@ -13,7 +13,7 @@ import SettingsIcon from '@material-ui/icons/Settings'
 import classnames from 'classnames'
 import { useSelector, useDispatch } from '../hooks/redux'
 import { TimerLabel } from '../components/atoms/TimerLabel'
-import { useLapInfoRepository } from '../hooks/useLapInfoRepository'
+import { parseTextToLapInfoList } from '../modules/timer/util'
 import { useIntervalByAudioContext } from '../hooks/useIntervalByAudioContext'
 import { useTranslationWithKey } from '../hooks/useTranslationWithKey'
 
@@ -117,7 +117,7 @@ const Home: React.FC = () => {
   const router = useRouter()
   const { t, k } = useTranslationWithKey()
 
-  const { loadLapInfoList } = useLapInfoRepository()
+  const lapInfoListText = useSelector(({ setting }) => setting.lapInfoListText)
 
   const {
     lapRemains,
@@ -145,11 +145,12 @@ const Home: React.FC = () => {
 
   const dispatchReset = React.useCallback(() => {
     setIsPlay(false)
-    dispatch({
-      type: 'timer/reset',
-      payload: { lapInfoList: loadLapInfoList() },
-    })
-  }, [dispatch])
+    if (lapInfoListText)
+      dispatch({
+        type: 'timer/reset',
+        payload: { lapInfoList: parseTextToLapInfoList(lapInfoListText) },
+      })
+  }, [dispatch, lapInfoListText])
 
   const goToSetting = React.useCallback(() => router.push('/settings'), [
     router,
@@ -157,11 +158,11 @@ const Home: React.FC = () => {
 
   const intervalCallback = React.useCallback(() => {
     if (isPlay) dispatch({ type: 'timer/elapsed', payload: { second: 1 } })
-  }, [isPlay])
+  }, [dispatch, isPlay])
 
   useIntervalByAudioContext(1, intervalCallback)
 
-  React.useEffect(() => dispatchReset(), [])
+  React.useEffect(() => dispatchReset(), [dispatchReset])
 
   return (
     <React.Fragment>

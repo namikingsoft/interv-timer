@@ -5,7 +5,7 @@ import { Theme, makeStyles, createStyles } from '@material-ui/core/styles'
 import IconButton from '@material-ui/core/IconButton'
 import SaveIcon from '@material-ui/icons/Save'
 import TextareaAutosize from '@material-ui/core/TextareaAutosize'
-import { useLapInfoRepository } from '../hooks/useLapInfoRepository'
+import { useSelector, useDispatch } from '../hooks/redux'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -58,25 +58,29 @@ label2,180
 const Home: React.FC = () => {
   const classes = useStyles({})
   const router = useRouter()
-  const { save, load } = useLapInfoRepository()
 
-  const [lapsText, setLapsText] = React.useState('')
+  const setting = useSelector(({ setting }) => setting)
+
+  const dispatch = useDispatch()
 
   const onChangeLapsText = React.useCallback(
     (event: React.SyntheticEvent<HTMLTextAreaElement>) => {
-      setLapsText(event.currentTarget.value)
+      dispatch({
+        type: 'setting/setLapInfoListText',
+        payload: event.currentTarget.value,
+      })
     },
-    [],
+    [dispatch],
   )
 
   const saveAndGotoHome = React.useCallback(() => {
-    save(lapsText)
+    dispatch({ type: 'setting/saveRequest', payload: setting })
     router.push('/home')
-  }, [lapsText, router])
+  }, [dispatch, router, setting])
 
   React.useEffect(() => {
-    setLapsText(load())
-  }, [])
+    dispatch({ type: 'setting/loadRequest' })
+  }, [dispatch])
 
   return (
     <React.Fragment>
@@ -100,7 +104,7 @@ const Home: React.FC = () => {
             rowsMin={10}
             rowsMax={20}
             placeholder={placeholder}
-            value={lapsText}
+            value={setting.lapInfoListText}
             onChange={onChangeLapsText}
           />
         </div>
