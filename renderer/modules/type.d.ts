@@ -6,4 +6,8 @@ export interface State {
   setting: SettingState
 }
 
-export type Action = TimerAction | SettingAction
+export interface InitializeAction {
+  type: 'initialize'
+}
+
+export type Action = InitializeAction | TimerAction | SettingAction

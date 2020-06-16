@@ -1,5 +1,5 @@
 import { Reducer } from 'redux'
-import { State, Action } from './type'
+import { State, Action, LapInfo } from './type'
 
 const initialState: State = {
   lapInfoList: [],
@@ -39,6 +39,20 @@ const calcState = (state: State): State => {
   }
 }
 
+const initState = (lapInfoList: LapInfo[]): State => {
+  const totalLapSecond = lapInfoList.reduce((acc, x) => acc + x.second, 0)
+  return {
+    ...initialState,
+    lapInfoList: lapInfoList,
+    lapRemains: lapInfoList.map(({ label, second }) => ({
+      label,
+      second,
+    })),
+    idealLapRemainSecond: lapInfoList[0].second,
+    totalRemainSecond: totalLapSecond,
+  }
+}
+
 export const timer: Reducer<State, Action> = (state = initialState, action) => {
   const { lapInfoList, elapsedSecond, lapSeconds } = state
   switch (action.type) {
@@ -59,23 +73,10 @@ export const timer: Reducer<State, Action> = (state = initialState, action) => {
         ...state,
         lapSeconds: lapSeconds.slice(0, -1),
       })
-    case 'timer/reset': {
-      const { lapInfoList: lapInfoNewList } = action.payload
-      const totalLapSecond = lapInfoNewList.reduce(
-        (acc, x) => acc + x.second,
-        0,
-      )
-      return {
-        ...initialState,
-        lapInfoList: lapInfoNewList,
-        lapRemains: lapInfoNewList.map(({ label, second }) => ({
-          label,
-          second,
-        })),
-        idealLapRemainSecond: lapInfoNewList[0].second,
-        totalRemainSecond: totalLapSecond,
-      }
-    }
+    case 'timer/reset':
+      return initState(lapInfoList)
+    case 'timer/init':
+      return initState(action.payload.lapInfoList)
     default:
       return state
   }

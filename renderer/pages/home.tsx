@@ -13,7 +13,6 @@ import SettingsIcon from '@material-ui/icons/Settings'
 import classnames from 'classnames'
 import { useSelector, useDispatch } from '../hooks/redux'
 import { TimerLabel } from '../components/atoms/TimerLabel'
-import { parseTextToLapInfoList } from '../modules/timer/util'
 import { useIntervalByAudioContext } from '../hooks/useIntervalByAudioContext'
 import { useTranslationWithKey } from '../hooks/useTranslationWithKey'
 
@@ -117,8 +116,6 @@ const Home: React.FC = () => {
   const router = useRouter()
   const { t, k } = useTranslationWithKey()
 
-  const lapInfoListText = useSelector(({ setting }) => setting.lapInfoListText)
-
   const {
     lapRemains,
     lapSeconds,
@@ -145,12 +142,8 @@ const Home: React.FC = () => {
 
   const dispatchReset = React.useCallback(() => {
     setIsPlay(false)
-    if (lapInfoListText)
-      dispatch({
-        type: 'timer/reset',
-        payload: { lapInfoList: parseTextToLapInfoList(lapInfoListText) },
-      })
-  }, [dispatch, lapInfoListText])
+    dispatch({ type: 'timer/reset' })
+  }, [dispatch])
 
   const goToSetting = React.useCallback(() => router.push('/settings'), [
     router,
@@ -161,8 +154,6 @@ const Home: React.FC = () => {
   }, [dispatch, isPlay])
 
   useIntervalByAudioContext(1, intervalCallback)
-
-  React.useEffect(() => dispatchReset(), [dispatchReset])
 
   return (
     <React.Fragment>

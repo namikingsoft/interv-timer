@@ -33,8 +33,8 @@ export default class MyApp extends App {
       window.navigator.browserLanguage
     i18n.changeLanguage(browserLanguage)
 
-    // load setting
-    store.dispatch({ type: 'setting/loadRequest' })
+    // initialize app
+    store.dispatch({ type: 'initialize' })
   }
 
   render(): React.ReactElement {

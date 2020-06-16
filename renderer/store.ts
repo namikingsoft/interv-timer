@@ -2,10 +2,14 @@ import { applyMiddleware, combineReducers, createStore, Store } from 'redux'
 import { createEpicMiddleware, combineEpics } from 'redux-observable'
 import { timer } from './modules/timer/reducer'
 import { setting } from './modules/setting/reducer'
+import * as timerEpics from './modules/timer/epic'
 import * as settingEpics from './modules/setting/epic'
 import { State, Action } from './modules/type'
 
-const rootEpic = combineEpics(...Object.values(settingEpics))
+const rootEpic = combineEpics(
+  ...Object.values(timerEpics),
+  ...Object.values(settingEpics),
+)
 
 export const createReduxStore = (): Store<State, Action> => {
   const epicMiddleware = createEpicMiddleware()

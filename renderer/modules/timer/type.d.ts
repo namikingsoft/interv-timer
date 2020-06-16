@@ -17,11 +17,15 @@ export interface State {
   totalRemainSecond: number
 }
 
-interface ResetAction {
-  type: 'timer/reset'
+interface InitAction {
+  type: 'timer/init'
   payload: {
     lapInfoList: LapInfo[]
   }
+}
+
+interface ResetAction {
+  type: 'timer/reset'
 }
 
 interface ElapsedAction {
@@ -39,4 +43,9 @@ interface UndoAction {
   type: 'timer/undo'
 }
 
-export type Action = ResetAction | ElapsedAction | LapAction | UndoAction
+export type Action =
+  | InitAction
+  | ResetAction
+  | ElapsedAction
+  | LapAction
+  | UndoAction
