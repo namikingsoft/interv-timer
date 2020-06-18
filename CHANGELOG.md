@@ -1,4 +1,16 @@
 
+## v0.2.0 (2020-06-18)
+
+#### :rocket: Enhancement
+* [#8](https://github.com/namikingsoft/interv-timer/pull/8) Adjust style and show header on hover window only macos  ([@namikingsoft](https://github.com/namikingsoft))
+
+#### :memo: Documentation
+* [#9](https://github.com/namikingsoft/interv-timer/pull/9) Update readme ([@namikingsoft](https://github.com/namikingsoft))
+
+#### Committers: 1
+- Namiki ([@namikingsoft](https://github.com/namikingsoft))
+
+
 ## v0.2.0-beta.1 (2020-06-18)
 
 #### :rocket: Enhancement
