@@ -45,6 +45,7 @@ const useStyles = makeStyles((theme: Theme) =>
       width: '100%',
       bottom: 0,
       zIndex: 1234,
+      paddingBottom: 20,
     },
     form: {
       marginLeft: 14,
