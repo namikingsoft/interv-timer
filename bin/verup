@@ -1,0 +1,9 @@
+#!/bin/sh -eu
+
+version="$1"
+changelog_file="CHANGELOG.md"
+
+npx lerna-changelog --nextVersion "$version" --from v0.1.0 > "$changelog_file"
+git add "$changelog_file"
+git commit "$changelog_file" -m 'chore: update changelog'
+npm version "$version"
