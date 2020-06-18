@@ -33,7 +33,9 @@ const useStyles = makeStyles(() =>
       paddingTop: 4,
       paddingLeft: 4,
       paddingRight: 6,
-      backgroundColor: '#111',
+      backgroundColor: '#262626',
+      borderTop: '1px solid #555',
+      borderRadius: '2px 2px 0 0',
     },
     dragArea: {
       flex: '1 0 auto',
@@ -79,13 +81,16 @@ const useStyles = makeStyles(() =>
           `rgba(0, 0, 0, ${backgroundAlphaRate || 0})`,
       },
       '::-webkit-scrollbar': {
-        width: 6,
+        width: 10,
       },
       '::-webkit-scrollbar-track': {
-        WebkitBoxShadow: 'inset 0 0 6px rgba(0,0,0,0.3)',
+        // NOTE: scrollbar background style
+        // WebkitBoxShadow: 'inset 0 0 6px rgba(0,0,0,0.3)',
       },
       '::-webkit-scrollbar-thumb:window-inactive, ::-webkit-scrollbar-thumb': {
         background: 'rgba(255,255,255,0.4)',
+        border: '2px solid rgba(0, 0, 0, 0)',
+        backgroundClip: 'padding-box',
         borderRadius: 25,
       },
     },
