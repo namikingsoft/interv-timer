@@ -36,8 +36,6 @@ const useStyles = makeStyles(() =>
       backgroundColor: '#262626',
       borderTop: '1px solid #555',
       borderRadius: '2px 2px 0 0',
-      // cannot drag by visibility or display
-      opacity: 0,
     },
     dragArea: {
       flex: '1 0 auto',
@@ -80,8 +78,11 @@ const useStyles = makeStyles(() =>
       },
       body: {
         height: '100%',
-        '&:hover $header': {
-          opacity: 1,
+        // cannot drag by visibility or display
+        '&:not(:hover) $header': {
+          // TODO: -webkit-app-region: drag eats all click events on windows
+          // https://github.com/electron/electron/issues/1354
+          opacity: /^Win/.test(process?.platform) ? 1 : 0,
         },
       },
       '::-webkit-scrollbar': {
@@ -109,6 +110,7 @@ export const AppFrame: React.FC<Props> = ({
   const backgroundAlphaRate = useSelector(
     ({ setting }) => setting.backgroundAlphaRate,
   )
+  console.log(process.platform)
   const classes = useStyles({ backgroundAlphaRate })
 
   return (
