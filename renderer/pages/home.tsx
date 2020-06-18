@@ -123,6 +123,8 @@ const Home: React.FC = () => {
     idealLapRemainSecond,
   } = useSelector(({ timer }) => timer)
 
+  const avoidFinished = useSelector(({ setting }) => setting.avoidFinished)
+
   const dispatch = useDispatch()
 
   const [isPlay, setIsPlay] = React.useState(false)
@@ -187,7 +189,8 @@ const Home: React.FC = () => {
           <Grid container spacing={2}>
             {lapRemains.map((remain, i) => {
               const isActive = i === lapSeconds.length
-              return (
+              const finished = i < lapSeconds.length
+              return avoidFinished && finished ? null : (
                 <Grid
                   key={remain.label}
                   item

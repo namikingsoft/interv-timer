@@ -2,7 +2,10 @@ import { Reducer } from 'redux'
 import { State, Action } from './type'
 
 const initialState: State = {
-  lapInfoListText: '',
+  settingVersion: 0,
+  agendaListText: '',
+  avoidFinished: false,
+  backgroundAlphaRate: 0,
 }
 
 export const setting: Reducer<State, Action> = (
@@ -13,8 +16,12 @@ export const setting: Reducer<State, Action> = (
     case 'setting/loadSuccess':
     case 'setting/saveSuccess':
       return { ...action.payload }
-    case 'setting/setLapInfoListText':
-      return { ...state, lapInfoListText: action.payload }
+    case 'setting/setAgendaListText':
+      return { ...state, agendaListText: action.payload }
+    case 'setting/setAvoidFinished':
+      return { ...state, avoidFinished: action.payload }
+    case 'setting/setBackgroundAlphaRate':
+      return { ...state, backgroundAlphaRate: action.payload }
     default:
       return state
   }
