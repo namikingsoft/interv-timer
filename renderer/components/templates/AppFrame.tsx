@@ -74,6 +74,7 @@ const useStyles = makeStyles(() =>
       body: {
         height: '100%',
         backgroundColor: 'rgba(0,0,0,0.7)',
+        // @ts-expect-error define props type
         background: ({ backgroundAlphaRate }) =>
           `rgba(0, 0, 0, ${backgroundAlphaRate || 0})`,
       },
