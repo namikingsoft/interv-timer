@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       paddingTop: theme.spacing(4),
       color: 'white !important',
-      fontSize: 24,
+      fontSize: 25,
       textShadow: `${textBorderColor} 1px 1px 0, ${textBorderColor} -1px -1px 0, ${textBorderColor} -1px 1px 0, ${textBorderColor} 1px -1px 0, ${textBorderColor} 0px 1px 0, ${textBorderColor}  0 -1px 0, ${textBorderColor} -1px 0 0, ${textBorderColor} 1px 0 0`,
     },
     header: {
@@ -67,7 +67,7 @@ const useStyles = makeStyles((theme: Theme) =>
       userSelect: 'none',
     },
     label: {
-      fontSize: 12,
+      fontSize: 13,
       marginBottom: -5,
     },
     active: {
