@@ -4,6 +4,10 @@
   "description": "My application description",
   "version": "0.2.0-alpha.2",
   "author": "Tsubasa Namiki <namikingsoft@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/namikingsoft/interv-timer.git"
+  },
   "main": "app/background.js",
   "scripts": {
     "dev": "nextron",
