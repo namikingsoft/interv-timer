@@ -40,6 +40,7 @@ const useStyles = makeStyles(() =>
     dragArea: {
       flex: '1 0 auto',
       cursor: 'move', // TODO: no effect on windows
+      userSelect: 'none',
       WebkitAppRegion: 'drag',
     },
     closeArea: {
