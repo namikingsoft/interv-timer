@@ -15,7 +15,6 @@ export const initAfterChangeSetting: Epic<Action, InitAction, State> = (
       'setting/saveSuccess',
       'setting/loadSuccess',
     ),
-    tap((x) => console.log(x)),
     map(({ payload: { agendaListText } }) =>
       parseTextToAgendaList(agendaListText),
     ),
