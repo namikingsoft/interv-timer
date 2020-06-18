@@ -6,7 +6,7 @@ const localStorageKey = 'jsonSettings'
 const settingVersion = 1
 const defaultState: State = {
   settingVersion,
-  lapInfoListText: 'Agenda1,60\nAgenda2,180',
+  agendaListText: 'Agenda1,60\nAgenda2,180',
   avoidFinished: true,
   backgroundAlphaRate: 0.7,
 }
@@ -21,7 +21,7 @@ export const load = (): State => {
       const loaded = JSON.parse(window.localStorage.getItem(localStorageKey))
       return loaded
         ? Object.keys(defaultState).reduce(
-            (acc, x) => ({ ...acc, [x]: loaded[x] }),
+            (acc, x) => ({ ...acc, [x]: loaded[x] ?? defaultState[x] }),
             {},
           )
         : {}

@@ -1,4 +1,4 @@
-export interface LapInfo {
+export interface Agenda {
   label: string
   second: number
 }
@@ -9,7 +9,7 @@ interface LapRemain {
 }
 
 export interface State {
-  lapInfoList: LapInfo[]
+  agendaList: Agenda[]
   lapRemains: LapRemain[]
   lapSeconds: number[]
   elapsedSecond: number
@@ -20,7 +20,7 @@ export interface State {
 interface InitAction {
   type: 'timer/init'
   payload: {
-    lapInfoList: LapInfo[]
+    agendaList: Agenda[]
   }
 }
 

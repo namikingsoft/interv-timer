@@ -83,7 +83,7 @@ const Home: React.FC = () => {
   const onChangeLapsText = React.useCallback(
     (event: React.SyntheticEvent<HTMLTextAreaElement>) => {
       dispatch({
-        type: 'setting/setLapInfoListText',
+        type: 'setting/setAgendaListText',
         payload: event.currentTarget.value,
       })
     },
@@ -151,8 +151,8 @@ const Home: React.FC = () => {
               className={classes.laps}
               rowsMin={10}
               rowsMax={20}
-              placeholder={t(k.lapInfoListPlaceholder)}
-              value={setting.lapInfoListText}
+              placeholder={t(k.agendaListPlaceholder)}
+              value={setting.agendaListText}
               onChange={onChangeLapsText}
             />
           </div>

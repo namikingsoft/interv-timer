@@ -3,7 +3,7 @@ import { State, Action } from './type'
 
 const initialState: State = {
   settingVersion: 0,
-  lapInfoListText: '',
+  agendaListText: '',
   avoidFinished: false,
   backgroundAlphaRate: 0,
 }
@@ -16,8 +16,8 @@ export const setting: Reducer<State, Action> = (
     case 'setting/loadSuccess':
     case 'setting/saveSuccess':
       return { ...action.payload }
-    case 'setting/setLapInfoListText':
-      return { ...state, lapInfoListText: action.payload }
+    case 'setting/setAgendaListText':
+      return { ...state, agendaListText: action.payload }
     case 'setting/setAvoidFinished':
       return { ...state, avoidFinished: action.payload }
     case 'setting/setBackgroundAlphaRate':

@@ -1,6 +1,6 @@
-import { LapInfo } from './type'
+import { Agenda } from './type'
 
-export const parseTextToLapInfoList = (text: string): LapInfo[] =>
+export const parseTextToAgendaList = (text: string): Agenda[] =>
   text
     .split(/\r?\n/)
     .filter((x) => !!x)

@@ -1,12 +1,12 @@
 export interface State {
   settingVersion: number
-  lapInfoListText: string
+  agendaListText: string
   avoidFinished: boolean
   backgroundAlphaRate: number
 }
 
-export interface SetLapInfoListText {
-  type: 'setting/setLapInfoListText'
+export interface SetAgendaListText {
+  type: 'setting/setAgendaListText'
   payload: string
 }
 
@@ -40,7 +40,7 @@ export interface LoadSuccessAction {
 }
 
 export type Action =
-  | SetLapInfoListText
+  | SetAgendaListText
   | SetAvoidFinished
   | SetBackgroundAlphaRate
   | SaveRequestAction

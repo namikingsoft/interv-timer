@@ -1,10 +1,10 @@
 import { Epic, ofType } from 'redux-observable'
-import { map, filter } from 'rxjs/operators'
+import { map, filter, tap } from 'rxjs/operators'
 import deepEqual from 'fast-deep-equal/react'
 import { SaveSuccessAction, LoadSuccessAction } from '../setting/type'
 import { Action, State } from '../type'
 import { InitAction } from './type'
-import { parseTextToLapInfoList } from './util'
+import { parseTextToAgendaList } from './util'
 
 export const initAfterChangeSetting: Epic<Action, InitAction, State> = (
   action$,
@@ -15,14 +15,15 @@ export const initAfterChangeSetting: Epic<Action, InitAction, State> = (
       'setting/saveSuccess',
       'setting/loadSuccess',
     ),
-    map(({ payload: { lapInfoListText } }) =>
-      parseTextToLapInfoList(lapInfoListText),
+    tap((x) => console.log(x)),
+    map(({ payload: { agendaListText } }) =>
+      parseTextToAgendaList(agendaListText),
     ),
     filter(
-      (lapInfoList) => !deepEqual(lapInfoList, state$.value.timer.lapInfoList),
+      (agendaList) => !deepEqual(agendaList, state$.value.timer.agendaList),
     ),
-    map((lapInfoList) => ({
+    map((agendaList) => ({
       type: 'timer/init',
-      payload: { lapInfoList },
+      payload: { agendaList },
     })),
   )
