@@ -2,7 +2,7 @@
 
 ## Download
 
-- [Releases](./releases)
+- [Releases](https://github.com/namikingsoft/interv-timer/releases)
 
 ## Development
 
