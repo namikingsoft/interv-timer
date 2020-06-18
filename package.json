@@ -2,7 +2,7 @@
   "private": true,
   "name": "interv-timer",
   "description": "My application description",
-  "version": "0.2.0-alpha.2",
+  "version": "0.2.0-beta.1",
   "author": "Tsubasa Namiki <namikingsoft@gmail.com>",
   "repository": {
     "type": "git",
