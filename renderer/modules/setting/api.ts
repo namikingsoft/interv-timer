@@ -1,7 +1,5 @@
 import { State } from './type'
 
-// const keyOfLapInfoListText = 'LapInfoListText'
-
 const localStorageKey = 'jsonSettings'
 const settingVersion = 1
 const defaultState: State = {
@@ -19,12 +17,24 @@ export const load = (): State => {
   const loadedSettingState = (() => {
     try {
       const loaded = JSON.parse(window.localStorage.getItem(localStorageKey))
-      return loaded
-        ? Object.keys(defaultState).reduce(
-            (acc, x) => ({ ...acc, [x]: loaded[x] ?? defaultState[x] }),
-            {},
-          )
-        : {}
+      if (loaded)
+        return Object.keys(defaultState).reduce(
+          (acc, x) => ({ ...acc, [x]: loaded[x] ?? defaultState[x] }),
+          {},
+        )
+      // TODO: remove after later
+      // migrate from v0.1 to v0.2
+      // return {}
+      const keyOfLapInfoListText = 'LapInfoListText'
+      const migrated = {
+        ...defaultState,
+        agendaListText:
+          window.localStorage.getItem(keyOfLapInfoListText) ||
+          defaultState.agendaListText,
+      }
+      save(migrated)
+      window.localStorage.removeItem(keyOfLapInfoListText)
+      return migrated
     } catch {
       return {}
     }
