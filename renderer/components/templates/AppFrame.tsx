@@ -3,6 +3,7 @@ import classnames from 'classnames'
 import { makeStyles, createStyles } from '@material-ui/core/styles'
 import DragIndicatorIcon from '@material-ui/icons/DragIndicator'
 import CloseIcon from '@material-ui/icons/Close'
+import { useSelector } from '../../hooks/redux'
 
 interface Props {
   className?: string
@@ -73,6 +74,8 @@ const useStyles = makeStyles(() =>
       body: {
         height: '100%',
         backgroundColor: 'rgba(0,0,0,0.7)',
+        background: ({ backgroundAlphaRate }) =>
+          `rgba(0, 0, 0, ${backgroundAlphaRate || 0})`,
       },
       '::-webkit-scrollbar': {
         width: 6,
@@ -93,7 +96,10 @@ export const AppFrame: React.FC<Props> = ({
   onClickClose,
   children,
 }) => {
-  const classes = useStyles({})
+  const backgroundAlphaRate = useSelector(
+    ({ setting }) => setting.backgroundAlphaRate,
+  )
+  const classes = useStyles({ backgroundAlphaRate })
 
   return (
     <div className={classnames(classes.root, className)}>
