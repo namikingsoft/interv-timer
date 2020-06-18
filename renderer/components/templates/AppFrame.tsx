@@ -36,6 +36,8 @@ const useStyles = makeStyles(() =>
       backgroundColor: '#262626',
       borderTop: '1px solid #555',
       borderRadius: '2px 2px 0 0',
+      // cannot drag by visibility or display
+      opacity: 0,
     },
     dragArea: {
       flex: '1 0 auto',
@@ -63,6 +65,9 @@ const useStyles = makeStyles(() =>
       left: 0,
       right: 0,
       bottom: 0,
+      // @ts-expect-error define props type
+      backgroundColor: ({ backgroundAlphaRate }) =>
+        `rgba(0, 0, 0, ${backgroundAlphaRate || 0})`,
     },
     mainRelative: {
       position: 'relative',
@@ -75,10 +80,9 @@ const useStyles = makeStyles(() =>
       },
       body: {
         height: '100%',
-        backgroundColor: 'rgba(0,0,0,0.7)',
-        // @ts-expect-error define props type
-        background: ({ backgroundAlphaRate }) =>
-          `rgba(0, 0, 0, ${backgroundAlphaRate || 0})`,
+        '&:hover $header': {
+          opacity: 1,
+        },
       },
       '::-webkit-scrollbar': {
         width: 10,
