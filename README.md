@@ -1,3 +1,5 @@
+# Agenda time keeper for macOS and Windows
+
 ![App Capture](https://user-images.githubusercontent.com/3187220/85080679-d3212700-b204-11ea-919b-350766ab37fe.gif)
 
 ## Download
