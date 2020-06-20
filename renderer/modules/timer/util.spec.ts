@@ -23,21 +23,23 @@ describe('modules/timer/util', () => {
     it('should return error message on label', () => {
       expect(parseTextToAgendaList('labelonly')).toEqual([
         {
-          label: "Unable to auto-detect delimiting character; defaulted to ','",
+          label:
+            "Parse Error: Unable to auto-detect delimiting character; defaulted to ','",
           second: 0,
         },
         {
-          label: 'Too few fields: expected 2 fields but parsed 1',
+          label: 'Parse Error: Too few fields: expected 2 fields but parsed 1',
           second: 0,
         },
       ])
       expect(parseTextToAgendaList('label,60\nlabelonly')).toEqual([
         {
-          label: "Unable to auto-detect delimiting character; defaulted to ','",
+          label:
+            "Parse Error: Unable to auto-detect delimiting character; defaulted to ','",
           second: 0,
         },
         {
-          label: 'Too few fields: expected 2 fields but parsed 1',
+          label: 'Parse Error: Too few fields: expected 2 fields but parsed 1',
           second: 0,
         },
       ])
