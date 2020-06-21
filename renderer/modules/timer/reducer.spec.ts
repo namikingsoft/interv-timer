@@ -109,42 +109,42 @@ describe('modules/timer/reducer', () => {
       totalRemainSecond: 126,
     })
 
-    state = timer(state, { type: 'timer/elapsed', payload: { second: 6 } })
+    state = timer(state, { type: 'timer/elapsed', payload: { second: 6.4 } })
     expect(state).toEqual({
       agendaList,
       lapSeconds: [2, 4],
       lapRemains: [
         { label: 'agenda1', second: 58 },
         { label: 'agenda2', second: 28 },
-        { label: 'agenda3', second: 34 },
+        { label: 'agenda3', second: 33.6 },
       ],
-      elapsedSecond: 10,
-      idealLapRemainSecond: 120,
-      totalRemainSecond: 120,
+      elapsedSecond: 10.4,
+      idealLapRemainSecond: 119.6,
+      totalRemainSecond: 119.6,
     })
 
     state = timer(state, { type: 'timer/lap' })
     expect(state).toEqual({
       agendaList,
-      lapSeconds: [2, 4, 10],
+      lapSeconds: [2, 4, 10.4],
       lapRemains: [
         { label: 'agenda1', second: 58 },
         { label: 'agenda2', second: 28 },
-        { label: 'agenda3', second: 34 },
+        { label: 'agenda3', second: 33.6 },
       ],
-      elapsedSecond: 10,
-      idealLapRemainSecond: 120,
-      totalRemainSecond: 120,
+      elapsedSecond: 10.4,
+      idealLapRemainSecond: 119.6,
+      totalRemainSecond: 119.6,
     })
 
-    state = timer(state, { type: 'timer/elapsed', payload: { second: 2 } })
+    state = timer(state, { type: 'timer/elapsed', payload: { second: 1.6 } })
     expect(state).toEqual({
       agendaList,
-      lapSeconds: [2, 4, 10],
+      lapSeconds: [2, 4, 10.4],
       lapRemains: [
         { label: 'agenda1', second: 58 },
         { label: 'agenda2', second: 28 },
-        { label: 'agenda3', second: 34 },
+        { label: 'agenda3', second: 33.6 },
       ],
       elapsedSecond: 12,
       idealLapRemainSecond: 118,
@@ -154,11 +154,11 @@ describe('modules/timer/reducer', () => {
     state = timer(state, { type: 'timer/lap' })
     expect(state).toEqual({
       agendaList,
-      lapSeconds: [2, 4, 10],
+      lapSeconds: [2, 4, 10.4],
       lapRemains: [
         { label: 'agenda1', second: 58 },
         { label: 'agenda2', second: 28 },
-        { label: 'agenda3', second: 34 },
+        { label: 'agenda3', second: 33.6 },
       ],
       elapsedSecond: 12,
       idealLapRemainSecond: 118,
