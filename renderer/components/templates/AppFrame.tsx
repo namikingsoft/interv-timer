@@ -111,7 +111,6 @@ export const AppFrame: React.FC<Props> = ({
   const backgroundAlphaRate = useSelector(
     ({ setting }) => setting.backgroundAlphaRate,
   )
-  console.log(process.platform)
   const classes = useStyles({ backgroundAlphaRate })
 
   return (
