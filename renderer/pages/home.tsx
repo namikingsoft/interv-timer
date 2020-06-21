@@ -151,9 +151,13 @@ const Home: React.FC = () => {
     router,
   ])
 
-  const intervalCallback = React.useCallback(() => {
-    if (isPlay) dispatch({ type: 'timer/elapsed', payload: { second: 1 } })
-  }, [dispatch, isPlay])
+  const intervalCallback = React.useCallback(
+    ({ deltaSecond }) => {
+      if (isPlay)
+        dispatch({ type: 'timer/elapsed', payload: { second: deltaSecond } })
+    },
+    [dispatch, isPlay],
+  )
 
   useIntervalByAudioContext(1, intervalCallback)
 
