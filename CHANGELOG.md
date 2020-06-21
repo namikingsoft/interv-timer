@@ -1,5 +1,17 @@
 
-## v0.2.0 (2020-06-18)
+## v0.2.1 (2020-06-21)
+
+#### :rocket: Enhancement
+* [#10](https://github.com/namikingsoft/interv-timer/pull/10) Improve agenda list text parsing ([@namikingsoft](https://github.com/namikingsoft))
+
+#### :bug: Bug Fix
+* [#11](https://github.com/namikingsoft/interv-timer/pull/11) Support automatic adjustment when crazy interval ([@namikingsoft](https://github.com/namikingsoft))
+
+#### Committers: 1
+- Namiki ([@namikingsoft](https://github.com/namikingsoft))
+
+
+## v0.2.0 (2020-06-19)
 
 #### :rocket: Enhancement
 * [#8](https://github.com/namikingsoft/interv-timer/pull/8) Adjust style and show header on hover window only macos  ([@namikingsoft](https://github.com/namikingsoft))
