@@ -91,6 +91,29 @@ describe('modules/timer/util', () => {
       })
     })
 
+    it('should round second', () => {
+      expect(calcTimerLabelFromRemainSecond(60.1)).toEqual({
+        hour: '00',
+        minute: '01',
+        second: '00',
+      })
+      expect(calcTimerLabelFromRemainSecond(59.9)).toEqual({
+        hour: '00',
+        minute: '01',
+        second: '00',
+      })
+      expect(calcTimerLabelFromRemainSecond(59.1)).toEqual({
+        hour: '00',
+        minute: '00',
+        second: '59',
+      })
+      expect(calcTimerLabelFromRemainSecond(58.9)).toEqual({
+        hour: '00',
+        minute: '00',
+        second: '59',
+      })
+    })
+
     it('should return hour label over 60', () => {
       expect(calcTimerLabelFromRemainSecond(60 * 60 * 60)).toEqual({
         hour: '60',
