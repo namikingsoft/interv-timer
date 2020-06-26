@@ -32,11 +32,12 @@ export const calcTimerLabelFromRemainSecond = (
   remainSecond: number,
 ): TimerLabel => {
   const remainSecondAbs = Math.abs(remainSecond)
-  const remainMinute = remainSecondAbs / 60
-  const remainHour = remainMinute / 60
+  const roundedSecond = Math.round(remainSecondAbs) // NOTE: 58.999 => 59 not 58
+  const remainMinute = Math.floor(roundedSecond / 60)
+  const remainHour = Math.floor(remainMinute / 60)
   return {
-    second: zeroPad2(Math.round(remainSecondAbs % 60)), // NOTE: 58.999 => 59 not 58
-    minute: zeroPad2(Math.floor(remainMinute % 60)),
-    hour: zeroPad2(Math.floor(remainHour)),
+    second: zeroPad2(roundedSecond % 60),
+    minute: zeroPad2(remainMinute % 60),
+    hour: zeroPad2(remainHour),
   }
 }
