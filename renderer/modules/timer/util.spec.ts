@@ -1,4 +1,4 @@
-import { parseTextToAgendaList } from './util'
+import { parseTextToAgendaList, calcTimerLabelFromRemainSecond } from './util'
 
 describe('modules/timer/util', () => {
   describe('parseTextToAgendaList', () => {
@@ -43,6 +43,109 @@ describe('modules/timer/util', () => {
           second: 0,
         },
       ])
+    })
+  })
+
+  describe('calcTimerLabelFromRemainSecond', () => {
+    it('should return label of hour and minute and second by remain second', () => {
+      expect(calcTimerLabelFromRemainSecond(0)).toEqual({
+        hour: '00',
+        minute: '00',
+        second: '00',
+      })
+
+      expect(calcTimerLabelFromRemainSecond(1)).toEqual({
+        hour: '00',
+        minute: '00',
+        second: '01',
+      })
+
+      expect(calcTimerLabelFromRemainSecond(59)).toEqual({
+        hour: '00',
+        minute: '00',
+        second: '59',
+      })
+
+      expect(calcTimerLabelFromRemainSecond(60)).toEqual({
+        hour: '00',
+        minute: '01',
+        second: '00',
+      })
+
+      expect(calcTimerLabelFromRemainSecond(61)).toEqual({
+        hour: '00',
+        minute: '01',
+        second: '01',
+      })
+
+      expect(calcTimerLabelFromRemainSecond(60 * 60 - 1)).toEqual({
+        hour: '00',
+        minute: '59',
+        second: '59',
+      })
+
+      expect(calcTimerLabelFromRemainSecond(60 * 60 + 61)).toEqual({
+        hour: '01',
+        minute: '01',
+        second: '01',
+      })
+    })
+
+    it('should round second', () => {
+      expect(calcTimerLabelFromRemainSecond(60.1)).toEqual({
+        hour: '00',
+        minute: '01',
+        second: '00',
+      })
+      expect(calcTimerLabelFromRemainSecond(59.9)).toEqual({
+        hour: '00',
+        minute: '01',
+        second: '00',
+      })
+      expect(calcTimerLabelFromRemainSecond(59.1)).toEqual({
+        hour: '00',
+        minute: '00',
+        second: '59',
+      })
+      expect(calcTimerLabelFromRemainSecond(58.9)).toEqual({
+        hour: '00',
+        minute: '00',
+        second: '59',
+      })
+    })
+
+    it('should return hour label over 60', () => {
+      expect(calcTimerLabelFromRemainSecond(60 * 60 * 60)).toEqual({
+        hour: '60',
+        minute: '00',
+        second: '00',
+      })
+
+      expect(calcTimerLabelFromRemainSecond(60 * 60 * 61)).toEqual({
+        hour: '61',
+        minute: '00',
+        second: '00',
+      })
+    })
+
+    it('should return absolute label from minus remain second', () => {
+      expect(calcTimerLabelFromRemainSecond(-1)).toEqual({
+        hour: '00',
+        minute: '00',
+        second: '01',
+      })
+
+      expect(calcTimerLabelFromRemainSecond(-(60 * 60 + 61))).toEqual({
+        hour: '01',
+        minute: '01',
+        second: '01',
+      })
+
+      expect(calcTimerLabelFromRemainSecond(-(60 * 60 * 61))).toEqual({
+        hour: '61',
+        minute: '00',
+        second: '00',
+      })
     })
   })
 })
