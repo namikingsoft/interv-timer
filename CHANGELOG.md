@@ -1,4 +1,13 @@
 
+## v0.2.2 (2020-06-27)
+
+#### :bug: Bug Fix
+* [#12](https://github.com/namikingsoft/interv-timer/pull/12) Fix second label of round logic ([@namikingsoft](https://github.com/namikingsoft))
+
+#### Committers: 1
+- Namiki ([@namikingsoft](https://github.com/namikingsoft))
+
+
 ## v0.2.1 (2020-06-21)
 
 #### :rocket: Enhancement
