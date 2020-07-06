@@ -1,9 +1,9 @@
 name: Release
 
-on:
-  push:
-    tags:
-    - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
+on: push
+  # push:
+  #   tags:
+  #   - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
 
 jobs:
   build:
@@ -35,48 +35,48 @@ jobs:
         name: windows
         path: dist/*.exe
       
-  release:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - uses: actions/download-artifact@v2
-      with:
-        path: dist
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: ${{ github.ref }}
-        release_name: ${{ github.ref }}
-        draft: true
-        prerelease: false
-    - name: Rename dist files
-      run: |
-        mv dist/macos/*.dmg dist/macos.dmg
-        mv dist/windows/*.exe dist/windows.exe
-    - name: Get the version
-      id: get_appinfo
-      run: |
-        echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
-        echo ::set-output name=APPNAME::$(< package.json jq -r .name)
-    - name: Upload Release Asset
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: dist/macos.dmg
-        asset_name: ${{ steps.get_appinfo.outputs.APPNAME }}-${{ steps.get_appinfo.outputs.VERSION }}-macos.dmg
-        asset_content_type: application/force-download
-    - name: Upload Release Asset
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: dist/windows.exe
-        asset_name: ${{ steps.get_appinfo.outputs.APPNAME }}-${{ steps.get_appinfo.outputs.VERSION }}-windows.exe
-        asset_content_type: application/force-download
+  #release:
+  #  needs: build
+  #  runs-on: ubuntu-latest
+  #  steps:
+  #  - uses: actions/checkout@v2
+  #  - uses: actions/download-artifact@v2
+  #    with:
+  #      path: dist
+  #  - name: Create Release
+  #    id: create_release
+  #    uses: actions/create-release@v1
+  #    env:
+  #      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #    with:
+  #      tag_name: ${{ github.ref }}
+  #      release_name: ${{ github.ref }}
+  #      draft: true
+  #      prerelease: false
+  #  - name: Rename dist files
+  #    run: |
+  #      mv dist/macos/*.dmg dist/macos.dmg
+  #      mv dist/windows/*.exe dist/windows.exe
+  #  - name: Get the version
+  #    id: get_appinfo
+  #    run: |
+  #      echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+  #      echo ::set-output name=APPNAME::$(< package.json jq -r .name)
+  #  - name: Upload Release Asset
+  #    uses: actions/upload-release-asset@v1
+  #    env:
+  #      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #    with:
+  #      upload_url: ${{ steps.create_release.outputs.upload_url }}
+  #      asset_path: dist/macos.dmg
+  #      asset_name: ${{ steps.get_appinfo.outputs.APPNAME }}-${{ steps.get_appinfo.outputs.VERSION }}-macos.dmg
+  #      asset_content_type: application/force-download
+  #  - name: Upload Release Asset
+  #    uses: actions/upload-release-asset@v1
+  #    env:
+  #      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #    with:
+  #      upload_url: ${{ steps.create_release.outputs.upload_url }}
+  #      asset_path: dist/windows.exe
+  #      asset_name: ${{ steps.get_appinfo.outputs.APPNAME }}-${{ steps.get_appinfo.outputs.VERSION }}-windows.exe
+  #      asset_content_type: application/force-download
