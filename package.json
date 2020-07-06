@@ -18,6 +18,24 @@
     "lintfix": "npm run lint -- --fix",
     "postinstall": "electron-builder install-app-deps"
   },
+  "build": {
+    "appId": "net.namiking.interv-timer",
+    "productName": "IntervTime",
+    "copyright": "Copyright © 2020 Tsubasa Namiki",
+    "afterSign": "./bin/after-sign-mac.js",
+    "directories": {
+      "output": "dist",
+      "buildResources": "resources"
+    },
+    "files": [{
+      "from": ".",
+      "filter": [
+        "package.json",
+        "app"
+      ]
+    }],
+    "publish": null
+  },
   "dependencies": {
     "electron-serve": "1.0.0",
     "electron-store": "5.1.1"
@@ -39,7 +57,8 @@
     "babel-loader": "8.1.0",
     "classnames": "2.2.6",
     "electron": "9.0.0",
-    "electron-builder": "22.6.1",
+    "electron-builder": "22.7.0",
+    "electron-notarize": "1.0.0",
     "eslint": "^7.2.0",
     "eslint-config-prettier": "6.11.0",
     "eslint-config-standard": "^14.1.1",
