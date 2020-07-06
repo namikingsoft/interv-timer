@@ -18,6 +18,23 @@
     "lintfix": "npm run lint -- --fix",
     "postinstall": "electron-builder install-app-deps"
   },
+  "build": {
+    "appId": "net.namiking.interv-timer",
+    "productName": "IntervTime",
+    "copyright": "Copyright © 2020 Tsubasa Namiki",
+    "directories": {
+      "output": "dist",
+      "buildResources": "resources"
+    },
+    "files": [{
+      "from": ".",
+      "filter": [
+        "package.json",
+        "app"
+      ]
+    }],
+    "publish": null
+  },
   "dependencies": {
     "electron-serve": "1.0.0",
     "electron-store": "5.1.1"
