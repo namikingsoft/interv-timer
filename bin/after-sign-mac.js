@@ -28,6 +28,16 @@ async function notarizeApp() {
 }
 
 exports.default = async () => {
-  if (process.platform !== 'darwin') return
+  if (
+    !(
+      process.platform === 'darwin' &&
+      appleId &&
+      appleIdPassword &&
+      ascProvider
+    )
+  ) {
+    console.log('afterSign: Skip notarize')
+    return
+  }
   await notarizeApp()
 }
