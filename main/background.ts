@@ -61,7 +61,7 @@ const main = async () => {
         buttons: ['Restart', 'Later'],
         defaultId: 0,
         cancelId: 999,
-        message: 'New version available',
+        message: 'New version is available',
         detail: releaseName,
       })
       if (result.response === 0) autoUpdater.quitAndInstall()
