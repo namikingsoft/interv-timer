@@ -12,6 +12,7 @@
   "scripts": {
     "dev": "nextron",
     "build": "nextron build",
+    "release": "nextron build",
     "test": "jest",
     "type": "tsc --noEmit",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
