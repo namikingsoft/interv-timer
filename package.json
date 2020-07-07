@@ -21,7 +21,7 @@
   },
   "build": {
     "appId": "net.namiking.interv-timer",
-    "productName": "IntervTime",
+    "productName": "IntervTimer",
     "copyright": "Copyright © 2020 Tsubasa Namiki",
     "afterSign": "./bin/after-sign-mac.js",
     "directories": {
