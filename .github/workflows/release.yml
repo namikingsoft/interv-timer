@@ -34,10 +34,12 @@ jobs:
     - name: Build production
       run: npm run build
     - uses: actions/upload-artifact@v2
+      if: matrix.os == 'macos-latest'
       with:
         name: macos
         path: dist/*.dmg
     - uses: actions/upload-artifact@v2
+      if: matrix.os == 'windows-latest'
       with:
         name: windows
         path: dist/*.exe
