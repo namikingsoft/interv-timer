@@ -27,14 +27,19 @@
       "output": "dist",
       "buildResources": "resources"
     },
-    "files": [{
-      "from": ".",
-      "filter": [
-        "package.json",
-        "app"
-      ]
-    }],
-    "publish": null
+    "files": [
+      {
+        "from": ".",
+        "filter": [
+          "package.json",
+          "app"
+        ]
+      }
+    ],
+    "publish": {
+      "provider": "github",
+      "releaseType": "draft"
+    }
   },
   "dependencies": {
     "electron-serve": "1.0.0",
