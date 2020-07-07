@@ -1,7 +1,11 @@
 import { app, dialog, ipcMain } from 'electron'
+import log from 'electron-log'
 import serve from 'electron-serve'
 import { autoUpdater } from 'electron-updater'
 import { createWindow } from './helpers'
+
+log.transports.file.level = 'info'
+autoUpdater.logger = log
 
 const isProd: boolean = process.env.NODE_ENV === 'production'
 
