@@ -1,5 +1,6 @@
-import { app, ipcMain } from 'electron'
+import { app, dialog, ipcMain } from 'electron'
 import serve from 'electron-serve'
+import { autoUpdater } from 'electron-updater'
 import { createWindow } from './helpers'
 
 const isProd: boolean = process.env.NODE_ENV === 'production'
@@ -10,7 +11,15 @@ if (isProd) {
   app.setPath('userData', `${app.getPath('userData')} (development)`)
 }
 
-;(async () => {
+app.on('window-all-closed', () => {
+  app.quit()
+})
+
+ipcMain.on('quit', () => {
+  app.quit()
+})
+
+const main = async () => {
   await app.whenReady()
 
   const mainWindow = createWindow('main', {
@@ -39,12 +48,23 @@ if (isProd) {
     await mainWindow.loadURL(`http://localhost:${port}/home`)
     mainWindow.webContents.openDevTools()
   }
-})()
 
-app.on('window-all-closed', () => {
-  app.quit()
-})
+  autoUpdater.on(
+    'update-downloaded',
+    async (event, releaseNotes, releaseName) => {
+      const result = await dialog.showMessageBox(mainWindow, {
+        type: 'question',
+        buttons: ['Restart', 'Later'],
+        defaultId: 0,
+        cancelId: 999,
+        message: 'New version available',
+        detail: releaseName,
+      })
+      if (result.response === 0) autoUpdater.quitAndInstall()
+    },
+  )
 
-ipcMain.on('quit', () => {
-  app.quit()
-})
+  autoUpdater.checkForUpdates()
+}
+
+main()
