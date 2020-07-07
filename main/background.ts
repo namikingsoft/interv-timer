@@ -53,20 +53,16 @@ const main = async () => {
     mainWindow.webContents.openDevTools()
   }
 
-  autoUpdater.on(
-    'update-downloaded',
-    async (event, releaseNotes, releaseName) => {
-      const result = await dialog.showMessageBox(mainWindow, {
-        type: 'question',
-        buttons: ['Restart', 'Later'],
-        defaultId: 0,
-        cancelId: 999,
-        message: 'New version is available',
-        detail: releaseName,
-      })
-      if (result.response === 0) autoUpdater.quitAndInstall()
-    },
-  )
+  autoUpdater.on('update-downloaded', async ({ version }) => {
+    const result = await dialog.showMessageBox(mainWindow, {
+      type: 'question',
+      buttons: ['Restart', 'Later'],
+      defaultId: 0,
+      cancelId: 999,
+      message: `New version ${version} is available.`,
+    })
+    if (result.response === 0) autoUpdater.quitAndInstall()
+  })
 
   autoUpdater.checkForUpdates()
   setInterval(() => autoUpdater.checkForUpdates(), 10 * 60 * 1000) // check every 10 min
