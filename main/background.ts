@@ -69,6 +69,7 @@ const main = async () => {
   )
 
   autoUpdater.checkForUpdates()
+  setInterval(() => autoUpdater.checkForUpdates(), 10 * 60 * 1000) // check every 10 min
 }
 
 main()
