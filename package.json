@@ -64,6 +64,7 @@
     "classnames": "2.2.6",
     "electron": "9.0.0",
     "electron-builder": "22.7.0",
+    "electron-log": "4.2.2",
     "electron-notarize": "1.0.0",
     "electron-updater": "4.3.1",
     "eslint": "^7.2.0",
