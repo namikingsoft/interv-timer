@@ -17,7 +17,4 @@ npm install
 
 # development mode
 npm run dev
-
-# production build
-npm run build
 ```
