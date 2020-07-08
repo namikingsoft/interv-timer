@@ -3,6 +3,11 @@
 ## Download
 
 - [Releases](https://github.com/namikingsoft/interv-timer/releases)
+    - MacOS
+        - Download and open dmg file
+    - Windows
+        - Download and open setup exe file
+          - **Notice:** Avoid security warning because code signing not yet
 
 ## Development
 
