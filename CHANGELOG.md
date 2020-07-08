@@ -1,4 +1,14 @@
 
+## v0.3.0 (2020-07-08)
+
+#### :rocket: Enhancement
+* [#14](https://github.com/namikingsoft/interv-timer/pull/14) Support auto updater ([@namikingsoft](https://github.com/namikingsoft))
+* [#13](https://github.com/namikingsoft/interv-timer/pull/13) Code signing and Notarize for macos ([@namikingsoft](https://github.com/namikingsoft))
+
+#### Committers: 1
+- Namiki ([@namikingsoft](https://github.com/namikingsoft))
+
+
 ## v0.2.2 (2020-06-27)
 
 #### :bug: Bug Fix
