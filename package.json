@@ -12,6 +12,7 @@
   "scripts": {
     "dev": "nextron",
     "build": "nextron build",
+    "release": "nextron build",
     "test": "jest",
     "type": "tsc --noEmit",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
@@ -20,21 +21,26 @@
   },
   "build": {
     "appId": "net.namiking.interv-timer",
-    "productName": "IntervTime",
+    "productName": "IntervTimer",
     "copyright": "Copyright © 2020 Tsubasa Namiki",
     "afterSign": "./bin/after-sign-mac.js",
     "directories": {
       "output": "dist",
       "buildResources": "resources"
     },
-    "files": [{
-      "from": ".",
-      "filter": [
-        "package.json",
-        "app"
-      ]
-    }],
-    "publish": null
+    "files": [
+      {
+        "from": ".",
+        "filter": [
+          "package.json",
+          "app"
+        ]
+      }
+    ],
+    "publish": {
+      "provider": "github",
+      "releaseType": "draft"
+    }
   },
   "dependencies": {
     "electron-serve": "1.0.0",
@@ -58,7 +64,9 @@
     "classnames": "2.2.6",
     "electron": "9.0.0",
     "electron-builder": "22.7.0",
+    "electron-log": "4.2.2",
     "electron-notarize": "1.0.0",
+    "electron-updater": "4.3.1",
     "eslint": "^7.2.0",
     "eslint-config-prettier": "6.11.0",
     "eslint-config-standard": "^14.1.1",
