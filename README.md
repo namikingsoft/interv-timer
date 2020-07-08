@@ -7,7 +7,7 @@
         - Download and open dmg file
     - Windows
         - Download and open setup exe file
-          - **Notice:** Avoid security warning because code signing not yet
+        - **Notice:** Need to avoid security warning because code signing not yet
 
 ## Development
 
