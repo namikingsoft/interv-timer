@@ -97,6 +97,6 @@
     "jest": "26.1.0",
     "prettier": "2.0.5",
     "react-test-renderer": "16.13.1",
-    "ts-jest": "26.1.0"
+    "ts-jest": "26.1.1"
   }
 }
