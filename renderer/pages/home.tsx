@@ -163,6 +163,10 @@ const Home: React.FC = () => {
 
   const finishedAll = lapRemains.length <= lapSeconds.length
 
+  React.useEffect(() => {
+    if (finishedAll) setIsPlay(false)
+  }, [finishedAll])
+
   return (
     <React.Fragment>
       <Head>
