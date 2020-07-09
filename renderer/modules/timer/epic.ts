@@ -1,5 +1,5 @@
 import { Epic, ofType } from 'redux-observable'
-import { map, filter, tap } from 'rxjs/operators'
+import { map, filter } from 'rxjs/operators'
 import deepEqual from 'fast-deep-equal/react'
 import { SaveSuccessAction, LoadSuccessAction } from '../setting/type'
 import { Action, State } from '../type'
