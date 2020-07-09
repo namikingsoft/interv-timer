@@ -12,7 +12,7 @@ update_configs:
         dependency_name: "*eslint*"
       - match:
         dependency_name: "*jest*"
-      # NOTE: electron and electron-builder in devDependencies required
+      # NOTE: electron and electron-builder in devDependencies required by nextron build
       # - match:
       #     dependency_type: development
       #     update_type: all
