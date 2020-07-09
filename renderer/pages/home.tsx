@@ -161,6 +161,8 @@ const Home: React.FC = () => {
 
   useIntervalByAudioContext(1, intervalCallback)
 
+  const finishedAll = lapRemains.length <= lapSeconds.length
+
   return (
     <React.Fragment>
       <Head>
@@ -194,7 +196,7 @@ const Home: React.FC = () => {
             {lapRemains.map((remain, i) => {
               const isActive = i === lapSeconds.length
               const finished = i < lapSeconds.length
-              return avoidFinished && finished ? null : (
+              return avoidFinished && finished && !finishedAll ? null : (
                 <Grid
                   key={remain.label}
                   item
