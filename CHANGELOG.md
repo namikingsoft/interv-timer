@@ -1,4 +1,21 @@
 
+## v0.3.1 (2020-07-09)
+
+#### :rocket: Enhancement
+* [#45](https://github.com/namikingsoft/interv-timer/pull/45) Implement after finish all agenda ([@namikingsoft](https://github.com/namikingsoft))
+
+#### :memo: Documentation
+* [#42](https://github.com/namikingsoft/interv-timer/pull/42) Update readme about code signing ([@namikingsoft](https://github.com/namikingsoft))
+
+#### :house: Internal
+* [#26](https://github.com/namikingsoft/interv-timer/pull/26) Introduce dependabot for update dependencies ([@namikingsoft](https://github.com/namikingsoft))
+* [#15](https://github.com/namikingsoft/interv-timer/pull/15) Fix dependencies vulnerabilities ([@namikingsoft](https://github.com/namikingsoft))
+
+#### Committers: 2
+- Namiki ([@namikingsoft](https://github.com/namikingsoft))
+- [@dependabot-preview[bot]](https://github.com/apps/dependabot-preview)
+
+
 ## v0.3.0 (2020-07-08)
 
 #### :rocket: Enhancement
