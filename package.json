@@ -70,7 +70,7 @@
     "redux-observable": "1.2.0",
     "rxjs": "6.6.0",
     "typeface-roboto": "0.0.75",
-    "typescript": "3.9.3",
+    "typescript": "3.9.6",
     "url-loader": "4.0.0",
     "webpack": "4.43.0"
   },
