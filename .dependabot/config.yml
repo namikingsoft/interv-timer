@@ -7,8 +7,12 @@ update_configs:
     update_schedule: live
     automerged_updates:
       - match:
-          dependency_type: development
-          update_type: all
-      # NOTE: specify dependency name with wildcard
+        dependency_name: "@types/*"
+      - match:
+        dependency_name: "*eslint*"
+      - match:
+        dependency_name: "*jest*"
+      # NOTE: electron and electron-builder in devDependencies required
       # - match:
-      #   dependency_name: "@types/*"
+      #     dependency_type: development
+      #     update_type: all
