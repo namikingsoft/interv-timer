@@ -7,11 +7,11 @@ update_configs:
     update_schedule: live
     automerged_updates:
       - match:
-        dependency_name: "@types/*"
+          dependency_name: "@types/*"
       - match:
-        dependency_name: "*eslint*"
+          dependency_name: "*eslint*"
       - match:
-        dependency_name: "*jest*"
+          dependency_name: "*jest*"
       # NOTE: electron and electron-builder in devDependencies required by nextron build
       # - match:
       #     dependency_type: development
