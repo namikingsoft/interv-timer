@@ -58,7 +58,7 @@
     "@types/react": "16.9.41",
     "@types/react-dom": "16.9.8",
     "@typescript-eslint/eslint-plugin": "3.6.0",
-    "@typescript-eslint/parser": "3.6.0",
+    "@typescript-eslint/parser": "3.6.1",
     "@zeit/next-css": "1.0.1",
     "babel-loader": "8.1.0",
     "classnames": "2.2.6",
