@@ -3,7 +3,10 @@
 version="$1"
 changelog_file="CHANGELOG.md"
 
-npx lerna-changelog --nextVersion "$version" --from v0.1.0 > "$changelog_file"
+# for dump error required env
+GITHUB_AUTH="$GITHUB_AUTH" \
+  npx lerna-changelog --nextVersion "$version" --from v0.1.0 > "$changelog_file"
+
 git add "$changelog_file"
 git commit "$changelog_file" -m 'chore: update changelog'
 npm version "$version"
