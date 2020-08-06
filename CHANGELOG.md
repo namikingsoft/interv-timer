@@ -1,5 +1,18 @@
 
-## v0.3.1 (2020-07-09)
+## v0.3.2 (2020-08-06)
+
+#### :rocket: Enhancement
+* [#93](https://github.com/namikingsoft/interv-timer/pull/93) Notify auto updater details on renderer ([@namikingsoft](https://github.com/namikingsoft))
+
+#### :house: Internal
+* [#88](https://github.com/namikingsoft/interv-timer/pull/88) chore(deps): [security] bump elliptic from 6.5.2 to 6.5.3 ([@dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+
+#### Committers: 2
+- Namiki ([@namikingsoft](https://github.com/namikingsoft))
+- [@dependabot-preview[bot]](https://github.com/apps/dependabot-preview)
+
+
+## v0.3.1 (2020-07-10)
 
 #### :rocket: Enhancement
 * [#45](https://github.com/namikingsoft/interv-timer/pull/45) Implement after finish all agenda ([@namikingsoft](https://github.com/namikingsoft))
