@@ -1,4 +1,4 @@
-import { app } from 'electron'
+import { app, shell } from 'electron'
 import log from 'electron-log'
 import serve from 'electron-serve'
 import { createWindow } from './helpers'
@@ -38,6 +38,13 @@ const main = async () => {
     titleBarStyle: 'customButtonsOnHover',
     // cannot exit by cmd + q
     // closable: false,
+  })
+
+  // open browser on target blank
+  // refs. https://qiita.com/k0kubun/items/baa0b2ee3d25f1e2f86d
+  mainWindow.webContents.on('new-window', (event, url) => {
+    event.preventDefault()
+    shell.openExternal(url)
   })
 
   if (isProd) {
