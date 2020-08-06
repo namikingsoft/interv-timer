@@ -1,13 +1,12 @@
-import { app, dialog, ipcMain } from 'electron'
+import { app } from 'electron'
 import log from 'electron-log'
 import serve from 'electron-serve'
-import { autoUpdater } from 'electron-updater'
 import { createWindow } from './helpers'
+import * as ipc from './ipcs'
 
 log.transports.file.level = 'info'
-autoUpdater.logger = log
 
-const isProd: boolean = process.env.NODE_ENV === 'production'
+const isProd = process.env.NODE_ENV === 'production'
 
 if (isProd) {
   serve({ directory: 'app' })
@@ -16,10 +15,6 @@ if (isProd) {
 }
 
 app.on('window-all-closed', () => {
-  app.quit()
-})
-
-ipcMain.on('quit', () => {
   app.quit()
 })
 
@@ -53,19 +48,7 @@ const main = async () => {
     mainWindow.webContents.openDevTools()
   }
 
-  autoUpdater.on('update-downloaded', async ({ version }) => {
-    const result = await dialog.showMessageBox(mainWindow, {
-      type: 'question',
-      buttons: ['Restart', 'Later'],
-      defaultId: 0,
-      cancelId: 999,
-      message: `New version ${version} is available.`,
-    })
-    if (result.response === 0) autoUpdater.quitAndInstall()
-  })
-
-  autoUpdater.checkForUpdates()
-  setInterval(() => autoUpdater.checkForUpdates(), 10 * 60 * 1000) // check every 10 min
+  ipc.initialize(mainWindow, isProd)
 }
 
 main()
