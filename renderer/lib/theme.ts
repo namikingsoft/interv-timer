@@ -13,7 +13,7 @@ export const theme = createMuiTheme({
       main: red.A400,
     },
     background: {
-      default: 'transparent',
+      default: 'rgba(0,0,0,0)',
     },
   },
 })
