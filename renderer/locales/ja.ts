@@ -7,5 +7,7 @@ export const ja = {
     agendaList: 'アジェンダリスト',
     avoidFinishedAgenda: '終了したアジェンダを表示しない',
     backgroundTransparentRate: '背景透過率 (Alpha)',
+    newVersion: '新しいバージョン',
+    restart: '再起動',
   },
 }
