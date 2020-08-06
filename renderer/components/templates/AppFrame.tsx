@@ -3,11 +3,11 @@ import classnames from 'classnames'
 import { makeStyles, createStyles } from '@material-ui/core/styles'
 import DragIndicatorIcon from '@material-ui/icons/DragIndicator'
 import CloseIcon from '@material-ui/icons/Close'
-import { useSelector } from '../../hooks/redux'
+import { UpdaterSnackbar } from '../organisms/UpdaterSnackbar'
+import { useSelector, useDispatch } from '../../hooks/redux'
 
 interface Props {
   className?: string
-  onClickClose: () => void
   children: React.ReactNode
 }
 
@@ -103,15 +103,34 @@ const useStyles = makeStyles(() =>
   }),
 )
 
-export const AppFrame: React.FC<Props> = ({
-  className,
-  onClickClose,
-  children,
-}) => {
+export const AppFrame: React.FC<Props> = ({ className, children }) => {
   const backgroundAlphaRate = useSelector(
     ({ setting }) => setting.backgroundAlphaRate,
   )
   const classes = useStyles({ backgroundAlphaRate })
+
+  const updaterNewVersion = useSelector(({ updater }) => updater.newVersion)
+  const updaterPercent = useSelector(({ updater }) => updater.percent)
+
+  const dispatch = useDispatch()
+
+  const [isOpenUpdater, setIsOpenUpdater] = React.useState(false)
+
+  React.useEffect(() => {
+    setIsOpenUpdater(!!updaterNewVersion)
+  }, [updaterNewVersion])
+
+  const onCloseUpdater = React.useCallback(() => {
+    setIsOpenUpdater(false)
+  }, [])
+
+  const onRestart = React.useCallback(() => {
+    dispatch({ type: 'ipc/updaterQuitAndInstall' })
+  }, [dispatch])
+
+  const onCloseApp = React.useCallback(() => {
+    dispatch({ type: 'ipc/quit' })
+  }, [dispatch])
 
   return (
     <div className={classnames(classes.root, className)}>
@@ -120,12 +139,20 @@ export const AppFrame: React.FC<Props> = ({
           <DragIndicatorIcon className={classes.dragIcon} />
         </div>
         <div className={classes.closeArea}>
-          <CloseIcon className={classes.closeButton} onClick={onClickClose} />
+          <CloseIcon className={classes.closeButton} onClick={onCloseApp} />
         </div>
       </div>
       <div className={classes.main}>
         <div className={classes.mainRelative}>{children}</div>
       </div>
+
+      <UpdaterSnackbar
+        open={isOpenUpdater}
+        onClose={onCloseUpdater}
+        onRestart={onRestart}
+        version={updaterNewVersion}
+        percent={updaterPercent}
+      />
     </div>
   )
 }

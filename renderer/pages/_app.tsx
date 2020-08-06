@@ -1,7 +1,6 @@
 import React from 'react'
 import App from 'next/app'
 import Head from 'next/head'
-import { ipcRenderer } from 'electron'
 import { ThemeProvider } from '@material-ui/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import { Provider } from 'react-redux'
@@ -12,8 +11,6 @@ import { theme } from '../lib/theme'
 import { i18n } from '../i18n'
 
 const store = createReduxStore()
-
-const onClickClose = () => ipcRenderer.send('quit')
 
 export default class MyApp extends App {
   componentDidMount(): void {
@@ -48,7 +45,7 @@ export default class MyApp extends App {
           <CssBaseline />
           <I18nextProvider i18n={i18n}>
             <Provider store={store}>
-              <AppFrame onClickClose={onClickClose}>
+              <AppFrame>
                 <Component {...pageProps} />
               </AppFrame>
             </Provider>

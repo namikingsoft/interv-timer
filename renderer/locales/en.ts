@@ -7,5 +7,7 @@ export const en = {
     agendaList: 'Agenda List',
     avoidFinishedAgenda: 'Avoid Finished Agenda',
     backgroundTransparentRate: 'Background Transparent Rate',
+    newVersion: 'New Version',
+    restart: 'Restart',
   },
 }
