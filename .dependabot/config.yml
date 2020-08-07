@@ -12,6 +12,8 @@ update_configs:
           dependency_name: "*eslint*"
       - match:
           dependency_name: "*jest*"
+      - match:
+          dependency_name: "*testing-library*"
       # NOTE: electron and electron-builder in devDependencies required by nextron build
       # - match:
       #     dependency_type: development
