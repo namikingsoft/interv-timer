@@ -5,7 +5,7 @@ import installExtension, {
   REACT_DEVELOPER_TOOLS,
   REDUX_DEVTOOLS,
 } from 'electron-devtools-installer'
-import { createWindow } from './helpers'
+import { createWindow } from './helpers/createWindow'
 import * as ipc from './ipcs'
 
 log.transports.file.level = 'info'
