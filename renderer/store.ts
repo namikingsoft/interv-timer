@@ -12,6 +12,7 @@ declare global {
   }
 }
 
+// TODO: runtime errors on extension, but no effects on app
 const composeEnhancers =
   (typeof window !== 'undefined' && // for ssr
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
