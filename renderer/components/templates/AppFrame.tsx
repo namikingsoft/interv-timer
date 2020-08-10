@@ -139,7 +139,11 @@ export const AppFrame: React.FC<Props> = ({ className, children }) => {
           <DragIndicatorIcon className={classes.dragIcon} />
         </div>
         <div className={classes.closeArea}>
-          <CloseIcon className={classes.closeButton} onClick={onCloseApp} />
+          <CloseIcon
+            className={classes.closeButton}
+            onClick={onCloseApp}
+            data-testid="CloseIcon"
+          />
         </div>
       </div>
       <div className={classes.main}>

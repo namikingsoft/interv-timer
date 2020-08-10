@@ -129,18 +129,23 @@ const Home: React.FC = () => {
   return (
     <React.Fragment>
       <Head>
-        <title>Home - Nextron (with-typescript-material-ui)</title>
+        <title>settings</title>
       </Head>
 
       <div className={classes.root}>
         <div className={classes.header}>
-          <IconButton color="inherit" onClick={resetAndGotoHome}>
+          <IconButton
+            color="inherit"
+            onClick={resetAndGotoHome}
+            data-testid="BackIcon"
+          >
             <NavigateBeforeIcon />
           </IconButton>
           <IconButton
             color="inherit"
             onClick={saveAndGotoHome}
             className={classes.floatRight}
+            data-testid="SaveIcon"
           >
             <SaveIcon />
           </IconButton>
@@ -155,6 +160,7 @@ const Home: React.FC = () => {
               placeholder={t(k.agendaListPlaceholder)}
               value={setting.agendaListText}
               onChange={onChangeLapsText}
+              data-testid="AgendaListTextarea"
             />
           </div>
           <div className={classes.inputBlock}>

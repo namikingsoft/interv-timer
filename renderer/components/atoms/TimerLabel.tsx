@@ -6,6 +6,7 @@ import { calcTimerLabelFromRemainSecond } from '../../modules/timer/util'
 interface Props {
   className?: string
   remainSecond: number
+  'data-testid'?: string
 }
 
 const useStyles = makeStyles(() =>
@@ -16,13 +17,18 @@ const useStyles = makeStyles(() =>
   }),
 )
 
-export const TimerLabel: React.FC<Props> = ({ className, remainSecond }) => {
+export const TimerLabel: React.FC<Props> = ({
+  className,
+  remainSecond,
+  'data-testid': dataTestId,
+}) => {
   const classes = useStyles({})
   const { hour, minute, second } = calcTimerLabelFromRemainSecond(remainSecond)
 
   return (
     <div
       className={classnames(classes.root, className)}
+      data-testid={dataTestId}
     >{`${hour}:${minute}:${second}`}</div>
   )
 }
