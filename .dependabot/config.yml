@@ -15,9 +15,8 @@ update_configs:
       - match:
           dependency_name: "*testing-library*"
       - match:
-          update_type:
-            - "semver:patch"
-            # - "security:patch"
-            # - "semver:minor"
-            # - "in_range"
-            # - "all"
+          update_type: "semver:patch"
+          # - "security:patch"
+          # - "semver:minor"
+          # - "in_range"
+          # - "all"
