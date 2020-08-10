@@ -14,7 +14,10 @@ update_configs:
           dependency_name: "*jest*"
       - match:
           dependency_name: "*testing-library*"
-      # NOTE: electron and electron-builder in devDependencies required by nextron build
-      # - match:
-      #     dependency_type: development
-      #     update_type: all
+      - match:
+          update_type:
+            - "semver:patch"
+            # - "security:patch"
+            # - "semver:minor"
+            # - "in_range"
+            # - "all"
