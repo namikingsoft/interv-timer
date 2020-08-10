@@ -170,27 +170,44 @@ const Home: React.FC = () => {
   return (
     <React.Fragment>
       <Head>
-        <title>Home - Nextron (with-typescript-material-ui)</title>
+        <title>home</title>
       </Head>
 
       <div className={classes.root}>
         <div className={classes.header}>
           <IconButton color="inherit" onClick={togglePlay}>
-            {isPlay ? <PauseIcon /> : <PlayArrowIcon />}
+            {isPlay ? (
+              <PauseIcon data-testid="PauseIcon" />
+            ) : (
+              <PlayArrowIcon data-testid="PlayIcon" />
+            )}
           </IconButton>
-          <IconButton color="inherit" onClick={dispatchReset}>
+          <IconButton
+            color="inherit"
+            onClick={dispatchReset}
+            data-testid="ResetIcon"
+          >
             <RestoreIcon />
           </IconButton>
-          <IconButton color="inherit" onClick={dispatchUndo}>
+          <IconButton
+            color="inherit"
+            onClick={dispatchUndo}
+            data-testid="UndoIcon"
+          >
             <ArrowUpwardIcon />
           </IconButton>
-          <IconButton color="inherit" onClick={dispatchLap}>
+          <IconButton
+            color="inherit"
+            onClick={dispatchLap}
+            data-testid="LapIcon"
+          >
             <ArrowDownwardIcon />
           </IconButton>
           <IconButton
             color="inherit"
             onClick={goToSetting}
             className={classes.floatRight}
+            data-testid="SettingIcon"
           >
             <SettingsIcon />
           </IconButton>
@@ -215,6 +232,7 @@ const Home: React.FC = () => {
                       classes.label,
                       isActive && classes.active,
                     )}
+                    data-testid={`AgendaLabel${i}`}
                   >
                     {remain.label}
                   </div>
@@ -231,6 +249,7 @@ const Home: React.FC = () => {
                         remain.second <= 10 &&
                         classes.hurryUp,
                     )}
+                    data-testid={`AgendaTime${i}`}
                   />
                 </Grid>
               )
@@ -244,6 +263,7 @@ const Home: React.FC = () => {
               <TimerLabel
                 remainSecond={totalRemainSecond}
                 className={classnames(totalRemainSecond < 0 && classes.expired)}
+                data-testid="TotalTime"
               />
             </Grid>
             <Grid item xs className={classes.lap}>
@@ -253,6 +273,7 @@ const Home: React.FC = () => {
                 className={classnames(
                   idealLapRemainSecond < 0 && classes.expired,
                 )}
+                data-testid="IdealTime"
               />
             </Grid>
           </Grid>
