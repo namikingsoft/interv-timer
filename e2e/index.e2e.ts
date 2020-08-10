@@ -29,7 +29,9 @@ describe('End-To-Ends', () => {
       path: path.join(
         __dirname,
         '..',
-        `dist/mac/${productName}.app/Contents/MacOS/${productName}`,
+        process.platform === 'darwin'
+          ? `dist/mac/${productName}.app/Contents/MacOS/${productName}`
+          : `dist/win-unpacked/${productName}.exe`,
       ),
     })
     await app.start()
