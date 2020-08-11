@@ -141,14 +141,14 @@ const Home: React.FC = () => {
               <TimerInfo
                 label={t(k.total)}
                 remainSecond={totalRemainSecond}
-                data-testid="TotalTime"
+                data-testid="TotalTimer"
               />
             </Grid>
             <Grid item xs>
               <TimerInfo
                 label={t(k.margin)}
                 remainSecond={idealLapRemainSecond}
-                data-testid="IdealTime"
+                data-testid="IdealTimer"
               />
             </Grid>
           </Grid>

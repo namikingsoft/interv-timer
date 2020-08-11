@@ -38,7 +38,7 @@ export const ListSkin: React.FC<Props> = ({
                 remainSecond={remain.second}
                 isActive={isActive}
                 disabled={!isActive}
-                data-testid={`AgendaLabel${i}`}
+                data-testid={`AgendaTimer${i}`}
               />
             </Grid>
           )

@@ -55,7 +55,10 @@ export const TimerInfo: React.FC<Props> = ({
       )}
       data-testid={testId}
     >
-      <TimerLabel className={classnames(isActive && classes.active, 'label')}>
+      <TimerLabel
+        className={classnames(isActive && classes.active, 'label')}
+        data-testid={`${testId}Label`}
+      >
         {label}
       </TimerLabel>
       <HurryAnimationText
@@ -65,6 +68,7 @@ export const TimerInfo: React.FC<Props> = ({
         <TimerValue
           remainSecond={remainSecond}
           className={classnames(remainSecond < 0 && classes.expired, 'value')}
+          data-testid={`${testId}Value`}
         />
       </HurryAnimationText>
     </div>
