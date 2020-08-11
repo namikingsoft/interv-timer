@@ -35,7 +35,7 @@ const useStyles = makeStyles(() =>
       paddingRight: 6,
       backgroundColor: '#262626',
       borderTop: '1px solid #555',
-      borderRadius: '2px 2px 0 0',
+      borderRadius: '5px 5px 0 0',
     },
     dragArea: {
       flex: '1 0 auto',
