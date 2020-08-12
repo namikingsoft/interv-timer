@@ -34,7 +34,8 @@ const useStyles = makeStyles(() =>
     },
     footer: {
       flex: '0 1 auto',
-      padding: '15px 0',
+      paddingTop: '15px',
+      paddingBottom: '10px',
       borderTop: '1px solid rgba(255,255,255,0.05)',
     },
   }),
