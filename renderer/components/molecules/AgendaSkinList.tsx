@@ -16,7 +16,7 @@ const useStyles = makeStyles(() =>
   }),
 )
 
-export const ListSkin: React.FC<Props> = ({
+export const AgendaSkinList: React.FC<Props> = ({
   lapRemains,
   lapSeconds,
   avoidFinished,

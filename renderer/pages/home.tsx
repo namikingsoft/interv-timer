@@ -12,7 +12,7 @@ import RestoreIcon from '@material-ui/icons/Restore'
 import SettingsIcon from '@material-ui/icons/Settings'
 import { useSelector, useDispatch } from '../hooks/redux'
 import { AppLayout } from '../components/atoms/AppLayout'
-import { ListSkin } from '../components/molecules/ListSkin'
+import { AgendaSkinList } from '../components/molecules/AgendaSkinList'
 import { TimerInfo } from '../components/molecules/TimerInfo'
 import { useIntervalByAudioContext } from '../hooks/useIntervalByAudioContext'
 import { useTranslationWithKey } from '../hooks/useTranslationWithKey'
@@ -129,7 +129,7 @@ const Home: React.FC = () => {
           </IconButton>
         }
         body={
-          <ListSkin
+          <AgendaSkinList
             lapRemains={lapRemains}
             lapSeconds={lapSeconds}
             avoidFinished={avoidFinished}
