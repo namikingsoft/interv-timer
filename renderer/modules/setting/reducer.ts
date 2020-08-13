@@ -6,6 +6,7 @@ const initialState: State = {
   agendaListText: '',
   avoidFinished: false,
   backgroundAlphaRate: 0,
+  skinMode: 'list',
 }
 
 export const setting: Reducer<State, Action> = (
@@ -22,6 +23,8 @@ export const setting: Reducer<State, Action> = (
       return { ...state, avoidFinished: action.payload }
     case 'setting/setBackgroundAlphaRate':
       return { ...state, backgroundAlphaRate: action.payload }
+    case 'setting/setSkinMode':
+      return { ...state, skinMode: action.payload }
     default:
       return state
   }

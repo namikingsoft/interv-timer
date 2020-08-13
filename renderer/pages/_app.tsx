@@ -37,7 +37,7 @@ export default class MyApp extends App {
   render(): React.ReactElement {
     const { Component, pageProps } = this.props
     return (
-      <React.Fragment>
+      <>
         <Head>
           <title>with-typescript-material-ui</title>
         </Head>
@@ -51,7 +51,7 @@ export default class MyApp extends App {
             </Provider>
           </I18nextProvider>
         </ThemeProvider>
-      </React.Fragment>
+      </>
     )
   }
 }

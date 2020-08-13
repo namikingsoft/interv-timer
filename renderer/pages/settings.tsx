@@ -1,7 +1,7 @@
 import React from 'react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { Theme, makeStyles, createStyles } from '@material-ui/core/styles'
+import { makeStyles, createStyles } from '@material-ui/core/styles'
 import Container from '@material-ui/core/Container'
 import Typography from '@material-ui/core/Typography'
 import IconButton from '@material-ui/core/IconButton'
@@ -12,41 +12,13 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Switch from '@material-ui/core/Switch'
 import Slider from '@material-ui/core/Slider'
 import TextareaAutosize from '@material-ui/core/TextareaAutosize'
+import { AppLayout } from '../components/atoms/AppLayout'
 import { useSelector, useDispatch } from '../hooks/redux'
 import { useTranslationWithKey } from '../hooks/useTranslationWithKey'
 
-const textBorderColor = '#333'
-
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
-    root: {
-      paddingTop: theme.spacing(4),
-      color: 'white',
-      textShadow: `${textBorderColor} 1px 1px 0, ${textBorderColor} -1px -1px 0, ${textBorderColor} -1px 1px 0, ${textBorderColor} 1px -1px 0, ${textBorderColor} 0px 1px 0, ${textBorderColor}  0 -1px 0, ${textBorderColor} -1px 0 0, ${textBorderColor} 1px 0 0`,
-    },
-    header: {
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      width: '100%',
-      height: 50,
-      // Icon
-      '& svg': {
-        filter: 'drop-shadow(0px 0px 1.5px black);',
-      },
-      zIndex: 1234,
-    },
-    main: {
-      position: 'absolute',
-      overflowY: 'scroll',
-      overflowX: 'hidden',
-      top: 50,
-      left: 0,
-      width: '100%',
-      bottom: 0,
-      zIndex: 1234,
-      paddingBottom: 20,
-    },
+    root: {},
     form: {
       marginLeft: 14,
     },
@@ -54,9 +26,6 @@ const useStyles = makeStyles((theme: Theme) =>
       '& + &': {
         marginTop: 20,
       },
-    },
-    floatRight: {
-      float: 'right',
     },
     laps: {
       width: '100%',
@@ -102,6 +71,17 @@ const Home: React.FC = () => {
     [dispatch],
   )
 
+  const onChangeSkinMode = React.useCallback(
+    (event: React.SyntheticEvent<HTMLInputElement>) => {
+      dispatch({
+        type: 'setting/setSkinMode',
+        // @ts-expect-error want React.SyntheticEvent<CheckboxElement>
+        payload: event.target.checked ? 'circle' : 'list',
+      })
+    },
+    [dispatch],
+  )
+
   const onChangeBackgroundAlphaRate = React.useCallback(
     (_, payload: number) => {
       dispatch({
@@ -127,13 +107,14 @@ const Home: React.FC = () => {
   }, [dispatch])
 
   return (
-    <React.Fragment>
+    <>
       <Head>
         <title>settings</title>
       </Head>
 
-      <div className={classes.root}>
-        <div className={classes.header}>
+      <AppLayout
+        className={classes.root}
+        nav={
           <IconButton
             color="inherit"
             onClick={resetAndGotoHome}
@@ -141,71 +122,87 @@ const Home: React.FC = () => {
           >
             <NavigateBeforeIcon />
           </IconButton>
+        }
+        navRight={
           <IconButton
             color="inherit"
             onClick={saveAndGotoHome}
-            className={classes.floatRight}
             data-testid="SaveIcon"
           >
             <SaveIcon />
           </IconButton>
-        </div>
-        <Container className={classes.main}>
-          <div className={classes.inputBlock}>
-            <Typography>{t(k.agendaList)}</Typography>
-            <TextareaAutosize
-              className={classes.laps}
-              rowsMin={10}
-              rowsMax={20}
-              placeholder={t(k.agendaListPlaceholder)}
-              value={setting.agendaListText}
-              onChange={onChangeLapsText}
-              data-testid="AgendaListTextarea"
-            />
-          </div>
-          <div className={classes.inputBlock}>
-            <Typography>{t(k.backgroundTransparentRate)}</Typography>
-            <Slider
-              className={classes.slider}
-              defaultValue={20}
-              min={0}
-              max={1}
-              step={0.01}
-              valueLabelDisplay="auto"
-              value={setting.backgroundAlphaRate}
-              onChange={onChangeBackgroundAlphaRate}
-              marks={[
-                {
-                  value: 0.2,
-                  label: '20%',
-                },
-                {
-                  value: 0.5,
-                  label: '50%',
-                },
-                {
-                  value: 0.8,
-                  label: '80%',
-                },
-              ]}
-            />
-          </div>
-          <div className={classes.inputBlock}>
-            <FormGroup>
-              <FormControlLabel
-                control={
-                  <Switch
-                    checked={setting.avoidFinished}
-                    onChange={onChangeAvoidFinished}
-                  />
-                }
-                label={t(k.avoidFinishedAgenda)}
+        }
+        body={
+          <div className={classes.root}>
+            <div className={classes.inputBlock}>
+              <Typography>{t(k.agendaList)}</Typography>
+              <TextareaAutosize
+                className={classes.laps}
+                rowsMin={10}
+                rowsMax={20}
+                placeholder={t(k.agendaListPlaceholder)}
+                value={setting.agendaListText}
+                onChange={onChangeLapsText}
+                data-testid="AgendaListTextarea"
               />
-            </FormGroup>
+            </div>
+            <div className={classes.inputBlock}>
+              <Typography>{t(k.backgroundTransparentRate)}</Typography>
+              <Slider
+                className={classes.slider}
+                defaultValue={20}
+                min={0}
+                max={1}
+                step={0.01}
+                valueLabelDisplay="auto"
+                value={setting.backgroundAlphaRate}
+                onChange={onChangeBackgroundAlphaRate}
+                marks={[
+                  {
+                    value: 0.2,
+                    label: '20%',
+                  },
+                  {
+                    value: 0.5,
+                    label: '50%',
+                  },
+                  {
+                    value: 0.8,
+                    label: '80%',
+                  },
+                ]}
+              />
+            </div>
+            <div className={classes.inputBlock}>
+              <FormGroup>
+                <FormControlLabel
+                  control={
+                    <Switch
+                      checked={setting.avoidFinished}
+                      onChange={onChangeAvoidFinished}
+                    />
+                  }
+                  label={t(k.avoidFinishedAgenda)}
+                />
+              </FormGroup>
+            </div>
+            <div className={classes.inputBlock}>
+              <FormGroup>
+                <FormControlLabel
+                  control={
+                    <Switch
+                      checked={setting.skinMode === 'circle'}
+                      onChange={onChangeSkinMode}
+                    />
+                  }
+                  label={t(k.skinMode)}
+                />
+              </FormGroup>
+            </div>
           </div>
-        </Container>
-      </div>
-    </React.Fragment>
+        }
+      />
+    </>
   )
 }
 
