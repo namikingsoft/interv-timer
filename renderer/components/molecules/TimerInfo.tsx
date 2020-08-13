@@ -20,7 +20,6 @@ const textBorderColorExpired = '#f00'
 const useStyles = makeStyles(() =>
   createStyles({
     root: {
-      marginLeft: 14,
       userSelect: 'none',
     },
     active: {

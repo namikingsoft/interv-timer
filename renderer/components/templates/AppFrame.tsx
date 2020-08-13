@@ -30,7 +30,7 @@ const useStyles = makeStyles(() =>
       width: '100%',
       height: 30,
       color: 'white',
-      paddingTop: 4,
+      paddingTop: 5,
       paddingLeft: 4,
       paddingRight: 6,
       backgroundColor: '#262626',
