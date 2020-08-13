@@ -1,6 +1,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import CircularProgress from '@material-ui/core/CircularProgress'
+import ThumbUpIcon from '@material-ui/icons/ThumbUp'
 import { makeStyles, createStyles } from '@material-ui/core/styles'
 import { Agenda, LapRemain } from '../../modules/timer/type'
 import { TimerInfo } from './TimerInfo'
@@ -227,12 +228,16 @@ export const AgendaSkinCircle: React.FC<Props> = ({
         percent={currentPercent}
       />
       <div className={classnames(classes.centering, classes.timer)}>
-        <TimerInfo
-          label={remainLabel}
-          remainSecond={remainSecond}
-          isActive
-          data-testid="AgendaTimer"
-        />
+        {finishedAll ? (
+          <ThumbUpIcon fontSize="large" />
+        ) : (
+          <TimerInfo
+            label={remainLabel}
+            remainSecond={remainSecond}
+            isActive
+            data-testid="AgendaTimer"
+          />
+        )}
       </div>
     </div>
   )
