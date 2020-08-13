@@ -62,10 +62,11 @@ const Home: React.FC = () => {
 
   const onChangeAvoidFinished = React.useCallback(
     (event: React.SyntheticEvent<HTMLInputElement>) => {
+      // @ts-expect-error want React.SyntheticEvent<CheckboxElement>
+      const checked = !!event.target.checked
       dispatch({
         type: 'setting/setAvoidFinished',
-        // @ts-expect-error want React.SyntheticEvent<CheckboxElement>
-        payload: !!event.target.checked,
+        payload: checked,
       })
     },
     [dispatch],
@@ -73,10 +74,11 @@ const Home: React.FC = () => {
 
   const onChangeSkinMode = React.useCallback(
     (event: React.SyntheticEvent<HTMLInputElement>) => {
+      // @ts-expect-error want React.SyntheticEvent<CheckboxElement>
+      const checked = !!event.target.checked
       dispatch({
         type: 'setting/setSkinMode',
-        // @ts-expect-error want React.SyntheticEvent<CheckboxElement>
-        payload: event.target.checked ? 'circle' : 'list',
+        payload: checked ? 'circle' : undefined,
       })
     },
     [dispatch],

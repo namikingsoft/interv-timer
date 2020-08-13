@@ -1,4 +1,5 @@
-type SkinMode = 'list' | 'circle'
+// TODO: avoid undefined after impl skin mode select
+type SkinMode = undefined | 'circle'
 
 export interface State {
   settingVersion: number
