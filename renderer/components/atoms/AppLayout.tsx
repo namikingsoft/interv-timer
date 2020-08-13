@@ -1,5 +1,6 @@
 import React from 'react'
 import classnames from 'classnames'
+import Container from '@material-ui/core/Container'
 import { makeStyles, createStyles } from '@material-ui/core/styles'
 
 const textBorderColor = '#333'
@@ -64,8 +65,14 @@ export const AppLayout: React.FC<Props> = ({
         <div>{nav}</div>
         <div>{navRight}</div>
       </div>
-      <div className={classes.body}>{body}</div>
-      {footer && <div className={classes.footer}>{footer}</div>}
+      <div className={classes.body}>
+        <Container>{body}</Container>
+      </div>
+      {footer && (
+        <div className={classes.footer}>
+          <Container>{footer}</Container>
+        </div>
+      )}
     </div>
   )
 }

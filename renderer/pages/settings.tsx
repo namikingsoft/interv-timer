@@ -122,7 +122,7 @@ const Home: React.FC = () => {
           </IconButton>
         }
         body={
-          <Container>
+          <div className={classes.root}>
             <div className={classes.inputBlock}>
               <Typography>{t(k.agendaList)}</Typography>
               <TextareaAutosize
@@ -175,7 +175,7 @@ const Home: React.FC = () => {
                 />
               </FormGroup>
             </div>
-          </Container>
+          </div>
         }
       />
     </>
