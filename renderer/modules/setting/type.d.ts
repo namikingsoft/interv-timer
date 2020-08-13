@@ -1,8 +1,11 @@
+type SkinMode = 'list' | 'circle'
+
 export interface State {
   settingVersion: number
   agendaListText: string
   avoidFinished: boolean
   backgroundAlphaRate: number
+  skinMode: SkinMode
 }
 
 export interface SetAgendaListText {
@@ -18,6 +21,11 @@ export interface SetAvoidFinished {
 export interface SetBackgroundAlphaRate {
   type: 'setting/setBackgroundAlphaRate'
   payload: number
+}
+
+export interface SetSkinMode {
+  type: 'setting/setSkinMode'
+  payload: SkinMode
 }
 
 export interface SaveRequestAction {
@@ -43,6 +51,7 @@ export type Action =
   | SetAgendaListText
   | SetAvoidFinished
   | SetBackgroundAlphaRate
+  | SetSkinMode
   | SaveRequestAction
   | SaveSuccessAction
   | LoadRequestAction

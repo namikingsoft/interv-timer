@@ -7,6 +7,7 @@ export const en = {
     agendaList: 'Agenda List',
     avoidFinishedAgenda: 'Avoid Finished Agenda',
     backgroundTransparentRate: 'Background Transparent Rate',
+    skinMode: 'Circle Graph Mode', // TODO: Skin Mode Select, only 2 mode not yet
     newVersion: 'New Version',
     restart: 'Restart',
   },

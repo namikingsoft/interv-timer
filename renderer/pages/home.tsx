@@ -13,6 +13,7 @@ import SettingsIcon from '@material-ui/icons/Settings'
 import { useSelector, useDispatch } from '../hooks/redux'
 import { AppLayout } from '../components/atoms/AppLayout'
 import { AgendaSkinList } from '../components/molecules/AgendaSkinList'
+import { AgendaSkinCircle } from '../components/molecules/AgendaSkinCircle'
 import { TimerInfo } from '../components/molecules/TimerInfo'
 import { useIntervalByAudioContext } from '../hooks/useIntervalByAudioContext'
 import { useTranslationWithKey } from '../hooks/useTranslationWithKey'
@@ -29,6 +30,7 @@ const Home: React.FC = () => {
   const { t, k } = useTranslationWithKey()
 
   const {
+    agendaList,
     lapRemains,
     lapSeconds,
     totalRemainSecond,
@@ -36,6 +38,7 @@ const Home: React.FC = () => {
   } = useSelector(({ timer }) => timer)
 
   const avoidFinished = useSelector(({ setting }) => setting.avoidFinished)
+  const skinMode = useSelector(({ setting }) => setting.skinMode)
 
   const dispatch = useDispatch()
 
@@ -129,11 +132,19 @@ const Home: React.FC = () => {
           </IconButton>
         }
         body={
-          <AgendaSkinList
-            lapRemains={lapRemains}
-            lapSeconds={lapSeconds}
-            avoidFinished={avoidFinished}
-          />
+          skinMode === 'circle' ? (
+            <AgendaSkinCircle
+              agendaList={agendaList}
+              lapRemains={lapRemains}
+              lapSeconds={lapSeconds}
+            />
+          ) : (
+            <AgendaSkinList
+              lapRemains={lapRemains}
+              lapSeconds={lapSeconds}
+              avoidFinished={avoidFinished}
+            />
+          )
         }
         footer={
           <Grid container spacing={2}>

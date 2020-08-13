@@ -71,6 +71,17 @@ const Home: React.FC = () => {
     [dispatch],
   )
 
+  const onChangeSkinMode = React.useCallback(
+    (event: React.SyntheticEvent<HTMLInputElement>) => {
+      dispatch({
+        type: 'setting/setSkinMode',
+        // @ts-expect-error want React.SyntheticEvent<CheckboxElement>
+        payload: event.target.checked ? 'circle' : 'list',
+      })
+    },
+    [dispatch],
+  )
+
   const onChangeBackgroundAlphaRate = React.useCallback(
     (_, payload: number) => {
       dispatch({
@@ -172,6 +183,19 @@ const Home: React.FC = () => {
                     />
                   }
                   label={t(k.avoidFinishedAgenda)}
+                />
+              </FormGroup>
+            </div>
+            <div className={classes.inputBlock}>
+              <FormGroup>
+                <FormControlLabel
+                  control={
+                    <Switch
+                      checked={setting.skinMode === 'circle'}
+                      onChange={onChangeSkinMode}
+                    />
+                  }
+                  label={t(k.skinMode)}
                 />
               </FormGroup>
             </div>
