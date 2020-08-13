@@ -1,5 +1,18 @@
 
-## v0.3.2 (2020-08-06)
+## v0.4.0 (2020-08-13)
+
+#### :rocket: Enhancement
+* [#126](https://github.com/namikingsoft/interv-timer/pull/126) Add circle skin mode for visualize progress ([@namikingsoft](https://github.com/namikingsoft))
+
+#### :house: Internal
+* [#112](https://github.com/namikingsoft/interv-timer/pull/112) Introduce E2E test ([@namikingsoft](https://github.com/namikingsoft))
+
+#### Committers: 2
+- Namiki ([@namikingsoft](https://github.com/namikingsoft))
+- [@dependabot-preview[bot]](https://github.com/apps/dependabot-preview)
+
+
+## v0.3.2 (2020-08-07)
 
 #### :rocket: Enhancement
 * [#93](https://github.com/namikingsoft/interv-timer/pull/93) Notify auto updater details on renderer ([@namikingsoft](https://github.com/namikingsoft))
