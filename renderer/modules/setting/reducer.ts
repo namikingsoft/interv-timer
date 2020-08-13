@@ -6,7 +6,7 @@ const initialState: State = {
   agendaListText: '',
   avoidFinished: false,
   backgroundAlphaRate: 0,
-  skinMode: 'list',
+  skinMode: undefined,
 }
 
 export const setting: Reducer<State, Action> = (
