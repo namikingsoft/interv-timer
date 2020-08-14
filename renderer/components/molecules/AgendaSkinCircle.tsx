@@ -130,12 +130,15 @@ export const AgendaSkinCircle: React.FC<Props> = ({
   const pastPercent = (pastSecond / totalSecond) * 100
   const pastDeadLinePercent = Math.min(pastPercent, nextProgressPercent)
 
-  const curentLatePercent = Math.min(
-    100,
-    (Math.max(0, lapSeconds[index - 1] - progressSeconds[index - 1]) /
-      agendaSecond) *
-      100,
-  )
+  const curentLatePercent =
+    index <= 0
+      ? 0
+      : Math.min(
+          100,
+          (Math.max(0, lapSeconds[index - 1] - progressSeconds[index - 1]) /
+            agendaSecond) *
+            100,
+        )
 
   const refRoot = React.useRef<HTMLDivElement>(null)
   const [shortSideSize, setShortSideSize] = React.useState(0)
