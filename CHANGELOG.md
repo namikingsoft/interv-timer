@@ -1,5 +1,14 @@
 
-## v0.4.0 (2020-08-13)
+## v0.4.1 (2020-08-14)
+
+#### :bug: Bug Fix
+* [#128](https://github.com/namikingsoft/interv-timer/pull/128) Fix late percent overflow on circle skin mode ([@namikingsoft](https://github.com/namikingsoft))
+
+#### Committers: 1
+- Namiki ([@namikingsoft](https://github.com/namikingsoft))
+
+
+## v0.4.0 (2020-08-14)
 
 #### :rocket: Enhancement
 * [#126](https://github.com/namikingsoft/interv-timer/pull/126) Add circle skin mode for visualize progress ([@namikingsoft](https://github.com/namikingsoft))
