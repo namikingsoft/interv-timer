@@ -27,6 +27,7 @@ module.exports = {
   plugins: ['react', 'prettier', 'jest', '@typescript-eslint'],
   rules: {
     '@typescript-eslint/ban-ts-comment': 'off',
+    '@typescript-eslint/no-unused-vars': 'error',
     'comma-dangle': ['error', 'always-multiline'],
     'react/prop-types': 'off', // alt typescript
     'prettier/prettier': [
