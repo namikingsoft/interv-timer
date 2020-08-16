@@ -91,15 +91,17 @@ describe('End-To-Ends', () => {
     const totalTime = await getByTestId('TotalTimerValue')
     const idealTime = await getByTestId('IdealTimerValue')
     const playIcon = await getByTestId('PlayIcon')
+    const pauseIcon = await getByTestId('PauseIcon')
+    expect(await pauseIcon.isExisting()).toBe(false) // isExisting too slow
     await playIcon.click()
+    await pauseIcon.waitForExist()
     await captureScreenshot('home-played')
     await app.client.waitUntil(
       async () => (await agendaTime0.getText()) === '00:00:59',
     )
-    const pauseIcon = await getByTestId('PauseIcon')
     await pauseIcon.click()
-    await captureScreenshot('home-paused')
     await playIcon.waitForExist()
+    await captureScreenshot('home-paused')
     expect(await agendaTime1.getText()).toBe('00:03:00')
     expect(await totalTime.getText()).toBe('00:03:59')
     expect(await idealTime.getText()).toBe('00:00:59')
