@@ -232,7 +232,7 @@ export const AgendaSkinCircle: React.FC<Props> = ({
       />
       <div className={classnames(classes.centering, classes.timer)}>
         {finishedAll ? (
-          <ThumbUpIcon fontSize="large" />
+          <ThumbUpIcon fontSize="large" data-testid="FinishedIcon" />
         ) : (
           <TimerInfo
             label={remainLabel}

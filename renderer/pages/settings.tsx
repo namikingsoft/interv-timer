@@ -194,6 +194,7 @@ const Home: React.FC = () => {
                     <Switch
                       checked={setting.skinMode === 'circle'}
                       onChange={onChangeSkinMode}
+                      data-testid="SkinModeCircleSwitch"
                     />
                   }
                   label={t(k.skinMode)}
