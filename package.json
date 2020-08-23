@@ -8,7 +8,7 @@
     "type": "git",
     "url": "https://github.com/namikingsoft/interv-timer.git"
   },
-  "main": "app/background.js",
+  "main": "src/main/main.ts",
   "scripts": {
     "dev": "electron-webpack dev",
     "compile": "electron-webpack",
