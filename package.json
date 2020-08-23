@@ -35,12 +35,6 @@
       "releaseType": "draft"
     }
   },
-  "electronWebpack": {
-    "whiteListedModules": [
-      "electron-devtools-installer",
-      "source-map-support"
-    ]
-  },
   "dependencies": {
     "electron-devtools-installer": "3.1.1",
     "electron-log": "4.2.4",
