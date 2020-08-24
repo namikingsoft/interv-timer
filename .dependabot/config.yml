@@ -13,6 +13,8 @@ update_configs:
       - match:
           dependency_name: "*jest*"
       - match:
+          dependency_name: "*prettier*"
+      - match:
           dependency_name: "*testing-library*"
       - match:
           update_type: "semver:patch"
