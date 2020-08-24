@@ -31,8 +31,10 @@ jobs:
           ${{ runner.os }}-node-
     - name: Install Dependencies
       run: npm install
+    - name: Compile
+      run: npm run compile
     - name: Release production
-      run: npm run build
+      run: npm run release
     - uses: actions/upload-artifact@v2
       if: matrix.os == 'macos-latest'
       with:

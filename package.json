@@ -12,8 +12,9 @@
   "scripts": {
     "dev": "electron-webpack dev",
     "compile": "electron-webpack",
-    "build": "npm run compile && electron-builder",
+    "build": "electron-builder",
     "build:dir": "npm run build -- --dir -c.compression=store -c.mac.identity=null",
+    "release": "npm run build -- --publish always",
     "test": "jest",
     "e2e": "jest --projects jest.e2e.config.js",
     "type": "tsc --noEmit",
