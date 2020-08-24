@@ -32,7 +32,7 @@ jobs:
     - name: Install Dependencies
       run: npm install
     - name: Release production
-      run: npm run release
+      run: npm run build
     - uses: actions/upload-artifact@v2
       if: matrix.os == 'macos-latest'
       with:
