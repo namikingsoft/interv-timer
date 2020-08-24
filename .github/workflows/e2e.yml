@@ -22,8 +22,10 @@ jobs:
           ${{ runner.os }}-node-
     - name: Install Dependencies
       run: npm install
+    - name: Compile
+      run: npm run compile
     - name: Build
-      run: npm run build
+      run: npm run build:dir
     - name: Test
       run: npm run e2e
     - uses: actions/upload-artifact@v2

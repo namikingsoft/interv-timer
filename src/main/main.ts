@@ -13,9 +13,9 @@ log.transports.file.level = 'info'
 const isProd = process.env.NODE_ENV === 'production'
 
 if (isProd) {
-  serve({ directory: 'app' })
+  serve({ directory: '.' })
 } else {
-  app.setPath('userData', `${app.getPath('userData')} (development)`)
+  app.setPath('userData', `${app.getPath('userData')}-development`)
 }
 
 app.on('window-all-closed', () => {
@@ -52,13 +52,14 @@ const main = async () => {
   })
 
   if (isProd) {
-    await mainWindow.loadURL('app://./home.html')
+    await mainWindow.loadURL('app://./index.html')
   } else {
     await installExtension(REACT_DEVELOPER_TOOLS)
     await installExtension(REDUX_DEVTOOLS)
 
-    const port = process.argv[2]
-    await mainWindow.loadURL(`http://localhost:${port}/home`)
+    await mainWindow.loadURL(
+      `http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}/`,
+    )
     mainWindow.webContents.openDevTools()
   }
 

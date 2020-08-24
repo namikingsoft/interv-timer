@@ -1,6 +1,5 @@
 import React from 'react'
-import Head from 'next/head'
-import { useRouter } from 'next/router'
+import { useHistory } from 'react-router-dom'
 import { makeStyles, createStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
 import IconButton from '@material-ui/core/IconButton'
@@ -26,7 +25,7 @@ const useStyles = makeStyles(() =>
 
 const Home: React.FC = () => {
   const classes = useStyles({})
-  const router = useRouter()
+  const history = useHistory()
   const { t, k } = useTranslationWithKey()
 
   const {
@@ -62,8 +61,8 @@ const Home: React.FC = () => {
     dispatch({ type: 'timer/reset' })
   }, [dispatch])
 
-  const goToSetting = React.useCallback(() => router.push('/settings'), [
-    router,
+  const goToSetting = React.useCallback(() => history.push('/settings'), [
+    history,
   ])
 
   const intervalCallback = React.useCallback(
@@ -83,89 +82,83 @@ const Home: React.FC = () => {
   }, [finishedAll])
 
   return (
-    <>
-      <Head>
-        <title>home</title>
-      </Head>
-
-      <AppLayout
-        className={classes.root}
-        nav={
-          <>
-            <IconButton color="inherit" onClick={togglePlay}>
-              {isPlay ? (
-                <PauseIcon data-testid="PauseIcon" />
-              ) : (
-                <PlayArrowIcon data-testid="PlayIcon" />
-              )}
-            </IconButton>
-            <IconButton
-              color="inherit"
-              onClick={dispatchReset}
-              data-testid="ResetIcon"
-            >
-              <RestoreIcon />
-            </IconButton>
-            <IconButton
-              color="inherit"
-              onClick={dispatchUndo}
-              data-testid="UndoIcon"
-            >
-              <ArrowUpwardIcon />
-            </IconButton>
-            <IconButton
-              color="inherit"
-              onClick={dispatchLap}
-              data-testid="LapIcon"
-            >
-              <ArrowDownwardIcon />
-            </IconButton>
-          </>
-        }
-        navRight={
+    <AppLayout
+      className={classes.root}
+      nav={
+        <>
+          <IconButton color="inherit" onClick={togglePlay}>
+            {isPlay ? (
+              <PauseIcon data-testid="PauseIcon" />
+            ) : (
+              <PlayArrowIcon data-testid="PlayIcon" />
+            )}
+          </IconButton>
           <IconButton
             color="inherit"
-            onClick={goToSetting}
-            data-testid="SettingIcon"
+            onClick={dispatchReset}
+            data-testid="ResetIcon"
           >
-            <SettingsIcon />
+            <RestoreIcon />
           </IconButton>
-        }
-        body={
-          skinMode === 'circle' ? (
-            <AgendaSkinCircle
-              agendaList={agendaList}
-              lapRemains={lapRemains}
-              lapSeconds={lapSeconds}
+          <IconButton
+            color="inherit"
+            onClick={dispatchUndo}
+            data-testid="UndoIcon"
+          >
+            <ArrowUpwardIcon />
+          </IconButton>
+          <IconButton
+            color="inherit"
+            onClick={dispatchLap}
+            data-testid="LapIcon"
+          >
+            <ArrowDownwardIcon />
+          </IconButton>
+        </>
+      }
+      navRight={
+        <IconButton
+          color="inherit"
+          onClick={goToSetting}
+          data-testid="SettingIcon"
+        >
+          <SettingsIcon />
+        </IconButton>
+      }
+      body={
+        skinMode === 'circle' ? (
+          <AgendaSkinCircle
+            agendaList={agendaList}
+            lapRemains={lapRemains}
+            lapSeconds={lapSeconds}
+          />
+        ) : (
+          <AgendaSkinList
+            lapRemains={lapRemains}
+            lapSeconds={lapSeconds}
+            avoidFinished={avoidFinished}
+          />
+        )
+      }
+      footer={
+        <Grid container spacing={2}>
+          <Grid item xs>
+            <TimerInfo
+              label={t(k.total)}
+              remainSecond={totalRemainSecond}
+              data-testid="TotalTimer"
             />
-          ) : (
-            <AgendaSkinList
-              lapRemains={lapRemains}
-              lapSeconds={lapSeconds}
-              avoidFinished={avoidFinished}
-            />
-          )
-        }
-        footer={
-          <Grid container spacing={2}>
-            <Grid item xs>
-              <TimerInfo
-                label={t(k.total)}
-                remainSecond={totalRemainSecond}
-                data-testid="TotalTimer"
-              />
-            </Grid>
-            <Grid item xs>
-              <TimerInfo
-                label={t(k.margin)}
-                remainSecond={idealLapRemainSecond}
-                data-testid="IdealTimer"
-              />
-            </Grid>
           </Grid>
-        }
-      />
-    </>
+          <Grid item xs>
+            <TimerInfo
+              label={t(k.margin)}
+              remainSecond={idealLapRemainSecond}
+              data-testid="IdealTimer"
+            />
+          </Grid>
+        </Grid>
+      }
+    />
   )
 }
 
