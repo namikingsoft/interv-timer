@@ -8,6 +8,7 @@ export const ja = {
     avoidFinishedAgenda: '終了したアジェンダを表示しない',
     skinMode: '進捗を円グラフで表示', // TODO: スキンモード選択 (現在、2 つのモードしかない)
     backgroundTransparentRate: '背景透過率 (Alpha)',
+    visibleOnAllWorkspaces: 'すべてのワークスペースで表示',
     newVersion: '新しいバージョン',
     restart: '再起動',
   },
