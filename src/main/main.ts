@@ -40,8 +40,17 @@ const main = async () => {
     // avoid white border on top frame
     // https://github.com/electron/electron/issues/13164#issuecomment-479941434
     titleBarStyle: 'customButtonsOnHover',
+    // required on fullscreen
+    show: false,
     // cannot exit by cmd + q
     // closable: false,
+  })
+
+  // on fullscreen hack for macos
+  mainWindow.on('ready-to-show', () => {
+    app.dock && app.dock.hide()
+    mainWindow.show()
+    app.dock && app.dock.show()
   })
 
   // open browser on target blank
