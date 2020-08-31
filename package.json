@@ -19,7 +19,6 @@
     "e2e": "jest --projects jest.e2e.config.js",
     "type": "tsc --noEmit",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "lint:fix": "npm run lint -- --fix",
     "postinstall": "electron-builder install-app-deps"
   },
   "build": {
