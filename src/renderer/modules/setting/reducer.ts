@@ -6,6 +6,7 @@ const initialState: State = {
   agendaListText: '',
   avoidFinished: false,
   backgroundAlphaRate: 0,
+  visibleOnAllWorkspaces: false,
   skinMode: undefined,
 }
 
@@ -23,6 +24,8 @@ export const setting: Reducer<State, Action> = (
       return { ...state, avoidFinished: action.payload }
     case 'setting/setBackgroundAlphaRate':
       return { ...state, backgroundAlphaRate: action.payload }
+    case 'setting/setVisibleOnAllWorkspaces':
+      return { ...state, visibleOnAllWorkspaces: action.payload }
     case 'setting/setSkinMode':
       return { ...state, skinMode: action.payload }
     default:

@@ -6,6 +6,7 @@ export interface State {
   agendaListText: string
   avoidFinished: boolean
   backgroundAlphaRate: number
+  visibleOnAllWorkspaces: boolean
   skinMode: SkinMode
 }
 
@@ -22,6 +23,11 @@ export interface SetAvoidFinished {
 export interface SetBackgroundAlphaRate {
   type: 'setting/setBackgroundAlphaRate'
   payload: number
+}
+
+export interface SetVisibleOnAllWorkspaces {
+  type: 'setting/setVisibleOnAllWorkspaces'
+  payload: boolean
 }
 
 export interface SetSkinMode {
@@ -52,6 +58,7 @@ export type Action =
   | SetAgendaListText
   | SetAvoidFinished
   | SetBackgroundAlphaRate
+  | SetVisibleOnAllWorkspaces
   | SetSkinMode
   | SaveRequestAction
   | SaveSuccessAction
