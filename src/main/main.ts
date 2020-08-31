@@ -60,6 +60,8 @@ const main = async () => {
     shell.openExternal(url)
   })
 
+  ipc.initialize(mainWindow, isProd)
+
   if (isProd) {
     await mainWindow.loadURL('app://./index.html')
   } else {
@@ -71,8 +73,6 @@ const main = async () => {
     )
     mainWindow.webContents.openDevTools()
   }
-
-  ipc.initialize(mainWindow, isProd)
 }
 
 main()

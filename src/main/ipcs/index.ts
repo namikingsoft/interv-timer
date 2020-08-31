@@ -8,7 +8,7 @@ const channelName = 'ipcAction'
 
 autoUpdater.logger = log
 
-export const initialize = (window: BrowserWindow, isProd: boolean): void => {
+export const initialize = (win: BrowserWindow, isProd: boolean): void => {
   const receiver = {
     on: (callback) => {
       ipcMain.on(channelName, (_, payload) => callback(payload))
@@ -16,10 +16,10 @@ export const initialize = (window: BrowserWindow, isProd: boolean): void => {
   }
   const sender = {
     send: (payload) => {
-      window.webContents.send(channelName, payload)
+      win.webContents.send(channelName, payload)
     },
   }
 
-  appIpc.initialize({ app })(receiver, sender)
+  appIpc.initialize({ app, win })(receiver, sender)
   updater.initialize({ autoUpdater, isProd })(receiver, sender)
 }
