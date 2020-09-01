@@ -7,6 +7,7 @@ const defaultState: State = {
   agendaListText: 'Agenda1,60\nAgenda2,180',
   avoidFinished: true,
   backgroundAlphaRate: 0.7,
+  visibleOnAllWorkspaces: false,
   skinMode: undefined,
 }
 

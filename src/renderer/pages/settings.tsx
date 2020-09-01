@@ -92,6 +92,18 @@ const Home: React.FC = () => {
     [dispatch],
   )
 
+  const onChangeVisibleOnAllWorkspaces = React.useCallback(
+    (event: React.SyntheticEvent<HTMLInputElement>) => {
+      // @ts-expect-error want React.SyntheticEvent<CheckboxElement>
+      const checked = !!event.target.checked
+      dispatch({
+        type: 'setting/setVisibleOnAllWorkspaces',
+        payload: checked,
+      })
+    },
+    [dispatch],
+  )
+
   const resetAndGotoHome = React.useCallback(() => {
     dispatch({ type: 'setting/loadRequest', payload: setting })
     history.push('/')
@@ -181,6 +193,22 @@ const Home: React.FC = () => {
               />
             </FormGroup>
           </div>
+          {process?.platform === 'darwin' && (
+            <div className={classes.inputBlock}>
+              <FormGroup>
+                <FormControlLabel
+                  control={
+                    <Switch
+                      checked={setting.visibleOnAllWorkspaces}
+                      onChange={onChangeVisibleOnAllWorkspaces}
+                      data-testid="VisibleOnAllWorkspacesSwitch"
+                    />
+                  }
+                  label={t(k.visibleOnAllWorkspaces)}
+                />
+              </FormGroup>
+            </div>
+          )}
           <div className={classes.inputBlock}>
             <FormGroup>
               <FormControlLabel

@@ -2,6 +2,15 @@ export interface QuitAction {
   type: 'ipc/quit'
 }
 
+export interface SetVisibleOnAllWorkSpacesAction {
+  type: 'ipc/setVisibleOnAllWorkspaces'
+  payload: boolean
+}
+
+export interface UpdaterCheckForUpdatesAction {
+  type: 'ipc/updaterCheckForUpdates'
+}
+
 export interface UpdaterQuitAndInstallAction {
   type: 'ipc/updaterQuitAndInstall'
 }
@@ -26,7 +35,11 @@ export interface UpdaterErrorAction {
   payload: Error
 }
 
-export type RequestAction = QuitAction | UpdaterQuitAndInstallAction
+export type RequestAction =
+  | QuitAction
+  | SetVisibleOnAllWorkSpacesAction
+  | UpdaterCheckForUpdatesAction
+  | UpdaterQuitAndInstallAction
 
 export type RecieveAction =
   | UpdaterAvailableAction
