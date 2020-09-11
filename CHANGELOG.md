@@ -1,4 +1,22 @@
 
+## v0.5.0 (2020-09-11)
+
+#### :rocket: Enhancement
+* [#178](https://github.com/namikingsoft/interv-timer/pull/178) Save timer state of timer even if move another page ([@namikingsoft](https://github.com/namikingsoft))
+* [#163](https://github.com/namikingsoft/interv-timer/pull/163) Toggle visible on all workspaces include fullscreen only macos ([@namikingsoft](https://github.com/namikingsoft))
+
+#### :bug: Bug Fix
+* [#177](https://github.com/namikingsoft/interv-timer/pull/177) Fix elapsed second of timer to based os time ([@namikingsoft](https://github.com/namikingsoft))
+
+#### :house: Internal
+* [#143](https://github.com/namikingsoft/interv-timer/pull/143) Use electron-webpack instead of nextron ([@namikingsoft](https://github.com/namikingsoft))
+* [#132](https://github.com/namikingsoft/interv-timer/pull/132) Add e2e test of circle skin mode ([@namikingsoft](https://github.com/namikingsoft))
+
+#### Committers: 2
+- Namiki ([@namikingsoft](https://github.com/namikingsoft))
+- [@dependabot-preview[bot]](https://github.com/apps/dependabot-preview)
+
+
 ## v0.4.1 (2020-08-14)
 
 #### :bug: Bug Fix
