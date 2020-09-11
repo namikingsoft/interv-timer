@@ -50,7 +50,11 @@ export const toggleInterval: Epic<Action, ElapsedSecondAction, State> = (
   state$,
 ) => {
   const finish$ = action$.pipe(
-    ofType<StopAction | ResetAction>('timer/stop', 'timer/reset'),
+    ofType<StopAction | InitAction | ResetAction>(
+      'timer/stop',
+      'timer/init',
+      'timer/reset',
+    ),
     first(),
   )
   const interval$ = () =>
