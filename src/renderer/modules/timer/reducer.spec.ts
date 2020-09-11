@@ -1,6 +1,18 @@
 import { timer } from './reducer'
 
 describe('modules/timer/reducer', () => {
+  const initialState = {
+    isPlay: false,
+    baseTime: 0,
+    stopTime: 0,
+    agendaList: [],
+    lapSeconds: [],
+    lapRemains: [],
+    elapsedSecond: 0,
+    idealLapRemainSecond: 0,
+    totalRemainSecond: 0,
+  }
+
   const agendaList = [
     { label: 'agenda1', second: 60 },
     { label: 'agenda2', second: 30 },
@@ -10,20 +22,14 @@ describe('modules/timer/reducer', () => {
   it('should behave lap timer', () => {
     // @ts-expect-error for test
     let state = timer(undefined, {})
-    expect(state).toEqual({
-      agendaList: [],
-      lapSeconds: [],
-      lapRemains: [],
-      elapsedSecond: 0,
-      idealLapRemainSecond: 0,
-      totalRemainSecond: 0,
-    })
+    expect(state).toEqual(initialState)
 
     state = timer(state, {
       type: 'timer/init',
       payload: { agendaList },
     })
     expect(state).toEqual({
+      ...initialState,
       agendaList,
       lapSeconds: [],
       lapRemains: [
@@ -37,10 +43,11 @@ describe('modules/timer/reducer', () => {
     })
 
     state = timer(state, {
-      type: 'timer/elapsed',
-      payload: { second: 1 },
+      type: 'timer/elapsedSecond',
+      payload: 1,
     })
     expect(state).toEqual({
+      ...initialState,
       agendaList,
       lapSeconds: [],
       lapRemains: [
@@ -53,8 +60,12 @@ describe('modules/timer/reducer', () => {
       totalRemainSecond: 129,
     })
 
-    state = timer(state, { type: 'timer/elapsed', payload: { second: 1 } })
+    state = timer(state, {
+      type: 'timer/elapsedSecond',
+      payload: 2,
+    })
     expect(state).toEqual({
+      ...initialState,
       agendaList,
       lapSeconds: [],
       lapRemains: [
@@ -69,6 +80,7 @@ describe('modules/timer/reducer', () => {
 
     state = timer(state, { type: 'timer/lap' })
     expect(state).toEqual({
+      ...initialState,
       agendaList,
       lapSeconds: [2],
       lapRemains: [
@@ -81,8 +93,12 @@ describe('modules/timer/reducer', () => {
       totalRemainSecond: 128,
     })
 
-    state = timer(state, { type: 'timer/elapsed', payload: { second: 2 } })
+    state = timer(state, {
+      type: 'timer/elapsedSecond',
+      payload: 4,
+    })
     expect(state).toEqual({
+      ...initialState,
       agendaList,
       lapSeconds: [2],
       lapRemains: [
@@ -97,6 +113,7 @@ describe('modules/timer/reducer', () => {
 
     state = timer(state, { type: 'timer/lap' })
     expect(state).toEqual({
+      ...initialState,
       agendaList,
       lapSeconds: [2, 4],
       lapRemains: [
@@ -109,8 +126,12 @@ describe('modules/timer/reducer', () => {
       totalRemainSecond: 126,
     })
 
-    state = timer(state, { type: 'timer/elapsed', payload: { second: 6.4 } })
+    state = timer(state, {
+      type: 'timer/elapsedSecond',
+      payload: 10.4,
+    })
     expect(state).toEqual({
+      ...initialState,
       agendaList,
       lapSeconds: [2, 4],
       lapRemains: [
@@ -125,6 +146,7 @@ describe('modules/timer/reducer', () => {
 
     state = timer(state, { type: 'timer/lap' })
     expect(state).toEqual({
+      ...initialState,
       agendaList,
       lapSeconds: [2, 4, 10.4],
       lapRemains: [
@@ -137,8 +159,12 @@ describe('modules/timer/reducer', () => {
       totalRemainSecond: 119.6,
     })
 
-    state = timer(state, { type: 'timer/elapsed', payload: { second: 1.6 } })
+    state = timer(state, {
+      type: 'timer/elapsedSecond',
+      payload: 12,
+    })
     expect(state).toEqual({
+      ...initialState,
       agendaList,
       lapSeconds: [2, 4, 10.4],
       lapRemains: [
@@ -153,6 +179,7 @@ describe('modules/timer/reducer', () => {
 
     state = timer(state, { type: 'timer/lap' })
     expect(state).toEqual({
+      ...initialState,
       agendaList,
       lapSeconds: [2, 4, 10.4],
       lapRemains: [
@@ -167,6 +194,7 @@ describe('modules/timer/reducer', () => {
 
     state = timer(state, { type: 'timer/undo' })
     expect(state).toEqual({
+      ...initialState,
       agendaList,
       lapSeconds: [2, 4],
       lapRemains: [
@@ -179,8 +207,12 @@ describe('modules/timer/reducer', () => {
       totalRemainSecond: 118,
     })
 
-    state = timer(state, { type: 'timer/elapsed', payload: { second: 2 } })
+    state = timer(state, {
+      type: 'timer/elapsedSecond',
+      payload: 14,
+    })
     expect(state).toEqual({
+      ...initialState,
       agendaList,
       lapSeconds: [2, 4],
       lapRemains: [
@@ -195,6 +227,7 @@ describe('modules/timer/reducer', () => {
 
     state = timer(state, { type: 'timer/undo' })
     expect(state).toEqual({
+      ...initialState,
       agendaList,
       lapSeconds: [2],
       lapRemains: [
@@ -209,6 +242,7 @@ describe('modules/timer/reducer', () => {
 
     state = timer(state, { type: 'timer/reset' })
     expect(state).toEqual({
+      ...initialState,
       agendaList,
       lapSeconds: [],
       lapRemains: [

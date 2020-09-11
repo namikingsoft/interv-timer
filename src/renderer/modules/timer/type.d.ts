@@ -9,6 +9,9 @@ interface LapRemain {
 }
 
 export interface State {
+  isPlay: boolean
+  baseTime: number
+  stopTime: number
   agendaList: Agenda[]
   lapRemains: LapRemain[]
   lapSeconds: number[]
@@ -28,11 +31,27 @@ interface ResetAction {
   type: 'timer/reset'
 }
 
-interface ElapsedAction {
-  type: 'timer/elapsed'
-  payload: {
-    second: number
-  }
+interface StartAction {
+  type: 'timer/start'
+}
+
+interface StopAction {
+  type: 'timer/stop'
+}
+
+interface SetBaseTimeAction {
+  type: 'timer/setBaseTime'
+  payload: number
+}
+
+interface SetStopTimeAction {
+  type: 'timer/setStopTime'
+  payload: number
+}
+
+interface ElapsedSecondAction {
+  type: 'timer/elapsedSecond'
+  payload: number
 }
 
 interface LapAction {
@@ -46,6 +65,10 @@ interface UndoAction {
 export type Action =
   | InitAction
   | ResetAction
-  | ElapsedAction
+  | StartAction
+  | StopAction
+  | SetBaseTimeAction
+  | SetStopTimeAction
+  | ElapsedSecondAction
   | LapAction
   | UndoAction

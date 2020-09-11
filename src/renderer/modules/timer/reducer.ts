@@ -2,6 +2,9 @@ import { Reducer } from 'redux'
 import { State, Action, Agenda } from './type'
 
 const initialState: State = {
+  isPlay: false,
+  baseTime: 0,
+  stopTime: 0,
   agendaList: [],
   lapRemains: [],
   lapSeconds: [],
@@ -56,10 +59,10 @@ const initState = (agendaList: Agenda[]): State => {
 export const timer: Reducer<State, Action> = (state = initialState, action) => {
   const { agendaList, elapsedSecond, lapSeconds } = state
   switch (action.type) {
-    case 'timer/elapsed':
+    case 'timer/elapsedSecond':
       return calcState({
         ...state,
-        elapsedSecond: elapsedSecond + action.payload.second,
+        elapsedSecond: action.payload,
       })
     case 'timer/lap':
       if (lapSeconds.length >= agendaList.length) return state
@@ -77,6 +80,14 @@ export const timer: Reducer<State, Action> = (state = initialState, action) => {
       return initState(agendaList)
     case 'timer/init':
       return initState(action.payload.agendaList)
+    case 'timer/start':
+      return { ...state, isPlay: true }
+    case 'timer/stop':
+      return { ...state, isPlay: false }
+    case 'timer/setBaseTime':
+      return { ...state, baseTime: action.payload }
+    case 'timer/setStopTime':
+      return { ...state, stopTime: action.payload }
     default:
       return state
   }
