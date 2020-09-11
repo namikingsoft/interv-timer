@@ -14,7 +14,6 @@ import { AppLayout } from '../components/atoms/AppLayout'
 import { AgendaSkinList } from '../components/molecules/AgendaSkinList'
 import { AgendaSkinCircle } from '../components/molecules/AgendaSkinCircle'
 import { TimerInfo } from '../components/molecules/TimerInfo'
-import { useIntervalByAudioContext } from '../hooks/useIntervalByAudioContext'
 import { useTranslationWithKey } from '../hooks/useTranslationWithKey'
 
 const useStyles = makeStyles(() =>
@@ -41,10 +40,11 @@ const Home: React.FC = () => {
 
   const dispatch = useDispatch()
 
-  const [isPlay, setIsPlay] = React.useState(false)
+  const isPlay = useSelector((state) => state.timer.isPlay)
 
   const togglePlay = React.useCallback(() => {
-    setIsPlay(!isPlay)
+    if (isPlay) dispatch({ type: 'timer/stop' })
+    else dispatch({ type: 'timer/start' })
   }, [isPlay])
 
   const dispatchLap = React.useCallback(() => dispatch({ type: 'timer/lap' }), [
@@ -57,7 +57,6 @@ const Home: React.FC = () => {
   )
 
   const dispatchReset = React.useCallback(() => {
-    setIsPlay(false)
     dispatch({ type: 'timer/reset' })
   }, [dispatch])
 
@@ -65,20 +64,10 @@ const Home: React.FC = () => {
     history,
   ])
 
-  const intervalCallback = React.useCallback(
-    ({ deltaSecond }) => {
-      if (isPlay)
-        dispatch({ type: 'timer/elapsed', payload: { second: deltaSecond } })
-    },
-    [dispatch, isPlay],
-  )
-
-  useIntervalByAudioContext(1, intervalCallback)
-
   const finishedAll = lapRemains.length <= lapSeconds.length
 
   React.useEffect(() => {
-    if (finishedAll) setIsPlay(false)
+    if (finishedAll) dispatch({ type: 'timer/stop' })
   }, [finishedAll])
 
   return (
