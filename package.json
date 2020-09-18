@@ -40,7 +40,7 @@
     "electron-log": "4.2.4",
     "electron-serve": "1.0.0",
     "electron-store": "6.0.0",
-    "electron-updater": "4.3.4",
+    "electron-updater": "4.3.5",
     "source-map-support": "0.5.19"
   },
   "devDependencies": {
