@@ -87,7 +87,7 @@
     "redux-observable": "1.2.0",
     "rxjs": "6.6.3",
     "spectron": "11.1.0",
-    "ts-jest": "26.4.1",
+    "ts-jest": "26.4.4",
     "typeface-roboto": "0.0.75",
     "typescript": "3.9.7",
     "webpack": "4.44.2"
