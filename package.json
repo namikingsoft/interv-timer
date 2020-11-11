@@ -49,7 +49,7 @@
     "@material-ui/lab": "4.0.0-alpha.56",
     "@testing-library/react": "11.1.0",
     "@testing-library/react-hooks": "3.4.2",
-    "@types/jest": "26.0.14",
+    "@types/jest": "26.0.15",
     "@types/papaparse": "5.2.4",
     "@types/react": "16.9.55",
     "@types/react-dom": "16.9.9",
