@@ -1,5 +1,19 @@
+Version 9 of Highlight.js has reached EOL and is no longer supported.
+Please upgrade or ask whatever dependency you are using to upgrade.
+https://github.com/highlightjs/highlight.js/issues/2877
 
-## v0.5.0 (2020-09-11)
+## v0.5.1 (2020-11-19)
+
+#### :house: Internal
+* [#255](https://github.com/namikingsoft/interv-timer/pull/255) Fix npm audit for security ([@namikingsoft](https://github.com/namikingsoft))
+* [#200](https://github.com/namikingsoft/interv-timer/pull/200) [security] chore(deps-dev): bump electron from 9.2.1 to 9.3.1 ([@dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+
+#### Committers: 2
+- Namiki ([@namikingsoft](https://github.com/namikingsoft))
+- [@dependabot-preview[bot]](https://github.com/apps/dependabot-preview)
+
+
+## v0.5.0 (2020-09-12)
 
 #### :rocket: Enhancement
 * [#178](https://github.com/namikingsoft/interv-timer/pull/178) Save timer state of timer even if move another page ([@namikingsoft](https://github.com/namikingsoft))
