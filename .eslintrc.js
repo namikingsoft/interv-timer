@@ -29,13 +29,15 @@ module.exports = {
     '@typescript-eslint/ban-ts-comment': 'off',
     '@typescript-eslint/no-unused-vars': 'error',
     'comma-dangle': ['error', 'always-multiline'],
-    'react/prop-types': 'off', // alt typescript
     'prettier/prettier': [
       'error',
       {
         parser: 'typescript',
       },
     ],
+    // alt typescript
+    'no-unused-vars': 'off',
+    'react/prop-types': 'off',
   },
   settings: {
     react: {
