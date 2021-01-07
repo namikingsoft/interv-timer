@@ -48,7 +48,7 @@
     "@material-ui/icons": "4.9.1",
     "@material-ui/lab": "4.0.0-alpha.56",
     "@testing-library/react": "11.2.2",
-    "@testing-library/react-hooks": "3.7.0",
+    "@testing-library/react-hooks": "4.0.0",
     "@types/jest": "26.0.19",
     "@types/papaparse": "5.2.4",
     "@types/react": "17.0.0",
