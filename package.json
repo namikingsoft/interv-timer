@@ -90,6 +90,6 @@
     "ts-jest": "26.4.4",
     "typeface-roboto": "1.1.13",
     "typescript": "3.9.7",
-    "webpack": "4.44.2"
+    "webpack": "4.45.0"
   }
 }
