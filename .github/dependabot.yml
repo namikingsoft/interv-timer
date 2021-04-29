@@ -1,0 +1,34 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: react-i18next
+    versions:
+    - 11.8.10
+    - 11.8.11
+    - 11.8.12
+    - 11.8.13
+    - 11.8.14
+    - 11.8.5
+    - 11.8.6
+    - 11.8.7
+    - 11.8.8
+    - 11.8.9
+  - dependency-name: eslint-config-prettier
+    versions:
+    - 8.0.0
+    - 8.1.0
+    - 8.2.0
+  - dependency-name: spectron
+    versions:
+    - 13.0.0
+  - dependency-name: "@material-ui/lab"
+    versions:
+    - 4.0.0-alpha.57
+  - dependency-name: electron-log
+    versions:
+    - 4.3.1
