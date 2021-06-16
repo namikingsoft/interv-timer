@@ -46,7 +46,7 @@
   "devDependencies": {
     "@material-ui/core": "4.11.2",
     "@material-ui/icons": "4.9.1",
-    "@material-ui/lab": "4.0.0-alpha.56",
+    "@material-ui/lab": "4.0.0-alpha.58",
     "@testing-library/react": "11.2.3",
     "@testing-library/react-hooks": "4.0.0",
     "@types/jest": "26.0.20",
