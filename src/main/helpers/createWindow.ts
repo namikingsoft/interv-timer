@@ -75,6 +75,8 @@ export const createWindow = (
     ...state,
     webPreferences: {
       nodeIntegration: true,
+      contextIsolation: false,
+      enableRemoteModule: true,
       ...options.webPreferences,
     },
   }
