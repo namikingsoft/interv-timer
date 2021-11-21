@@ -70,7 +70,8 @@ describe('End-To-Ends', () => {
   })
 
   it('should set default agenda list on first run', async () => {
-    // for stable test start
+    // for stable test start, TODO: avoid code
+    // https://github.com/namikingsoft/interv-timer/runs/4276333010?check_suite_focus=true
     const playIcon = await getByTestId('PlayIcon')
     const pauseIcon = await getByTestId('PauseIcon')
     await playIcon.click()
