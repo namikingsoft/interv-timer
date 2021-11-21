@@ -68,7 +68,7 @@ const Circle = ({
       }}
     >
       <CircularProgress
-        variant="static"
+        variant="determinate"
         color="inherit"
         size={size}
         thickness={thickness}

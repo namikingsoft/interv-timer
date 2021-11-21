@@ -8,9 +8,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - uses: actions/setup-node@v2-beta
+    - name: Get version
+      id: get-version
+      run: echo "::set-output name=node::$(cat .node-version)"
+    - uses: actions/setup-node@v2
       with:
-        node-version: '12'
+        node-version: ${{ steps.get-version.outputs.node }}
     - uses: actions/cache@v2
       with:
         path: ~/.npm
@@ -26,9 +29,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - uses: actions/setup-node@v2-beta
+    - name: Get version
+      id: get-version
+      run: echo "::set-output name=node::$(cat .node-version)"
+    - uses: actions/setup-node@v2
       with:
-        node-version: '12'
+        node-version: ${{ steps.get-version.outputs.node }}
     - uses: actions/cache@v2
       with:
         path: ~/.npm
@@ -44,9 +50,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - uses: actions/setup-node@v2-beta
+    - name: Get version
+      id: get-version
+      run: echo "::set-output name=node::$(cat .node-version)"
+    - uses: actions/setup-node@v2
       with:
-        node-version: '12'
+        node-version: ${{ steps.get-version.outputs.node }}
     - uses: actions/cache@v2
       with:
         path: ~/.npm

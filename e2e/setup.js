@@ -6,7 +6,7 @@ const screenshotDirPath = path.resolve(__dirname, '..', '.work', 'screenshot')
 
 module.exports = () => {
   try {
-    fs.rmdirSync(screenshotDirPath, { recursive: true })
+    fs.rmSync(screenshotDirPath, { recursive: true })
   } catch (err) {} // force true when no such dir
   fs.mkdirSync(screenshotDirPath, { recursive: true })
 }
