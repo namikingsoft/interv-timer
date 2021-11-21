@@ -74,6 +74,7 @@ export const createWindow = (
     ...options,
     ...state,
     webPreferences: {
+      // For compatible with old electron version TODO: fix security
       nodeIntegration: true,
       contextIsolation: false,
       enableRemoteModule: true,
