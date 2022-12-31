@@ -19,14 +19,14 @@ jobs:
       CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Get version
         id: get-version
-        run: echo "::set-output name=node::$(cat .node-version)"
-      - uses: actions/setup-node@v2
+        run: echo "node=$(cat .node-version)" >> $GITHUB_OUTPUT
+      - uses: actions/setup-node@v3
         with:
           node-version: ${{ steps.get-version.outputs.node }}
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -38,12 +38,12 @@ jobs:
         run: npm run compile
       - name: Release production
         run: npm run release
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         if: matrix.os == 'macos-latest'
         with:
           name: macos
           path: dist/*.dmg
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         if: matrix.os == 'windows-latest'
         with:
           name: windows
