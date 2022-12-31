@@ -1,183 +1,184 @@
-import { Application } from 'spectron'
-import fs from 'fs'
-import util from 'util'
 import path from 'path'
+import { _electron as electron } from 'playwright'
+import { ElectronApplication, Page, test, expect } from '@playwright/test'
 import packageJson from '../package.json'
 
 const { productName } = packageJson.build
 
-describe('End-To-Ends', () => {
-  let app: Application
+const captureScreenshot = async (window: Page, identifier: string) => {
+  const filepath = path.resolve(
+    __dirname,
+    '..',
+    '.work',
+    'screenshot',
+    `${identifier}.png`,
+  )
+  return window.screenshot({ path: filepath })
+}
 
-  const getByTestId = (testId: string) =>
-    app.client.$(`[data-testid="${testId}"]`)
+let electronApp: ElectronApplication
 
-  const captureScreenshot = async (identifier: string) => {
-    const filepath = path.resolve(
-      __dirname,
-      '..',
-      '.work',
-      'screenshot',
-      `${identifier}.png`,
-    )
-    const imageBuffer = await app.browserWindow.capturePage()
-    return util.promisify(fs.writeFile)(filepath, imageBuffer as never)
-  }
+test.beforeEach(async () => {
+  electronApp = await electron.launch({
+    executablePath:
+      process.platform === 'darwin'
+        ? `dist/mac/${productName}.app/Contents/MacOS/${productName}`
+        : `dist/win-unpacked/${productName}.exe`,
+  })
+  await electronApp.evaluate(async (electron) => {
+    return electron.session.defaultSession.clearStorageData()
+  })
+})
 
-  beforeEach(async () => {
-    app = new Application({
-      path: path.join(
-        __dirname,
-        '..',
-        process.platform === 'darwin'
-          ? `dist/mac/${productName}.app/Contents/MacOS/${productName}`
-          : `dist/win-unpacked/${productName}.exe`,
-      ),
+test.afterEach(async () => {
+  await electronApp.close()
+})
+
+test('save settings', async () => {
+  const window = await electronApp.firstWindow()
+  const settingIcon = window.getByTestId('SettingIcon')
+  await settingIcon.click()
+  const textarea = window.getByTestId('AgendaListTextarea')
+  expect(await textarea.inputValue()).toBe('Agenda1,60\nAgenda2,180')
+  await captureScreenshot(window, 'setting-default')
+  await textarea.fill('Test1,90\nTest2,120')
+  await captureScreenshot(window, 'setting-edited')
+  const saveIcon = window.getByTestId('SaveIcon')
+  await saveIcon.click()
+  const agendaLabel0 = window.getByTestId('AgendaTimer0Label')
+  const agendaLabel1 = window.getByTestId('AgendaTimer1Label')
+  const agendaTime0 = window.getByTestId('AgendaTimer0Value')
+  const agendaTime1 = window.getByTestId('AgendaTimer1Value')
+  const totalTime = window.getByTestId('TotalTimerValue')
+  const idealTime = window.getByTestId('IdealTimerValue')
+  expect(await agendaLabel0.innerText()).toBe('Test1')
+  expect(await agendaLabel1.innerText()).toBe('Test2')
+  expect(await agendaTime0.innerText()).toBe('00:01:30')
+  expect(await agendaTime1.innerText()).toBe('00:02:00')
+  expect(await totalTime.innerText()).toBe('00:03:30')
+  expect(await idealTime.innerText()).toBe('00:01:30')
+  await captureScreenshot(window, 'home-edited')
+})
+
+test('set default agenda list on first run', async () => {
+  const window = await electronApp.firstWindow()
+  // for stable test start, TODO: avoid code
+  // https://github.com/namikingsoft/interv-timer/runs/4276333010?check_suite_focus=true
+  const playIcon = window.getByTestId('PlayIcon')
+  const pauseIcon = window.getByTestId('PauseIcon')
+  await playIcon.click()
+  await pauseIcon.waitFor({ state: 'visible' })
+  await pauseIcon.click()
+  // for stable test end
+  const agendaLabel0 = window.getByTestId('AgendaTimer0Label')
+  const agendaLabel1 = window.getByTestId('AgendaTimer1Label')
+  const agendaTime0 = window.getByTestId('AgendaTimer0Value')
+  const agendaTime1 = window.getByTestId('AgendaTimer1Value')
+  const totalTime = window.getByTestId('TotalTimerValue')
+  const idealTime = window.getByTestId('IdealTimerValue')
+  expect(await agendaLabel0.innerText()).toBe('Agenda1')
+  expect(await agendaLabel1.innerText()).toBe('Agenda2')
+  expect(await agendaTime0.innerText()).toBe('00:01:00')
+  expect(await agendaTime1.innerText()).toBe('00:03:00')
+  expect(await totalTime.innerText()).toBe('00:04:00')
+  expect(await idealTime.innerText()).toBe('00:01:00')
+  await captureScreenshot(window, 'home-default')
+})
+
+test('behave agenda timer', async () => {
+  const window = await electronApp.firstWindow()
+  const agendaTime0 = window.getByTestId('AgendaTimer0Value')
+  const agendaTime1 = window.getByTestId('AgendaTimer1Value')
+  const totalTime = window.getByTestId('TotalTimerValue')
+  const idealTime = window.getByTestId('IdealTimerValue')
+  const playIcon = window.getByTestId('PlayIcon')
+  const pauseIcon = window.getByTestId('PauseIcon')
+  expect(await pauseIcon.isVisible()).toBe(false)
+  await playIcon.click()
+  await pauseIcon.waitFor({ state: 'visible' })
+  await captureScreenshot(window, 'circle-played')
+  await expect
+    .poll(() => agendaTime0.innerText(), {
+      intervals: [...Array(20)].map((_, i) => i * 100),
     })
-    await app.start()
-    await app.browserWindow.isVisible()
-  })
+    .toBe('00:00:59')
+  await pauseIcon.click()
+  await playIcon.waitFor({ state: 'visible' })
+  await captureScreenshot(window, 'home-paused')
+  expect(await agendaTime1.innerText()).toBe('00:03:00')
+  expect(await totalTime.innerText()).toBe('00:03:59')
+  expect(await idealTime.innerText()).toBe('00:00:59')
+  await playIcon.click()
+  const lapIcon = window.getByTestId('LapIcon')
+  await lapIcon.click()
+  await expect
+    .poll(() => agendaTime1.innerText(), {
+      intervals: [...Array(20)].map((_, i) => i * 100),
+    })
+    .toBe('00:02:59')
+  await pauseIcon.click()
+  expect(await agendaTime0.isVisible()).toBe(false)
+  expect(await totalTime.innerText()).toBe('00:03:58')
+  expect(await idealTime.innerText()).toBe('00:03:58')
+  await captureScreenshot(window, 'home-lapped')
+  await playIcon.click()
+  await pauseIcon.waitFor({ state: 'visible' })
+  expect(await playIcon.isVisible()).toBe(false)
+  await lapIcon.click()
+  await playIcon.waitFor({ state: 'visible' })
+  await agendaTime0.waitFor({ state: 'visible' })
+  expect(await agendaTime0.innerText()).toBe('00:00:59')
+  await captureScreenshot(window, 'home-finished')
+})
 
-  afterEach(async () => {
-    if (app && app.isRunning()) {
-      await app.stop()
-    }
-  })
-
-  it('should save settings', async () => {
-    const settingIcon = await getByTestId('SettingIcon')
-    await settingIcon.click()
-    const textarea = await getByTestId('AgendaListTextarea')
-    expect(await textarea.getValue()).toBe('Agenda1,60\nAgenda2,180')
-    await captureScreenshot('setting-default')
-    await textarea.setValue('Test1,90\nTest2,120')
-    await captureScreenshot('setting-edited')
-    const saveIcon = await getByTestId('SaveIcon')
-    await saveIcon.click()
-    const agendaLabel0 = await getByTestId('AgendaTimer0Label')
-    const agendaLabel1 = await getByTestId('AgendaTimer1Label')
-    const agendaTime0 = await getByTestId('AgendaTimer0Value')
-    const agendaTime1 = await getByTestId('AgendaTimer1Value')
-    const totalTime = await getByTestId('TotalTimerValue')
-    const idealTime = await getByTestId('IdealTimerValue')
-    expect(await agendaLabel0.getText()).toBe('Test1')
-    expect(await agendaLabel1.getText()).toBe('Test2')
-    expect(await agendaTime0.getText()).toBe('00:01:30')
-    expect(await agendaTime1.getText()).toBe('00:02:00')
-    expect(await totalTime.getText()).toBe('00:03:30')
-    expect(await idealTime.getText()).toBe('00:01:30')
-    await captureScreenshot('home-edited')
-  })
-
-  it('should set default agenda list on first run', async () => {
-    // for stable test start, TODO: avoid code
-    // https://github.com/namikingsoft/interv-timer/runs/4276333010?check_suite_focus=true
-    const playIcon = await getByTestId('PlayIcon')
-    const pauseIcon = await getByTestId('PauseIcon')
-    await playIcon.click()
-    await pauseIcon.waitForExist()
-    await pauseIcon.click()
-    // for stable test end
-    const agendaLabel0 = await getByTestId('AgendaTimer0Label')
-    const agendaLabel1 = await getByTestId('AgendaTimer1Label')
-    const agendaTime0 = await getByTestId('AgendaTimer0Value')
-    const agendaTime1 = await getByTestId('AgendaTimer1Value')
-    const totalTime = await getByTestId('TotalTimerValue')
-    const idealTime = await getByTestId('IdealTimerValue')
-    expect(await agendaLabel0.getText()).toBe('Agenda1')
-    expect(await agendaLabel1.getText()).toBe('Agenda2')
-    expect(await agendaTime0.getText()).toBe('00:01:00')
-    expect(await agendaTime1.getText()).toBe('00:03:00')
-    expect(await totalTime.getText()).toBe('00:04:00')
-    expect(await idealTime.getText()).toBe('00:01:00')
-    await captureScreenshot('home-defailt')
-  })
-
-  it('should behave agenda timer', async () => {
-    const agendaTime0 = await getByTestId('AgendaTimer0Value')
-    const agendaTime1 = await getByTestId('AgendaTimer1Value')
-    const totalTime = await getByTestId('TotalTimerValue')
-    const idealTime = await getByTestId('IdealTimerValue')
-    const playIcon = await getByTestId('PlayIcon')
-    const pauseIcon = await getByTestId('PauseIcon')
-    expect(await pauseIcon.isExisting()).toBe(false) // isExisting too slow
-    await playIcon.click()
-    await pauseIcon.waitForExist()
-    await captureScreenshot('home-played')
-    await app.client.waitUntil(
-      async () => (await agendaTime0.getText()) === '00:00:59',
-    )
-    await pauseIcon.click()
-    await playIcon.waitForExist()
-    await captureScreenshot('home-paused')
-    expect(await agendaTime1.getText()).toBe('00:03:00')
-    expect(await totalTime.getText()).toBe('00:03:59')
-    expect(await idealTime.getText()).toBe('00:00:59')
-    await playIcon.click()
-    const lapIcon = await getByTestId('LapIcon')
-    await lapIcon.click()
-    await app.client.waitUntil(
-      async () => (await agendaTime1.getText()) === '00:02:59',
-    )
-    await pauseIcon.click() // for stable test because isExisting too slow
-    expect(await agendaTime0.isExisting()).toBe(false)
-    expect(await totalTime.getText()).toBe('00:03:58')
-    expect(await idealTime.getText()).toBe('00:03:58')
-    await captureScreenshot('home-lapped')
-    await playIcon.click()
-    await pauseIcon.waitForExist()
-    expect(await playIcon.isExisting()).toBe(false)
-    await lapIcon.click()
-    await playIcon.waitForExist()
-    await agendaTime0.waitForExist()
-    expect(await agendaTime0.getText()).toBe('00:00:59')
-    await captureScreenshot('home-finished')
-  })
-
-  it('should behave agenda timer using circle skin', async () => {
-    const settingIcon = await getByTestId('SettingIcon')
-    await settingIcon.click()
-    const circleSwitch = await getByTestId('SkinModeCircleSwitch')
-    await circleSwitch.click()
-    await new Promise((resolve) => setTimeout(resolve, 500)) // wait animation
-    await captureScreenshot('circle-settings')
-    const saveIcon = await getByTestId('SaveIcon')
-    await saveIcon.click()
-    const agendaLabel = await getByTestId('AgendaTimerLabel')
-    const agendaTime = await getByTestId('AgendaTimerValue')
-    const totalTime = await getByTestId('TotalTimerValue')
-    const idealTime = await getByTestId('IdealTimerValue')
-    expect(await agendaLabel.getText()).toBe('Agenda1')
-    expect(await agendaTime.getText()).toBe('00:01:00')
-    expect(await totalTime.getText()).toBe('00:04:00')
-    expect(await idealTime.getText()).toBe('00:01:00')
-    await captureScreenshot('circle-home')
-    const playIcon = await getByTestId('PlayIcon')
-    await playIcon.click()
-    await captureScreenshot('circle-played')
-    await app.client.waitUntil(
-      async () => (await agendaTime.getText()) === '00:00:59',
-    )
-    const pauseIcon = await getByTestId('PauseIcon')
-    await pauseIcon.click()
-    await captureScreenshot('setting-paused')
-    await playIcon.waitForExist()
-    expect(await totalTime.getText()).toBe('00:03:59')
-    expect(await idealTime.getText()).toBe('00:00:59')
-    await playIcon.click()
-    const lapIcon = await getByTestId('LapIcon')
-    await lapIcon.click()
-    await app.client.waitUntil(
-      async () => (await agendaTime.getText()) === '00:02:59',
-    )
-    expect(await totalTime.getText()).toBe('00:03:58')
-    expect(await idealTime.getText()).toBe('00:03:58')
-    await captureScreenshot('circle-lapped')
-    await lapIcon.click()
-    await playIcon.waitForExist()
-    const finishedIcon = await getByTestId('FinishedIcon')
-    await finishedIcon.waitForExist()
-    await captureScreenshot('circle-finished')
-    expect(await agendaTime.isExisting()).toBe(false)
-  })
+test('behave agenda timer using circle skin', async () => {
+  const window = await electronApp.firstWindow()
+  const settingIcon = window.getByTestId('SettingIcon')
+  await settingIcon.click()
+  const circleSwitch = window.getByTestId('SkinModeCircleSwitch')
+  await circleSwitch.click()
+  await window.waitForTimeout(500) // wait animation
+  await captureScreenshot(window, 'circle-settings')
+  const saveIcon = window.getByTestId('SaveIcon')
+  await saveIcon.click()
+  const agendaLabel = window.getByTestId('AgendaTimerLabel')
+  const agendaTime = window.getByTestId('AgendaTimerValue')
+  const totalTime = window.getByTestId('TotalTimerValue')
+  const idealTime = window.getByTestId('IdealTimerValue')
+  expect(await agendaLabel.innerText()).toBe('Agenda1')
+  expect(await agendaTime.innerText()).toBe('00:01:00')
+  expect(await totalTime.innerText()).toBe('00:04:00')
+  expect(await idealTime.innerText()).toBe('00:01:00')
+  await captureScreenshot(window, 'circle-home')
+  const playIcon = window.getByTestId('PlayIcon')
+  await playIcon.click()
+  await captureScreenshot(window, 'circle-played')
+  await expect
+    .poll(() => agendaTime.innerText(), {
+      intervals: [...Array(20)].map((_, i) => i * 100),
+    })
+    .toBe('00:00:59')
+  const pauseIcon = window.getByTestId('PauseIcon')
+  await pauseIcon.click()
+  await captureScreenshot(window, 'circle-paused')
+  await playIcon.waitFor({ state: 'visible' })
+  expect(await totalTime.innerText()).toBe('00:03:59')
+  expect(await idealTime.innerText()).toBe('00:00:59')
+  await playIcon.click()
+  const lapIcon = window.getByTestId('LapIcon')
+  await lapIcon.click()
+  await expect
+    .poll(() => agendaTime.innerText(), {
+      intervals: [...Array(20)].map((_, i) => i * 100),
+    })
+    .toBe('00:02:59')
+  expect(await totalTime.innerText()).toBe('00:03:58')
+  expect(await idealTime.innerText()).toBe('00:03:58')
+  await captureScreenshot(window, 'circle-lapped')
+  await lapIcon.click()
+  await playIcon.waitFor({ state: 'visible' })
+  const finishedIcon = window.getByTestId('FinishedIcon')
+  await finishedIcon.waitFor({ state: 'visible' })
+  await captureScreenshot(window, 'circle-finished')
+  expect(await agendaTime.isVisible()).toBe(false)
 })
