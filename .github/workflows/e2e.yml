@@ -1,7 +1,6 @@
 name: E2E
 
-on:
-  push
+on: push
 
 jobs:
   test:
@@ -10,28 +9,28 @@ jobs:
         os: [macos-latest, windows-latest]
     runs-on: ${{ matrix.os }}
     steps:
-    - uses: actions/checkout@v2
-    - name: Get version
-      id: get-version
-      run: echo "::set-output name=node::$(cat .node-version)"
-    - uses: actions/setup-node@v2
-      with:
-        node-version: ${{ steps.get-version.outputs.node }}
-    - uses: actions/cache@v2
-      with:
-        path: ~/.npm
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-node-
-    - name: Install Dependencies
-      run: npm install
-    - name: Compile
-      run: npm run compile
-    - name: Build
-      run: npm run build:dir
-    - name: Test
-      run: npm run e2e
-    - uses: actions/upload-artifact@v2
-      with:
-        name: screenshot-${{ matrix.os }}
-        path: .work/screenshot/*.png
+      - uses: actions/checkout@v2
+      - name: Get version
+        id: get-version
+        run: echo "::set-output name=node::$(cat .node-version)"
+      - uses: actions/setup-node@v2
+        with:
+          node-version: ${{ steps.get-version.outputs.node }}
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - name: Install Dependencies
+        run: npm install
+      - name: Compile
+        run: npm run compile
+      - name: Build
+        run: npm run build:dir
+      - name: Test
+        run: npm run e2e
+      - uses: actions/upload-artifact@v2
+        with:
+          name: screenshot-${{ matrix.os }}
+          path: .work/screenshot/*.png
