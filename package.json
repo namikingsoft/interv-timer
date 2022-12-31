@@ -16,7 +16,7 @@
     "build:dir": "npm run build -- --dir -c.compression=store -c.mac.identity=null",
     "release": "npm run build -- --publish always",
     "test": "jest",
-    "e2e": "jest --projects jest.e2e.config.js",
+    "e2e": "playwright test",
     "type": "tsc --noEmit",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "upgrade-interactive": "npx npm-check --update",
