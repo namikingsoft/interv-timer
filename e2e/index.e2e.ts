@@ -97,25 +97,27 @@ test('behave agenda timer', async () => {
   await playIcon.click()
   await pauseIcon.waitFor({ state: 'visible' })
   await captureScreenshot(window, 'circle-played')
-  // check interval too long
-  // ALT: await expect(agendaTime0).toHaveText('00:00:59')
-  await window.waitForTimeout(1000)
+  await expect
+    .poll(() => agendaTime0.innerText(), {
+      intervals: [...Array(20)].map((_, i) => i * 100),
+    })
+    .toBe('00:00:59')
   await pauseIcon.click()
   await playIcon.waitFor({ state: 'visible' })
   await captureScreenshot(window, 'home-paused')
-  expect(await agendaTime0.innerText()).toBe('00:00:59')
   expect(await agendaTime1.innerText()).toBe('00:03:00')
   expect(await totalTime.innerText()).toBe('00:03:59')
   expect(await idealTime.innerText()).toBe('00:00:59')
   await playIcon.click()
   const lapIcon = window.getByTestId('LapIcon')
   await lapIcon.click()
-  // check interval too long
-  // ALT: await expect(agendaTime1).toHaveText('00:02:59')
-  await window.waitForTimeout(1000)
+  await expect
+    .poll(() => agendaTime1.innerText(), {
+      intervals: [...Array(20)].map((_, i) => i * 100),
+    })
+    .toBe('00:02:59')
   await pauseIcon.click()
   expect(await agendaTime0.isVisible()).toBe(false)
-  expect(await agendaTime1.innerText()).toBe('00:02:59')
   expect(await totalTime.innerText()).toBe('00:03:58')
   expect(await idealTime.innerText()).toBe('00:03:58')
   await captureScreenshot(window, 'home-lapped')
@@ -151,10 +153,11 @@ test('behave agenda timer using circle skin', async () => {
   const playIcon = window.getByTestId('PlayIcon')
   await playIcon.click()
   await captureScreenshot(window, 'circle-played')
-  // check interval too long
-  // ALT: await expect(agendaTime).toHaveText('00:00:59')
-  await window.waitForTimeout(1000)
-  expect(await agendaTime.innerText()).toBe('00:00:59')
+  await expect
+    .poll(() => agendaTime.innerText(), {
+      intervals: [...Array(20)].map((_, i) => i * 100),
+    })
+    .toBe('00:00:59')
   const pauseIcon = window.getByTestId('PauseIcon')
   await pauseIcon.click()
   await captureScreenshot(window, 'circle-paused')
@@ -164,10 +167,11 @@ test('behave agenda timer using circle skin', async () => {
   await playIcon.click()
   const lapIcon = window.getByTestId('LapIcon')
   await lapIcon.click()
-  // check interval too long
-  // ALT: await expect(agendaTime).toHaveText('00:02:59')
-  await window.waitForTimeout(1000)
-  expect(await agendaTime.innerText()).toBe('00:02:59')
+  await expect
+    .poll(() => agendaTime.innerText(), {
+      intervals: [...Array(20)].map((_, i) => i * 100),
+    })
+    .toBe('00:02:59')
   expect(await totalTime.innerText()).toBe('00:03:58')
   expect(await idealTime.innerText()).toBe('00:03:58')
   await captureScreenshot(window, 'circle-lapped')
