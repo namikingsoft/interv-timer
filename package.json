@@ -19,6 +19,7 @@
     "e2e": "jest --projects jest.e2e.config.js",
     "type": "tsc --noEmit",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "upgrade-interactive": "npx npm-check --update",
     "postinstall": "electron-builder install-app-deps"
   },
   "build": {
@@ -44,9 +45,9 @@
     "source-map-support": "0.5.19"
   },
   "devDependencies": {
-    "@material-ui/core": "4.11.2",
-    "@material-ui/icons": "4.9.1",
-    "@material-ui/lab": "4.0.0-alpha.56",
+    "@material-ui/core": "4.12.4",
+    "@material-ui/icons": "4.11.3",
+    "@material-ui/lab": "4.0.0-alpha.61",
     "@testing-library/react": "11.2.3",
     "@testing-library/react-hooks": "4.0.0",
     "@types/jest": "26.0.20",
