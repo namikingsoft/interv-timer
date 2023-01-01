@@ -1,5 +1,5 @@
 import React from 'react'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { makeStyles, createStyles } from '@mui/styles'
 import Grid from '@mui/material/Grid'
 import IconButton from '@mui/material/IconButton'
@@ -24,7 +24,7 @@ const useStyles = makeStyles(() =>
 
 const Home: React.FC = () => {
   const classes = useStyles({})
-  const history = useHistory()
+  const navigate = useNavigate()
   const { t, k } = useTranslationWithKey()
 
   const {
@@ -61,10 +61,7 @@ const Home: React.FC = () => {
     dispatch({ type: 'timer/reset' })
   }, [dispatch])
 
-  const goToSetting = React.useCallback(
-    () => history.push('/settings'),
-    [history],
-  )
+  const goToSetting = React.useCallback(() => navigate('/settings'), [history])
 
   const finishedAll = lapRemains.length <= lapSeconds.length
 

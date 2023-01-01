@@ -1,5 +1,5 @@
 import React from 'react'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { makeStyles, createStyles } from '@mui/styles'
 import Typography from '@mui/material/Typography'
 import IconButton from '@mui/material/IconButton'
@@ -41,7 +41,7 @@ const useStyles = makeStyles(() =>
 
 const Home: React.FC = () => {
   const classes = useStyles({})
-  const history = useHistory()
+  const navigate = useNavigate()
   const { t, k } = useTranslationWithKey()
 
   const setting = useSelector(({ setting }) => setting)
@@ -106,12 +106,12 @@ const Home: React.FC = () => {
 
   const resetAndGotoHome = React.useCallback(() => {
     dispatch({ type: 'setting/loadRequest', payload: setting })
-    history.push('/')
+    navigate('/')
   }, [dispatch, history, setting])
 
   const saveAndGotoHome = React.useCallback(() => {
     dispatch({ type: 'setting/saveRequest', payload: setting })
-    history.push('/')
+    navigate('/')
   }, [dispatch, history, setting])
 
   React.useEffect(() => {
