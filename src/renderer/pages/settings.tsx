@@ -131,12 +131,8 @@ const Home: React.FC = () => {
         </IconButton>
       }
       navRight={
-        <IconButton
-          color="inherit"
-          onClick={saveAndGotoHome}
-          data-testid="SaveIcon"
-        >
-          <SaveIcon />
+        <IconButton color="inherit" onClick={saveAndGotoHome}>
+          <SaveIcon data-testid="SaveIcon" />
         </IconButton>
       }
       body={

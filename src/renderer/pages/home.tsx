@@ -98,22 +98,14 @@ const Home: React.FC = () => {
           >
             <ArrowUpwardIcon />
           </IconButton>
-          <IconButton
-            color="inherit"
-            onClick={dispatchLap}
-            data-testid="LapIcon"
-          >
-            <ArrowDownwardIcon />
+          <IconButton color="inherit" onClick={dispatchLap}>
+            <ArrowDownwardIcon data-testid="LapIcon" />
           </IconButton>
         </>
       }
       navRight={
-        <IconButton
-          color="inherit"
-          onClick={goToSetting}
-          data-testid="SettingIcon"
-        >
-          <SettingsIcon />
+        <IconButton color="inherit" onClick={goToSetting}>
+          <SettingsIcon data-testid="SettingIcon" />
         </IconButton>
       }
       body={
