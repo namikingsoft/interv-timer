@@ -1,6 +1,5 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { makeStyles, createStyles } from '@mui/styles'
 import Grid from '@mui/material/Grid'
 import IconButton from '@mui/material/IconButton'
 import PlayArrowIcon from '@mui/icons-material/PlayArrow'
@@ -16,14 +15,7 @@ import { AgendaSkinCircle } from '../components/molecules/AgendaSkinCircle'
 import { TimerInfo } from '../components/molecules/TimerInfo'
 import { useTranslationWithKey } from '../hooks/useTranslationWithKey'
 
-const useStyles = makeStyles(() =>
-  createStyles({
-    root: {},
-  }),
-)
-
 const Home: React.FC = () => {
-  const classes = useStyles({})
   const navigate = useNavigate()
   const { t, k } = useTranslationWithKey()
 
@@ -71,7 +63,6 @@ const Home: React.FC = () => {
 
   return (
     <AppLayout
-      className={classes.root}
       nav={
         <>
           <IconButton color="inherit" onClick={togglePlay}>

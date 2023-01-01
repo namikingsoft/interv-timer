@@ -1,8 +1,7 @@
-import React from 'react'
-import classnames from 'classnames'
+import React, { CSSProperties } from 'react'
 import CircularProgress from '@mui/material/CircularProgress'
 import ThumbUpIcon from '@mui/icons-material/ThumbUp'
-import { makeStyles, createStyles } from '@mui/styles'
+import { styled } from '@mui/material/styles'
 import { Agenda, LapRemain } from '../../modules/timer/type'
 import { TimerInfo } from './TimerInfo'
 
@@ -12,34 +11,30 @@ interface Props {
   lapSeconds: number[]
 }
 
-const useStyles = makeStyles(() =>
-  createStyles({
-    root: {
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      overflow: 'hidden',
-    },
-    centering: {
-      position: 'absolute',
-      top: '50%',
-      left: '50%',
-      transform: 'translateY(-50%) translateX(-50%)',
-    },
-    timer: {
-      width: '90%',
-      textAlign: 'center',
-    },
-    shadowWhite: {
-      filter: 'drop-shadow(2px 2px 0px #fffa)',
-    },
-    shadowBlack: {
-      filter: 'drop-shadow(1px 1px 0px #000a)',
-    },
-  }),
-)
+const ContainerDiv = styled('div')(() => ({
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
+  overflow: 'hidden',
+}))
+
+const CenteringDiv = styled('div')(() => ({
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translateY(-50%) translateX(-50%)',
+}))
+
+const styleTimer = {
+  width: '90%',
+  textAlign: 'center',
+} as const
+
+const styleShadowBlack = {
+  filter: 'drop-shadow(1px 1px 0px #000a)',
+} as const
 
 interface CircleProps {
   size: number
@@ -47,7 +42,7 @@ interface CircleProps {
   thickness: number
   percent: number
   rotateDegree?: number
-  className?: string
+  style?: CSSProperties
 }
 
 const Circle = ({
@@ -56,9 +51,9 @@ const Circle = ({
   thickness,
   percent,
   rotateDegree,
-  className,
+  style,
 }: CircleProps) => (
-  <div className={className}>
+  <CenteringDiv style={style}>
     <div
       style={{
         transform: rotateDegree && `rotate(${rotateDegree}deg)`,
@@ -75,7 +70,7 @@ const Circle = ({
         value={percent}
       />
     </div>
-  </div>
+  </CenteringDiv>
 )
 
 const circleWholeSizeRate = 0.9
@@ -92,8 +87,6 @@ export const AgendaSkinCircle: React.FC<Props> = ({
   lapRemains,
   lapSeconds,
 }) => {
-  const classes = useStyles({})
-
   const finishedAll = lapRemains.length <= lapSeconds.length
 
   const index = lapSeconds.length
@@ -159,10 +152,9 @@ export const AgendaSkinCircle: React.FC<Props> = ({
   }, [refRoot.current])
 
   return (
-    <div className={classes.root} ref={refRoot}>
+    <ContainerDiv ref={refRoot}>
       <Circle
         // whole frame
-        className={classnames(classes.centering)}
         size={shortSideSize * circleWholeSizeRate}
         color="#fff2"
         thickness={circleWholeThickness}
@@ -170,7 +162,6 @@ export const AgendaSkinCircle: React.FC<Props> = ({
       />
       <Circle
         // whole past percent
-        className={classnames(classes.centering)}
         size={shortSideSize * circleWholeSizeRate}
         color="#fff3"
         thickness={circleWholeThickness}
@@ -179,8 +170,8 @@ export const AgendaSkinCircle: React.FC<Props> = ({
       {progressDegrees.map((x) => (
         <Circle
           // whole agenda scale
-          className={classnames(classes.centering, classes.shadowBlack)}
           key={x}
+          style={styleShadowBlack}
           size={shortSideSize * circleWholeSizeRate}
           color="#fff6"
           thickness={circleWholeThickness}
@@ -190,7 +181,6 @@ export const AgendaSkinCircle: React.FC<Props> = ({
       ))}
       <Circle
         // whole past percent
-        className={classnames(classes.centering)}
         color="#a00"
         size={shortSideSize * circleWholeSizeRate}
         thickness={circleWholeThickness}
@@ -198,7 +188,6 @@ export const AgendaSkinCircle: React.FC<Props> = ({
       />
       <Circle
         // whole past deadline percent
-        className={classnames(classes.centering)}
         color={circleColorSecondary}
         size={shortSideSize * circleWholeSizeRate}
         thickness={circleWholeThickness}
@@ -206,7 +195,6 @@ export const AgendaSkinCircle: React.FC<Props> = ({
       />
       <Circle
         // current progress frame
-        className={classnames(classes.centering)}
         color="#fff2"
         size={shortSideSize * circleCurrentSizeRate}
         thickness={circleCurrentThickness}
@@ -214,7 +202,6 @@ export const AgendaSkinCircle: React.FC<Props> = ({
       />
       <Circle
         // current late percent
-        className={classnames(classes.centering)}
         color="#0006"
         size={shortSideSize * circleCurrentSizeRate}
         thickness={circleCurrentThickness}
@@ -222,13 +209,12 @@ export const AgendaSkinCircle: React.FC<Props> = ({
       />
       <Circle
         // current progress percent
-        className={classnames(classes.centering)}
         color={circleColorPrimary}
         size={shortSideSize * circleCurrentSizeRate}
         thickness={circleCurrentThickness}
         percent={currentPercent}
       />
-      <div className={classnames(classes.centering, classes.timer)}>
+      <CenteringDiv style={styleTimer}>
         {finishedAll ? (
           <ThumbUpIcon fontSize="large" data-testid="FinishedIcon" />
         ) : (
@@ -239,7 +225,7 @@ export const AgendaSkinCircle: React.FC<Props> = ({
             data-testid="AgendaTimer"
           />
         )}
-      </div>
-    </div>
+      </CenteringDiv>
+    </ContainerDiv>
   )
 }

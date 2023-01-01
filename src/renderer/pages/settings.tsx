@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { makeStyles, createStyles } from '@mui/styles'
+import { styled } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
 import IconButton from '@mui/material/IconButton'
 import SaveIcon from '@mui/icons-material/Save'
@@ -14,33 +14,24 @@ import { AppLayout } from '../components/atoms/AppLayout'
 import { useSelector, useDispatch } from '../hooks/redux'
 import { useTranslationWithKey } from '../hooks/useTranslationWithKey'
 
-const useStyles = makeStyles(() =>
-  createStyles({
-    root: {},
-    form: {
-      marginLeft: 14,
-    },
-    inputBlock: {
-      '& + &': {
-        marginTop: 20,
-      },
-    },
-    laps: {
-      width: '100%',
-    },
-    slider: {
-      '& .MuiSlider-markLabel': {
-        color: '#aaa',
-      },
-      '& .MuiSlider-markLabelActive': {
-        color: '#fff',
-      },
-    },
-  }),
-)
+const InputBlockDiv = styled('div')(() => ({
+  '& + &': {
+    marginTop: 20,
+  },
+}))
+
+const SliderDiv = styled('div')(() => ({
+  '& .MuiSlider-markLabel': {
+    color: '#aaa',
+  },
+  '& .MuiSlider-markLabelActive': {
+    color: '#fff',
+  },
+}))
+
+const styleLaps = { width: '100%' } as const
 
 const Home: React.FC = () => {
-  const classes = useStyles({})
   const navigate = useNavigate()
   const { t, k } = useTranslationWithKey()
 
@@ -120,7 +111,6 @@ const Home: React.FC = () => {
 
   return (
     <AppLayout
-      className={classes.root}
       nav={
         <IconButton
           color="inherit"
@@ -136,11 +126,11 @@ const Home: React.FC = () => {
         </IconButton>
       }
       body={
-        <div className={classes.root}>
-          <div className={classes.inputBlock}>
+        <div>
+          <InputBlockDiv>
             <Typography>{t(k.agendaList)}</Typography>
             <TextareaAutosize
-              className={classes.laps}
+              style={styleLaps}
               minRows={10}
               maxRows={20}
               placeholder={t(k.agendaListPlaceholder)}
@@ -148,35 +138,36 @@ const Home: React.FC = () => {
               onChange={onChangeLapsText}
               data-testid="AgendaListTextarea"
             />
-          </div>
-          <div className={classes.inputBlock}>
+          </InputBlockDiv>
+          <InputBlockDiv>
             <Typography>{t(k.backgroundTransparentRate)}</Typography>
-            <Slider
-              className={classes.slider}
-              defaultValue={20}
-              min={0}
-              max={1}
-              step={0.01}
-              valueLabelDisplay="auto"
-              value={setting.backgroundAlphaRate}
-              onChange={onChangeBackgroundAlphaRate}
-              marks={[
-                {
-                  value: 0.2,
-                  label: '20%',
-                },
-                {
-                  value: 0.5,
-                  label: '50%',
-                },
-                {
-                  value: 0.8,
-                  label: '80%',
-                },
-              ]}
-            />
-          </div>
-          <div className={classes.inputBlock}>
+            <SliderDiv>
+              <Slider
+                defaultValue={20}
+                min={0}
+                max={1}
+                step={0.01}
+                valueLabelDisplay="auto"
+                value={setting.backgroundAlphaRate}
+                onChange={onChangeBackgroundAlphaRate}
+                marks={[
+                  {
+                    value: 0.2,
+                    label: '20%',
+                  },
+                  {
+                    value: 0.5,
+                    label: '50%',
+                  },
+                  {
+                    value: 0.8,
+                    label: '80%',
+                  },
+                ]}
+              />
+            </SliderDiv>
+          </InputBlockDiv>
+          <InputBlockDiv>
             <FormGroup>
               <FormControlLabel
                 control={
@@ -188,9 +179,9 @@ const Home: React.FC = () => {
                 label={t(k.avoidFinishedAgenda)}
               />
             </FormGroup>
-          </div>
+          </InputBlockDiv>
           {window.platform === 'darwin' && (
-            <div className={classes.inputBlock}>
+            <InputBlockDiv>
               <FormGroup>
                 <FormControlLabel
                   control={
@@ -203,9 +194,9 @@ const Home: React.FC = () => {
                   label={t(k.visibleOnAllWorkspaces)}
                 />
               </FormGroup>
-            </div>
+            </InputBlockDiv>
           )}
-          <div className={classes.inputBlock}>
+          <InputBlockDiv>
             <FormGroup>
               <FormControlLabel
                 control={
@@ -218,7 +209,7 @@ const Home: React.FC = () => {
                 label={t(k.skinMode)}
               />
             </FormGroup>
-          </div>
+          </InputBlockDiv>
         </div>
       }
     />

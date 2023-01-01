@@ -1,5 +1,4 @@
 import React from 'react'
-import { makeStyles, createStyles } from '@mui/styles'
 import Snackbar from '@mui/material/Snackbar'
 import Link from '@mui/material/Link'
 import Button from '@mui/material/Button'
@@ -18,14 +17,6 @@ interface Props {
   onRestart: () => void
 }
 
-const useStyles = makeStyles(() =>
-  createStyles({
-    progress: {
-      marginTop: 5,
-    },
-  }),
-)
-
 export const UpdaterSnackbar: React.FC<Props> = ({
   className,
   version,
@@ -34,7 +25,6 @@ export const UpdaterSnackbar: React.FC<Props> = ({
   onClose,
   onRestart,
 }) => {
-  const classes = useStyles()
   const { t, k } = useTranslationWithKey()
   const downloaded = percent >= 100
   const tag = `v${version.replace(/^v/, '')}`
@@ -81,7 +71,7 @@ export const UpdaterSnackbar: React.FC<Props> = ({
             </Link>
           </div>
           <LinearProgress
-            className={classes.progress}
+            sx={{ marginTop: 5 }}
             variant="determinate"
             value={percent}
           />

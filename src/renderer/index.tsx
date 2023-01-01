@@ -4,6 +4,7 @@ import { Provider } from 'react-redux'
 import { I18nextProvider } from 'react-i18next'
 import CssBaseline from '@mui/material/CssBaseline'
 import { ThemeProvider } from '@mui/material/styles'
+import { AppGlobalStyle } from './components/atoms/AppGlobalStyle'
 import { createReduxStore } from './store'
 import { routes } from './routes'
 import { theme } from './theme'
@@ -34,6 +35,7 @@ render(
     <Provider store={store}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
+        <AppGlobalStyle />
         {routes}
       </ThemeProvider>
     </Provider>
