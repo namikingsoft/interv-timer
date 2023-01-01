@@ -11,7 +11,7 @@ import * as api from './api'
 
 export const initialize: Epic<Action, LoadRequestAction> = (action$) =>
   action$.pipe(
-    ofType<Action, AppInitAction>('app/init'),
+    ofType<Action, 'app/init', AppInitAction>('app/init'),
     mapTo({
       type: 'setting/loadRequest',
     }),
@@ -19,7 +19,9 @@ export const initialize: Epic<Action, LoadRequestAction> = (action$) =>
 
 export const save: Epic<Action, SaveSuccessAction> = (action$) =>
   action$.pipe(
-    ofType<Action, SaveRequestAction>('setting/saveRequest'),
+    ofType<Action, 'setting/saveRequest', SaveRequestAction>(
+      'setting/saveRequest',
+    ),
     tap(({ payload }) => api.save(payload)),
     map(({ payload }) => ({
       type: 'setting/saveSuccess',
@@ -29,7 +31,9 @@ export const save: Epic<Action, SaveSuccessAction> = (action$) =>
 
 export const load: Epic<Action, LoadSuccessAction> = (action$) =>
   action$.pipe(
-    ofType<Action, LoadRequestAction>('setting/loadRequest'),
+    ofType<Action, 'setting/loadRequest', LoadRequestAction>(
+      'setting/loadRequest',
+    ),
     map(() => ({
       type: 'setting/loadSuccess',
       payload: api.load(),

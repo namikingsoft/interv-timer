@@ -5,8 +5,19 @@ import * as settingEpics from './modules/setting/epic'
 import * as updaterEpics from './modules/updater/epic'
 
 export const rootEpic = combineEpics(
-  ...Object.values(ipcEpics),
-  ...Object.values(timerEpics),
-  ...Object.values(settingEpics),
-  ...Object.values(updaterEpics),
+  ipcEpics.initialize,
+  ipcEpics.localStorageToVisibleOnAllWorkspaces,
+  ipcEpics.recieve,
+  ipcEpics.send,
+  ipcEpics.setVisibleOnAllWorkspaces,
+  timerEpics.calcBaseTime,
+  timerEpics.initAfterChangeSetting,
+  timerEpics.setStopTime,
+  timerEpics.toggleInterval,
+  settingEpics.initialize,
+  settingEpics.load,
+  settingEpics.save,
+  updaterEpics.available,
+  updaterEpics.downloaded,
+  updaterEpics.progress,
 )
