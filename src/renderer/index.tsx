@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { render } from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import { Provider } from 'react-redux'
 import { I18nextProvider } from 'react-i18next'
 import CssBaseline from '@mui/material/CssBaseline'
@@ -30,7 +30,7 @@ app.setAttribute('id', 'app')
 
 document.body.appendChild(app)
 
-render(
+createRoot(app).render(
   <I18nextProvider i18n={i18n}>
     <Provider store={store}>
       <ThemeProvider theme={theme}>
@@ -40,5 +40,4 @@ render(
       </ThemeProvider>
     </Provider>
   </I18nextProvider>,
-  app,
 )
