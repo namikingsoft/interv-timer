@@ -193,7 +193,7 @@ const Home: React.FC = () => {
               />
             </FormGroup>
           </div>
-          {process?.platform === 'darwin' && (
+          {window.platform === 'darwin' && (
             <div className={classes.inputBlock}>
               <FormGroup>
                 <FormControlLabel

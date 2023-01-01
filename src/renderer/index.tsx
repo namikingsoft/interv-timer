@@ -24,6 +24,11 @@ i18n.changeLanguage(browserLanguage)
 const store = createReduxStore()
 store.dispatch({ type: 'app/init' })
 
+const app = document.createElement('div')
+app.setAttribute('id', 'app')
+
+document.body.appendChild(app)
+
 render(
   <I18nextProvider i18n={i18n}>
     <Provider store={store}>
@@ -33,6 +38,5 @@ render(
       </ThemeProvider>
     </Provider>
   </I18nextProvider>,
-  // with html template of electron-webpack
-  document.getElementById('app'),
+  app,
 )

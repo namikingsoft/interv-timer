@@ -7,6 +7,7 @@ import Store from 'electron-store'
 
 export const createWindow = (
   windowName: string,
+  preloadPath: string,
   options: BrowserWindowConstructorOptions,
 ): BrowserWindow => {
   const key = 'window-state'
@@ -74,10 +75,9 @@ export const createWindow = (
     ...options,
     ...state,
     webPreferences: {
-      // For compatible with old electron version TODO: fix security
-      nodeIntegration: true,
+      preload: preloadPath,
+      nodeIntegration: false,
       contextIsolation: false,
-      enableRemoteModule: true,
       ...options.webPreferences,
     },
   }

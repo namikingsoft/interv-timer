@@ -144,8 +144,6 @@ export const AgendaSkinCircle: React.FC<Props> = ({
   const [shortSideSize, setShortSideSize] = React.useState(0)
 
   React.useEffect(() => {
-    // @ts-expect-error ResizeObserver undefined
-    // https://github.com/Microsoft/TypeScript/issues/28502
     const resizeObserver = new ResizeObserver((entries) => {
       for (const entry of entries) {
         const { width, height } = entry.contentRect
