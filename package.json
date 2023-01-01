@@ -21,7 +21,7 @@
     "fmtc": "prettier --check .",
     "type": "tsc --noEmit",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "upgrade-interactive": "npx npm-check --update",
+    "upgrade-interactive": "npx npm-check --update --save-exact",
     "postinstall": "electron-builder install-app-deps"
   },
   "build": {
