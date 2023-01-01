@@ -1,9 +1,10 @@
 import * as React from 'react'
-import { render } from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import { Provider } from 'react-redux'
 import { I18nextProvider } from 'react-i18next'
-import CssBaseline from '@material-ui/core/CssBaseline'
-import { ThemeProvider } from '@material-ui/styles'
+import CssBaseline from '@mui/material/CssBaseline'
+import { ThemeProvider } from '@mui/material/styles'
+import { AppGlobalStyle } from './components/atoms/AppGlobalStyle'
 import { createReduxStore } from './store'
 import { routes } from './routes'
 import { theme } from './theme'
@@ -24,15 +25,19 @@ i18n.changeLanguage(browserLanguage)
 const store = createReduxStore()
 store.dispatch({ type: 'app/init' })
 
-render(
+const app = document.createElement('div')
+app.setAttribute('id', 'app')
+
+document.body.appendChild(app)
+
+createRoot(app).render(
   <I18nextProvider i18n={i18n}>
     <Provider store={store}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
+        <AppGlobalStyle />
         {routes}
       </ThemeProvider>
     </Provider>
   </I18nextProvider>,
-  // with html template of electron-webpack
-  document.getElementById('app'),
 )

@@ -1,14 +1,13 @@
 import React from 'react'
-import { useHistory } from 'react-router-dom'
-import { makeStyles, createStyles } from '@material-ui/core/styles'
-import Grid from '@material-ui/core/Grid'
-import IconButton from '@material-ui/core/IconButton'
-import PlayArrowIcon from '@material-ui/icons/PlayArrow'
-import PauseIcon from '@material-ui/icons/Pause'
-import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward'
-import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward'
-import RestoreIcon from '@material-ui/icons/Restore'
-import SettingsIcon from '@material-ui/icons/Settings'
+import { useNavigate } from 'react-router-dom'
+import Grid from '@mui/material/Grid'
+import IconButton from '@mui/material/IconButton'
+import PlayArrowIcon from '@mui/icons-material/PlayArrow'
+import PauseIcon from '@mui/icons-material/Pause'
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward'
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward'
+import RestoreIcon from '@mui/icons-material/Restore'
+import SettingsIcon from '@mui/icons-material/Settings'
 import { useSelector, useDispatch } from '../hooks/redux'
 import { AppLayout } from '../components/atoms/AppLayout'
 import { AgendaSkinList } from '../components/molecules/AgendaSkinList'
@@ -16,15 +15,8 @@ import { AgendaSkinCircle } from '../components/molecules/AgendaSkinCircle'
 import { TimerInfo } from '../components/molecules/TimerInfo'
 import { useTranslationWithKey } from '../hooks/useTranslationWithKey'
 
-const useStyles = makeStyles(() =>
-  createStyles({
-    root: {},
-  }),
-)
-
 const Home: React.FC = () => {
-  const classes = useStyles({})
-  const history = useHistory()
+  const navigate = useNavigate()
   const { t, k } = useTranslationWithKey()
 
   const {
@@ -47,9 +39,10 @@ const Home: React.FC = () => {
     else dispatch({ type: 'timer/start' })
   }, [isPlay])
 
-  const dispatchLap = React.useCallback(() => dispatch({ type: 'timer/lap' }), [
-    dispatch,
-  ])
+  const dispatchLap = React.useCallback(
+    () => dispatch({ type: 'timer/lap' }),
+    [dispatch],
+  )
 
   const dispatchUndo = React.useCallback(
     () => dispatch({ type: 'timer/undo' }),
@@ -60,9 +53,7 @@ const Home: React.FC = () => {
     dispatch({ type: 'timer/reset' })
   }, [dispatch])
 
-  const goToSetting = React.useCallback(() => history.push('/settings'), [
-    history,
-  ])
+  const goToSetting = React.useCallback(() => navigate('/settings'), [history])
 
   const finishedAll = lapRemains.length <= lapSeconds.length
 
@@ -72,7 +63,6 @@ const Home: React.FC = () => {
 
   return (
     <AppLayout
-      className={classes.root}
       nav={
         <>
           <IconButton color="inherit" onClick={togglePlay}>
@@ -96,22 +86,14 @@ const Home: React.FC = () => {
           >
             <ArrowUpwardIcon />
           </IconButton>
-          <IconButton
-            color="inherit"
-            onClick={dispatchLap}
-            data-testid="LapIcon"
-          >
-            <ArrowDownwardIcon />
+          <IconButton color="inherit" onClick={dispatchLap}>
+            <ArrowDownwardIcon data-testid="LapIcon" />
           </IconButton>
         </>
       }
       navRight={
-        <IconButton
-          color="inherit"
-          onClick={goToSetting}
-          data-testid="SettingIcon"
-        >
-          <SettingsIcon />
+        <IconButton color="inherit" onClick={goToSetting}>
+          <SettingsIcon data-testid="SettingIcon" />
         </IconButton>
       }
       body={

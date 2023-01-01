@@ -1,6 +1,5 @@
 import React from 'react'
-import { makeStyles, createStyles } from '@material-ui/core/styles'
-import Grid from '@material-ui/core/Grid'
+import Grid from '@mui/material/Grid'
 import { LapRemain } from '../../modules/timer/type'
 import { TimerInfo } from './TimerInfo'
 
@@ -10,23 +9,15 @@ interface Props {
   avoidFinished: boolean
 }
 
-const useStyles = makeStyles(() =>
-  createStyles({
-    root: {},
-  }),
-)
-
 export const AgendaSkinList: React.FC<Props> = ({
   lapRemains,
   lapSeconds,
   avoidFinished,
 }) => {
-  const classes = useStyles({})
-
   const finishedAll = lapRemains.length <= lapSeconds.length
 
   return (
-    <div className={classes.root}>
+    <div>
       <Grid container spacing={2}>
         {lapRemains.map((remain, i) => {
           const isActive = i === lapSeconds.length

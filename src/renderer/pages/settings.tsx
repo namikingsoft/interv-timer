@@ -1,47 +1,38 @@
 import React from 'react'
-import { useHistory } from 'react-router-dom'
-import { makeStyles, createStyles } from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography'
-import IconButton from '@material-ui/core/IconButton'
-import SaveIcon from '@material-ui/icons/Save'
-import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore'
-import FormGroup from '@material-ui/core/FormGroup'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Switch from '@material-ui/core/Switch'
-import Slider from '@material-ui/core/Slider'
-import TextareaAutosize from '@material-ui/core/TextareaAutosize'
+import { useNavigate } from 'react-router-dom'
+import { styled } from '@mui/material/styles'
+import Typography from '@mui/material/Typography'
+import IconButton from '@mui/material/IconButton'
+import SaveIcon from '@mui/icons-material/Save'
+import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore'
+import FormGroup from '@mui/material/FormGroup'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import Switch from '@mui/material/Switch'
+import Slider from '@mui/material/Slider'
+import TextareaAutosize from '@mui/material/TextareaAutosize'
 import { AppLayout } from '../components/atoms/AppLayout'
 import { useSelector, useDispatch } from '../hooks/redux'
 import { useTranslationWithKey } from '../hooks/useTranslationWithKey'
 
-const useStyles = makeStyles(() =>
-  createStyles({
-    root: {},
-    form: {
-      marginLeft: 14,
-    },
-    inputBlock: {
-      '& + &': {
-        marginTop: 20,
-      },
-    },
-    laps: {
-      width: '100%',
-    },
-    slider: {
-      '& .MuiSlider-markLabel': {
-        color: '#aaa',
-      },
-      '& .MuiSlider-markLabelActive': {
-        color: '#fff',
-      },
-    },
-  }),
-)
+const InputBlockDiv = styled('div')(() => ({
+  '& + &': {
+    marginTop: 20,
+  },
+}))
+
+const SliderDiv = styled('div')(() => ({
+  '& .MuiSlider-markLabel': {
+    color: '#aaa',
+  },
+  '& .MuiSlider-markLabelActive': {
+    color: '#fff',
+  },
+}))
+
+const styleLaps = { width: '100%' } as const
 
 const Home: React.FC = () => {
-  const classes = useStyles({})
-  const history = useHistory()
+  const navigate = useNavigate()
   const { t, k } = useTranslationWithKey()
 
   const setting = useSelector(({ setting }) => setting)
@@ -106,12 +97,12 @@ const Home: React.FC = () => {
 
   const resetAndGotoHome = React.useCallback(() => {
     dispatch({ type: 'setting/loadRequest', payload: setting })
-    history.push('/')
+    navigate('/')
   }, [dispatch, history, setting])
 
   const saveAndGotoHome = React.useCallback(() => {
     dispatch({ type: 'setting/saveRequest', payload: setting })
-    history.push('/')
+    navigate('/')
   }, [dispatch, history, setting])
 
   React.useEffect(() => {
@@ -120,7 +111,6 @@ const Home: React.FC = () => {
 
   return (
     <AppLayout
-      className={classes.root}
       nav={
         <IconButton
           color="inherit"
@@ -131,56 +121,53 @@ const Home: React.FC = () => {
         </IconButton>
       }
       navRight={
-        <IconButton
-          color="inherit"
-          onClick={saveAndGotoHome}
-          data-testid="SaveIcon"
-        >
-          <SaveIcon />
+        <IconButton color="inherit" onClick={saveAndGotoHome}>
+          <SaveIcon data-testid="SaveIcon" />
         </IconButton>
       }
       body={
-        <div className={classes.root}>
-          <div className={classes.inputBlock}>
+        <div>
+          <InputBlockDiv>
             <Typography>{t(k.agendaList)}</Typography>
             <TextareaAutosize
-              className={classes.laps}
-              rowsMin={10}
-              rowsMax={20}
+              style={styleLaps}
+              minRows={10}
+              maxRows={20}
               placeholder={t(k.agendaListPlaceholder)}
               value={setting.agendaListText}
               onChange={onChangeLapsText}
               data-testid="AgendaListTextarea"
             />
-          </div>
-          <div className={classes.inputBlock}>
+          </InputBlockDiv>
+          <InputBlockDiv>
             <Typography>{t(k.backgroundTransparentRate)}</Typography>
-            <Slider
-              className={classes.slider}
-              defaultValue={20}
-              min={0}
-              max={1}
-              step={0.01}
-              valueLabelDisplay="auto"
-              value={setting.backgroundAlphaRate}
-              onChange={onChangeBackgroundAlphaRate}
-              marks={[
-                {
-                  value: 0.2,
-                  label: '20%',
-                },
-                {
-                  value: 0.5,
-                  label: '50%',
-                },
-                {
-                  value: 0.8,
-                  label: '80%',
-                },
-              ]}
-            />
-          </div>
-          <div className={classes.inputBlock}>
+            <SliderDiv>
+              <Slider
+                defaultValue={20}
+                min={0}
+                max={1}
+                step={0.01}
+                valueLabelDisplay="auto"
+                value={setting.backgroundAlphaRate}
+                onChange={onChangeBackgroundAlphaRate}
+                marks={[
+                  {
+                    value: 0.2,
+                    label: '20%',
+                  },
+                  {
+                    value: 0.5,
+                    label: '50%',
+                  },
+                  {
+                    value: 0.8,
+                    label: '80%',
+                  },
+                ]}
+              />
+            </SliderDiv>
+          </InputBlockDiv>
+          <InputBlockDiv>
             <FormGroup>
               <FormControlLabel
                 control={
@@ -192,9 +179,9 @@ const Home: React.FC = () => {
                 label={t(k.avoidFinishedAgenda)}
               />
             </FormGroup>
-          </div>
-          {process?.platform === 'darwin' && (
-            <div className={classes.inputBlock}>
+          </InputBlockDiv>
+          {window.platform === 'darwin' && (
+            <InputBlockDiv>
               <FormGroup>
                 <FormControlLabel
                   control={
@@ -207,9 +194,9 @@ const Home: React.FC = () => {
                   label={t(k.visibleOnAllWorkspaces)}
                 />
               </FormGroup>
-            </div>
+            </InputBlockDiv>
           )}
-          <div className={classes.inputBlock}>
+          <InputBlockDiv>
             <FormGroup>
               <FormControlLabel
                 control={
@@ -222,7 +209,7 @@ const Home: React.FC = () => {
                 label={t(k.skinMode)}
               />
             </FormGroup>
-          </div>
+          </InputBlockDiv>
         </div>
       }
     />

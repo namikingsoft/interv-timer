@@ -46,7 +46,7 @@ const initState = (agendaList: Agenda[]): State => {
   const totalLapSecond = agendaList.reduce((acc, x) => acc + x.second, 0)
   return {
     ...initialState,
-    agendaList: agendaList,
+    agendaList,
     lapRemains: agendaList.map(({ label, second }) => ({
       label,
       second,

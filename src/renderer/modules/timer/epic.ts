@@ -22,7 +22,7 @@ export const calcBaseTime: Epic<Action, SetBaseTimeAction, State> = (
   state$,
 ) =>
   action$.pipe(
-    ofType<Action, StartAction>('timer/start'),
+    ofType<Action, 'timer/start', StartAction>('timer/start'),
     map(() =>
       state$.value.timer.baseTime === 0
         ? Date.now()
@@ -38,7 +38,7 @@ export const calcBaseTime: Epic<Action, SetBaseTimeAction, State> = (
 
 export const setStopTime: Epic<Action, SetStopTimeAction, State> = (action$) =>
   action$.pipe(
-    ofType<Action, StopAction>('timer/stop'),
+    ofType<Action, 'timer/stop', StopAction>('timer/stop'),
     map(() => ({
       type: 'timer/setStopTime',
       payload: Date.now(),
@@ -50,11 +50,10 @@ export const toggleInterval: Epic<Action, ElapsedSecondAction, State> = (
   state$,
 ) => {
   const finish$ = action$.pipe(
-    ofType<StopAction | InitAction | ResetAction>(
-      'timer/stop',
-      'timer/init',
-      'timer/reset',
-    ),
+    ofType<
+      StopAction | InitAction | ResetAction,
+      'timer/stop' | 'timer/init' | 'timer/reset'
+    >('timer/stop', 'timer/init', 'timer/reset'),
     first(),
   )
   const interval$ = () =>
@@ -65,7 +64,7 @@ export const toggleInterval: Epic<Action, ElapsedSecondAction, State> = (
     ).pipe(takeUntil(finish$))
 
   return action$.pipe(
-    ofType<Action, StartAction>('timer/start'),
+    ofType<Action, 'timer/start', StartAction>('timer/start'),
     map(interval$),
     switchAll(),
     map(() => ({
@@ -80,10 +79,11 @@ export const initAfterChangeSetting: Epic<Action, InitAction, State> = (
   state$,
 ) =>
   action$.pipe(
-    ofType<Action, SaveSuccessAction | LoadSuccessAction>(
-      'setting/saveSuccess',
-      'setting/loadSuccess',
-    ),
+    ofType<
+      Action,
+      'setting/saveSuccess' | 'setting/loadSuccess',
+      SaveSuccessAction | LoadSuccessAction
+    >('setting/saveSuccess', 'setting/loadSuccess'),
     map(({ payload: { agendaListText } }) =>
       parseTextToAgendaList(agendaListText),
     ),

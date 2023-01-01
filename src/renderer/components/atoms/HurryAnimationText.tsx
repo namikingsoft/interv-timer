@@ -1,6 +1,5 @@
 import React from 'react'
-import { makeStyles, createStyles } from '@material-ui/core/styles'
-import classnames from 'classnames'
+import { styled } from '@mui/material/styles'
 
 interface Props {
   hurry?: boolean
@@ -8,55 +7,44 @@ interface Props {
   children: React.ReactNode
 }
 
-const useStyles = makeStyles(() =>
-  createStyles({
-    root: {
-      display: 'inline-block',
+const ContainerSpan = styled('span')(() => ({
+  display: 'inline-block',
+  transformOrigin: 'center',
+  '@keyframes hurry': {
+    '0%': {
+      transform: 'scale(1, 1)',
     },
-    hurry: {
-      animation: '$hurry 1s ease-in-out 0s infinite normal',
-      transformOrigin: 'center',
+    '20%': {
+      transform: 'scale(1.2, 1.2)',
     },
-    hurryUp: {
-      animation: '$hurryUp 1s ease-in-out 0s infinite normal',
-      transformOrigin: 'center',
+  },
+  '@keyframes hurryUp': {
+    '0%': {
+      transform: 'scale(1, 1)',
     },
-    '@keyframes hurry': {
-      '0%': {
-        transform: 'scale(1, 1)',
-      },
-      '20%': {
-        transform: 'scale(1.2, 1.2)',
-      },
+    '20%': {
+      transform: 'scale(1.3, 1.3)',
+      color: '#f33',
     },
-    '@keyframes hurryUp': {
-      '0%': {
-        transform: 'scale(1, 1)',
-      },
-      '20%': {
-        transform: 'scale(1.3, 1.3)',
-        color: '#f33',
-      },
-    },
-  }),
-)
+  },
+}))
 
 export const HurryAnimationText: React.FC<Props> = ({
   hurry,
   hurryUp,
   children,
 }) => {
-  const classes = useStyles({})
-
   return (
-    <span
-      className={classnames(
-        classes.root,
-        hurry && classes.hurry,
-        hurryUp && classes.hurryUp,
-      )}
+    <ContainerSpan
+      sx={{
+        animation: hurryUp
+          ? 'hurryUp 1s ease-in-out 0s infinite normal'
+          : hurry
+          ? 'hurry 1s ease-in-out 0s infinite normal'
+          : '',
+      }}
     >
       {children}
-    </span>
+    </ContainerSpan>
   )
 }

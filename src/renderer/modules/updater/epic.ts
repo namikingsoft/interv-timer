@@ -10,7 +10,9 @@ import { AvailableAction, ProgressAction, DownloadedAction } from './type'
 
 export const available: Epic<Action, AvailableAction> = (action$) =>
   action$.pipe(
-    ofType<Action, UpdaterAvailableAction>('ipc/updaterAvailable'),
+    ofType<Action, 'ipc/updaterAvailable', UpdaterAvailableAction>(
+      'ipc/updaterAvailable',
+    ),
     map((action) => ({
       type: 'updater/available',
       payload: { newVersion: action.payload.version },
@@ -19,7 +21,9 @@ export const available: Epic<Action, AvailableAction> = (action$) =>
 
 export const progress: Epic<Action, ProgressAction> = (action$) =>
   action$.pipe(
-    ofType<Action, UpdaterProgressAction>('ipc/updaterProgress'),
+    ofType<Action, 'ipc/updaterProgress', UpdaterProgressAction>(
+      'ipc/updaterProgress',
+    ),
     map((action) => ({
       type: 'updater/progress',
       payload: { percent: action.payload.percent },
@@ -28,7 +32,9 @@ export const progress: Epic<Action, ProgressAction> = (action$) =>
 
 export const downloaded: Epic<Action, DownloadedAction> = (action$) =>
   action$.pipe(
-    ofType<Action, UpdaterDownloadedAction>('ipc/updaterDownloaded'),
+    ofType<Action, 'ipc/updaterDownloaded', UpdaterDownloadedAction>(
+      'ipc/updaterDownloaded',
+    ),
     map(() => ({
       type: 'updater/downloaded',
     })),

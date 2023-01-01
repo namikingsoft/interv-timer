@@ -1,5 +1,5 @@
 import { Epic, ofType } from 'redux-observable'
-import { Subject, Observable } from 'rxjs'
+import { Subject } from 'rxjs'
 import { tap, map, mapTo } from 'rxjs/operators'
 import { Action, AppInitAction, NoopAction } from '../type'
 import {
@@ -20,14 +20,21 @@ export const initialize: Epic<Action, UpdaterCheckForUpdatesAction> = (
   action$,
 ) =>
   action$.pipe(
-    ofType<Action, AppInitAction>('app/init'),
+    ofType<Action, 'app/init', AppInitAction>('app/init'),
     tap(() => api.on((_, action) => recieveSubject.next(action))),
     mapTo({ type: 'ipc/updaterCheckForUpdates' }),
   )
 
 export const send: Epic<Action, NoopAction> = (action$) =>
   action$.pipe(
-    ofType<Action, RequestAction>(
+    ofType<
+      Action,
+      | 'ipc/quit'
+      | 'ipc/setVisibleOnAllWorkspaces'
+      | 'ipc/updaterCheckForUpdates'
+      | 'ipc/updaterQuitAndInstall',
+      RequestAction
+    >(
       'ipc/quit',
       'ipc/setVisibleOnAllWorkspaces',
       'ipc/updaterCheckForUpdates',
@@ -37,17 +44,19 @@ export const send: Epic<Action, NoopAction> = (action$) =>
     mapTo({ type: 'noop' }),
   )
 
-export const recieve: () => Observable<unknown> = () =>
-  recieveSubject.asObservable()
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- Epic<unknown>
+export const recieve: Epic<any> = () => recieveSubject.asObservable()
 
 export const setVisibleOnAllWorkspaces: Epic<
   Action,
   SetVisibleOnAllWorkSpacesAction
 > = (action$) =>
   action$.pipe(
-    ofType<Action, SetVisibleOnAllWorkspaces>(
+    ofType<
+      Action,
       'setting/setVisibleOnAllWorkspaces',
-    ),
+      SetVisibleOnAllWorkspaces
+    >('setting/setVisibleOnAllWorkspaces'),
     map(({ payload }) => ({ type: 'ipc/setVisibleOnAllWorkspaces', payload })),
   )
 
@@ -56,10 +65,11 @@ export const localStorageToVisibleOnAllWorkspaces: Epic<
   SetVisibleOnAllWorkSpacesAction
 > = (action$) =>
   action$.pipe(
-    ofType<Action, SaveSuccessAction | LoadSuccessAction>(
-      'setting/saveSuccess',
-      'setting/loadSuccess',
-    ),
+    ofType<
+      Action,
+      'setting/saveSuccess' | 'setting/loadSuccess',
+      SaveSuccessAction | LoadSuccessAction
+    >('setting/saveSuccess', 'setting/loadSuccess'),
     map(({ payload }) => ({
       type: 'ipc/setVisibleOnAllWorkspaces',
       payload: payload.visibleOnAllWorkspaces,
