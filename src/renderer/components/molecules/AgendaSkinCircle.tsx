@@ -1,8 +1,8 @@
 import React from 'react'
 import classnames from 'classnames'
-import CircularProgress from '@material-ui/core/CircularProgress'
-import ThumbUpIcon from '@material-ui/icons/ThumbUp'
-import { makeStyles, createStyles } from '@material-ui/core/styles'
+import CircularProgress from '@mui/material/CircularProgress'
+import ThumbUpIcon from '@mui/icons-material/ThumbUp'
+import { makeStyles, createStyles } from '@mui/styles'
 import { Agenda, LapRemain } from '../../modules/timer/type'
 import { TimerInfo } from './TimerInfo'
 

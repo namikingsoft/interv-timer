@@ -1,8 +1,8 @@
 import React from 'react'
 import classnames from 'classnames'
-import { makeStyles, createStyles } from '@material-ui/core/styles'
-import DragIndicatorIcon from '@material-ui/icons/DragIndicator'
-import CloseIcon from '@material-ui/icons/Close'
+import { makeStyles, createStyles } from '@mui/styles'
+import DragIndicatorIcon from '@mui/icons-material/DragIndicator'
+import CloseIcon from '@mui/icons-material/Close'
 import { UpdaterSnackbar } from '../organisms/UpdaterSnackbar'
 import { useSelector, useDispatch } from '../../hooks/redux'
 

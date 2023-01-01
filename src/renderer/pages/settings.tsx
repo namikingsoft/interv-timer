@@ -1,15 +1,15 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
-import { makeStyles, createStyles } from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography'
-import IconButton from '@material-ui/core/IconButton'
-import SaveIcon from '@material-ui/icons/Save'
-import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore'
-import FormGroup from '@material-ui/core/FormGroup'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Switch from '@material-ui/core/Switch'
-import Slider from '@material-ui/core/Slider'
-import TextareaAutosize from '@material-ui/core/TextareaAutosize'
+import { makeStyles, createStyles } from '@mui/styles'
+import Typography from '@mui/material/Typography'
+import IconButton from '@mui/material/IconButton'
+import SaveIcon from '@mui/icons-material/Save'
+import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore'
+import FormGroup from '@mui/material/FormGroup'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import Switch from '@mui/material/Switch'
+import Slider from '@mui/material/Slider'
+import TextareaAutosize from '@mui/material/TextareaAutosize'
 import { AppLayout } from '../components/atoms/AppLayout'
 import { useSelector, useDispatch } from '../hooks/redux'
 import { useTranslationWithKey } from '../hooks/useTranslationWithKey'
@@ -145,8 +145,8 @@ const Home: React.FC = () => {
             <Typography>{t(k.agendaList)}</Typography>
             <TextareaAutosize
               className={classes.laps}
-              rowsMin={10}
-              rowsMax={20}
+              minRows={10}
+              maxRows={20}
               placeholder={t(k.agendaListPlaceholder)}
               value={setting.agendaListText}
               onChange={onChangeLapsText}

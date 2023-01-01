@@ -1,6 +1,6 @@
 import React from 'react'
 import classnames from 'classnames'
-import { makeStyles, createStyles } from '@material-ui/core/styles'
+import { makeStyles, createStyles } from '@mui/styles'
 import { calcTimerLabelFromRemainSecond } from '../../modules/timer/util'
 
 interface Props {

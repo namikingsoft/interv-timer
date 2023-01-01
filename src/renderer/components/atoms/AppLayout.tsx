@@ -1,7 +1,7 @@
 import React from 'react'
 import classnames from 'classnames'
-import Container from '@material-ui/core/Container'
-import { makeStyles, createStyles } from '@material-ui/core/styles'
+import Container from '@mui/material/Container'
+import { makeStyles, createStyles } from '@mui/styles'
 
 const textBorderColor = '#333'
 
