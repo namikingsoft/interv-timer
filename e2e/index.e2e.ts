@@ -22,8 +22,8 @@ test.beforeEach(async () => {
   electronApp = await electron.launch({
     executablePath:
       process.platform === 'darwin'
-        ? `dist/mac/${productName}.app/Contents/MacOS/${productName}`
-        : `dist/win-unpacked/${productName}.exe`,
+        ? `release/mac/${productName}.app/Contents/MacOS/${productName}`
+        : `release/win-unpacked/${productName}.exe`,
   })
   await electronApp.evaluate(async (electron) => {
     return electron.session.defaultSession.clearStorageData()

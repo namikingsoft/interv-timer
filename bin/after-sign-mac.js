@@ -12,7 +12,7 @@ const ascProvider = process.env.ASC_PROVIDER
 const appBundleId = configBuild.appId
 const appPath = path.resolve(
   __dirname,
-  `../dist/mac/${configBuild.productName}.app`,
+  `../release/mac/${configBuild.productName}.app`,
 )
 
 async function notarizeApp() {
