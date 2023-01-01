@@ -15,7 +15,7 @@ export default defineConfig({
         entry: 'src/main/main.ts',
         vite: {
           build: {
-            sourcemap: false,
+            sourcemap: true,
             outDir: 'dist/main',
           },
         },
@@ -24,7 +24,7 @@ export default defineConfig({
         entry: 'src/preload/index.ts',
         vite: {
           build: {
-            sourcemap: false,
+            sourcemap: true,
             outDir: 'dist/preload',
           },
         },
