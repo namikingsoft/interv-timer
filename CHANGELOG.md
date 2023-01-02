@@ -1,16 +1,26 @@
-Version 9 of Highlight.js has reached EOL and is no longer supported.
-Please upgrade or ask whatever dependency you are using to upgrade.
-https://github.com/highlightjs/highlight.js/issues/2877
 
-## v0.5.1 (2020-11-19)
+## v0.6.0-beta.1 (2023-01-02)
+
+#### :rocket: Enhancement
+* [#374](https://github.com/namikingsoft/interv-timer/pull/374) Upgrade electron v22 and all dependencies to latest ([@namikingsoft](https://github.com/namikingsoft))
+
+#### :house: Internal
+* [#372](https://github.com/namikingsoft/interv-timer/pull/372) Migrate E2E Test to Playwright instead of Spectron ([@namikingsoft](https://github.com/namikingsoft))
+* [#369](https://github.com/namikingsoft/interv-timer/pull/369) Fix collapsed dependencies ([@namikingsoft](https://github.com/namikingsoft))
+* [#350](https://github.com/namikingsoft/interv-timer/pull/350) Update electron for support Apple Silicon  ([@namikingsoft](https://github.com/namikingsoft))
+
+#### Committers: 1
+- Namiki ([@namikingsoft](https://github.com/namikingsoft))
+
+
+## v0.5.1 (2020-11-20)
 
 #### :house: Internal
 * [#255](https://github.com/namikingsoft/interv-timer/pull/255) Fix npm audit for security ([@namikingsoft](https://github.com/namikingsoft))
 * [#200](https://github.com/namikingsoft/interv-timer/pull/200) [security] chore(deps-dev): bump electron from 9.2.1 to 9.3.1 ([@dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 
-#### Committers: 2
+#### Committers: 1
 - Namiki ([@namikingsoft](https://github.com/namikingsoft))
-- [@dependabot-preview[bot]](https://github.com/apps/dependabot-preview)
 
 
 ## v0.5.0 (2020-09-12)
@@ -26,9 +36,8 @@ https://github.com/highlightjs/highlight.js/issues/2877
 * [#143](https://github.com/namikingsoft/interv-timer/pull/143) Use electron-webpack instead of nextron ([@namikingsoft](https://github.com/namikingsoft))
 * [#132](https://github.com/namikingsoft/interv-timer/pull/132) Add e2e test of circle skin mode ([@namikingsoft](https://github.com/namikingsoft))
 
-#### Committers: 2
+#### Committers: 1
 - Namiki ([@namikingsoft](https://github.com/namikingsoft))
-- [@dependabot-preview[bot]](https://github.com/apps/dependabot-preview)
 
 
 ## v0.4.1 (2020-08-14)
@@ -48,9 +57,8 @@ https://github.com/highlightjs/highlight.js/issues/2877
 #### :house: Internal
 * [#112](https://github.com/namikingsoft/interv-timer/pull/112) Introduce E2E test ([@namikingsoft](https://github.com/namikingsoft))
 
-#### Committers: 2
+#### Committers: 1
 - Namiki ([@namikingsoft](https://github.com/namikingsoft))
-- [@dependabot-preview[bot]](https://github.com/apps/dependabot-preview)
 
 
 ## v0.3.2 (2020-08-07)
@@ -61,9 +69,8 @@ https://github.com/highlightjs/highlight.js/issues/2877
 #### :house: Internal
 * [#88](https://github.com/namikingsoft/interv-timer/pull/88) chore(deps): [security] bump elliptic from 6.5.2 to 6.5.3 ([@dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 
-#### Committers: 2
+#### Committers: 1
 - Namiki ([@namikingsoft](https://github.com/namikingsoft))
-- [@dependabot-preview[bot]](https://github.com/apps/dependabot-preview)
 
 
 ## v0.3.1 (2020-07-10)
@@ -78,9 +85,8 @@ https://github.com/highlightjs/highlight.js/issues/2877
 * [#26](https://github.com/namikingsoft/interv-timer/pull/26) Introduce dependabot for update dependencies ([@namikingsoft](https://github.com/namikingsoft))
 * [#15](https://github.com/namikingsoft/interv-timer/pull/15) Fix dependencies vulnerabilities ([@namikingsoft](https://github.com/namikingsoft))
 
-#### Committers: 2
+#### Committers: 1
 - Namiki ([@namikingsoft](https://github.com/namikingsoft))
-- [@dependabot-preview[bot]](https://github.com/apps/dependabot-preview)
 
 
 ## v0.3.0 (2020-07-08)
