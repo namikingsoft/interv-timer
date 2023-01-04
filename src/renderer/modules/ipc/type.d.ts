@@ -7,6 +7,18 @@ export interface SetVisibleOnAllWorkSpacesAction {
   payload: boolean
 }
 
+export interface ShortcutToggleAction {
+  type: 'ipc/shortcutToggle'
+}
+
+export interface ShortcutLapAction {
+  type: 'ipc/shortcutLap'
+}
+
+export interface ShortcutUndoAction {
+  type: 'ipc/shortcutUndo'
+}
+
 export interface UpdaterCheckForUpdatesAction {
   type: 'ipc/updaterCheckForUpdates'
 }
@@ -38,6 +50,9 @@ export interface UpdaterErrorAction {
 export type RequestAction =
   | QuitAction
   | SetVisibleOnAllWorkSpacesAction
+  | ShortcutToggleAction
+  | ShortcutLapAction
+  | ShortcutUndoAction
   | UpdaterCheckForUpdatesAction
   | UpdaterQuitAndInstallAction
 
