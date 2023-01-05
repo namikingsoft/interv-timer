@@ -85,6 +85,46 @@ test('set default agenda list on first run', async () => {
   await captureScreenshot(window, 'home-default')
 })
 
+test('proceed step on double click in app anywhere', async () => {
+  const window = await electronApp.firstWindow()
+  const agendaTime0 = window.getByTestId('AgendaTimer0Value')
+  const idealTime = window.getByTestId('IdealTimerValue')
+  const playIcon = window.getByTestId('PlayIcon')
+  const pauseIcon = window.getByTestId('PauseIcon')
+  const anywhereInApp = window.getByTestId('AgendaTimer1Value')
+  await playIcon.waitFor({ state: 'visible' })
+  // play
+  await anywhereInApp.dblclick()
+  expect(await playIcon.isVisible()).toBe(false)
+  expect(await pauseIcon.isVisible()).toBe(true)
+  expect(await agendaTime0.isVisible()).toBe(true)
+  expect(await idealTime.innerText()).toBe('00:01:00')
+  // lap
+  await anywhereInApp.dblclick()
+  expect(await playIcon.isVisible()).toBe(false)
+  expect(await pauseIcon.isVisible()).toBe(true)
+  expect(await agendaTime0.isVisible()).toBe(false)
+  expect(await idealTime.innerText()).toBe('00:04:00')
+  // finish
+  await anywhereInApp.dblclick()
+  expect(await playIcon.isVisible()).toBe(true)
+  expect(await pauseIcon.isVisible()).toBe(false)
+  expect(await agendaTime0.isVisible()).toBe(true)
+  expect(await idealTime.innerText()).toBe('00:04:00')
+  // reset
+  await anywhereInApp.dblclick()
+  expect(await playIcon.isVisible()).toBe(true)
+  expect(await pauseIcon.isVisible()).toBe(false)
+  expect(await agendaTime0.isVisible()).toBe(true)
+  expect(await idealTime.innerText()).toBe('00:01:00')
+  // re-play
+  await anywhereInApp.dblclick()
+  expect(await playIcon.isVisible()).toBe(false)
+  expect(await pauseIcon.isVisible()).toBe(true)
+  expect(await agendaTime0.isVisible()).toBe(true)
+  expect(await idealTime.innerText()).toBe('00:01:00')
+})
+
 test('behave agenda timer', async () => {
   const window = await electronApp.firstWindow()
   const agendaTime0 = window.getByTestId('AgendaTimer0Value')
