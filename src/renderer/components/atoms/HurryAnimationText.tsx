@@ -7,9 +7,14 @@ interface Props {
   children: React.ReactNode
 }
 
-const ContainerSpan = styled('span')(() => ({
+const ContainerSpan = styled('span')<Props>(({ hurry, hurryUp }) => ({
   display: 'inline-block',
   transformOrigin: 'center',
+  animation: hurryUp
+    ? 'hurryUp 1s ease-in-out 0s infinite normal'
+    : hurry
+    ? 'hurry 1s ease-in-out 0s infinite normal'
+    : '',
   '@keyframes hurry': {
     '0%': {
       transform: 'scale(1, 1)',
@@ -35,15 +40,7 @@ export const HurryAnimationText: React.FC<Props> = ({
   children,
 }) => {
   return (
-    <ContainerSpan
-      sx={{
-        animation: hurryUp
-          ? 'hurryUp 1s ease-in-out 0s infinite normal'
-          : hurry
-          ? 'hurry 1s ease-in-out 0s infinite normal'
-          : '',
-      }}
-    >
+    <ContainerSpan hurry={hurry} hurryUp={hurryUp}>
       {children}
     </ContainerSpan>
   )

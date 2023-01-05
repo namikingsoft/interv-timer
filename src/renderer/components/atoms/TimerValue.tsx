@@ -9,8 +9,12 @@ interface Props {
 }
 const textBorderColorExpired = '#f00'
 
-const ContainerDiv = styled('div')(() => ({
+const ContainerDiv = styled('div')<{ isExpired: boolean }>(({ isExpired }) => ({
   fontSize: 24,
+  color: isExpired ? '#000' : undefined,
+  textShadow: isExpired
+    ? `${textBorderColorExpired} 1px 1px 0, ${textBorderColorExpired} -1px -1px 0, ${textBorderColorExpired} -1px 1px 0, ${textBorderColorExpired} 1px -1px 0, ${textBorderColorExpired} 0px 1px 0, ${textBorderColorExpired}  0 -1px 0, ${textBorderColorExpired} -1px 0 0, ${textBorderColorExpired} 1px 0 0`
+    : undefined,
 }))
 
 export const TimerValue: React.FC<Props> = ({
@@ -23,13 +27,8 @@ export const TimerValue: React.FC<Props> = ({
   return (
     <ContainerDiv
       className={className}
-      sx={
-        remainSecond < 0 && {
-          color: '#000',
-          textShadow: `${textBorderColorExpired} 1px 1px 0, ${textBorderColorExpired} -1px -1px 0, ${textBorderColorExpired} -1px 1px 0, ${textBorderColorExpired} 1px -1px 0, ${textBorderColorExpired} 0px 1px 0, ${textBorderColorExpired}  0 -1px 0, ${textBorderColorExpired} -1px 0 0, ${textBorderColorExpired} 1px 0 0`,
-        }
-      }
       data-testid={testId}
+      isExpired={remainSecond < 0}
     >{`${hour}:${minute}:${second}`}</ContainerDiv>
   )
 }
