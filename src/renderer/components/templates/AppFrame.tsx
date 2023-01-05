@@ -99,13 +99,16 @@ export const AppFrame: React.FC<Props> = ({ className, children }) => {
     dispatch({ type: 'ipc/quit' })
   }, [dispatch])
 
+  // NOTE: windows does not accept mouse event on drag region
+  const showHeader = isHover || window.platform !== 'darwin'
+
   return (
     <ContainerDiv
       className={className}
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
     >
-      {isHover && (
+      {showHeader && (
         <HeaderDiv>
           <DragAreaDiv>
             <DragIndicatorIcon
