@@ -11,5 +11,13 @@ export const ja = {
     visibleOnAllWorkspaces: 'すべてのワークスペースで表示',
     newVersion: '新しいバージョン',
     restart: '再起動',
+    play: '開始',
+    pause: '一時停止',
+    lap: '次へ',
+    undo: '戻る',
+    reset: 'リセット',
+    settings: '設定',
+    back: '戻る',
+    save: '保存',
   },
 }

@@ -8,6 +8,7 @@ import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward'
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward'
 import RestoreIcon from '@mui/icons-material/Restore'
 import SettingsIcon from '@mui/icons-material/Settings'
+import Tooltip from '@mui/material/Tooltip'
 import { useSelector, useDispatch } from '../hooks/redux'
 import { AppLayout } from '../components/atoms/AppLayout'
 import { AgendaSkinList } from '../components/molecules/AgendaSkinList'
@@ -67,34 +68,48 @@ const Home: React.FC = () => {
         <>
           <IconButton color="inherit" onClick={togglePlay}>
             {isPlay ? (
-              <PauseIcon data-testid="PauseIcon" />
+              <Tooltip title={t(k.pause)} arrow>
+                <PauseIcon data-testid="PauseIcon" />
+              </Tooltip>
             ) : (
-              <PlayArrowIcon data-testid="PlayIcon" />
+              <Tooltip title={t(k.play)} arrow>
+                <PlayArrowIcon data-testid="PlayIcon" />
+              </Tooltip>
             )}
-          </IconButton>
-          <IconButton
-            color="inherit"
-            onClick={dispatchReset}
-            data-testid="ResetIcon"
-          >
-            <RestoreIcon />
           </IconButton>
           <IconButton
             color="inherit"
             onClick={dispatchUndo}
             data-testid="UndoIcon"
           >
-            <ArrowUpwardIcon />
+            <Tooltip title={t(k.undo)} arrow>
+              <ArrowUpwardIcon />
+            </Tooltip>
           </IconButton>
           <IconButton color="inherit" onClick={dispatchLap}>
-            <ArrowDownwardIcon data-testid="LapIcon" />
+            <Tooltip title={t(k.lap)} arrow>
+              <ArrowDownwardIcon data-testid="LapIcon" />
+            </Tooltip>
           </IconButton>
         </>
       }
       navRight={
-        <IconButton color="inherit" onClick={goToSetting}>
-          <SettingsIcon data-testid="SettingIcon" />
-        </IconButton>
+        <>
+          <IconButton
+            color="inherit"
+            onClick={dispatchReset}
+            data-testid="ResetIcon"
+          >
+            <Tooltip title={t(k.reset)} arrow>
+              <RestoreIcon />
+            </Tooltip>
+          </IconButton>
+          <IconButton color="inherit" onClick={goToSetting}>
+            <Tooltip title={t(k.settings)} arrow>
+              <SettingsIcon data-testid="SettingIcon" />
+            </Tooltip>
+          </IconButton>
+        </>
       }
       body={
         skinMode === 'circle' ? (
