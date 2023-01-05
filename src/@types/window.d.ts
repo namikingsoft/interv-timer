@@ -2,7 +2,7 @@ import { IpcRenderer } from 'electron'
 
 declare global {
   interface Window {
-    platform: string // process.platform
+    platform: typeof process.platform
     ipcRenderer: IpcRenderer
   }
 }

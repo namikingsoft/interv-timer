@@ -16,7 +16,9 @@ const ContainerDiv = styled('div')(() => ({
   left: 0,
   right: 0,
   bottom: 0,
-  WebkitAppRegion: 'drag',
+  // if apply this whole then do not receive mouse events on windows
+  // refs. https://stackoverflow.com/questions/56338939/hover-in-css-is-not-working-with-electron
+  // WebkitAppRegion: 'drag',
 }))
 
 const HeaderDiv = styled('div')(() => ({
@@ -39,9 +41,11 @@ const HeaderDiv = styled('div')(() => ({
 
 const DragAreaDiv = styled('div')(() => ({
   flex: '1 0 auto',
-  cursor: 'move', // TODO: no effect on windows
   userSelect: 'none',
   WebkitAppRegion: 'drag',
+  // TODO: no effect on windows, because do not receive mouse events
+  // refs. https://stackoverflow.com/questions/56338939/hover-in-css-is-not-working-with-electron
+  cursor: 'move',
 }))
 
 const CloseAreaDiv = styled('div')(() => ({
@@ -95,13 +99,16 @@ export const AppFrame: React.FC<Props> = ({ className, children }) => {
     dispatch({ type: 'ipc/quit' })
   }, [dispatch])
 
+  // NOTE: windows does not accept mouse event on drag region
+  const showHeader = isHover || window.platform !== 'darwin'
+
   return (
     <ContainerDiv
       className={className}
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
     >
-      {isHover && (
+      {showHeader && (
         <HeaderDiv>
           <DragAreaDiv>
             <DragIndicatorIcon

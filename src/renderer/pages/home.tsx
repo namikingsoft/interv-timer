@@ -157,6 +157,8 @@ const Home: React.FC = () => {
         </Grid>
       }
       onDoubleClick={onDoubleClickLayout}
+      bodyIsDragRegion
+      footerIsDragRegion
     />
   )
 }
