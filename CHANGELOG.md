@@ -1,4 +1,19 @@
 
+## v0.6.0-beta.2 (2023-01-05)
+
+#### :rocket: Enhancement
+* [#380](https://github.com/namikingsoft/interv-timer/pull/380) Proceed step on double click in app anywhere ([@namikingsoft](https://github.com/namikingsoft))
+* [#379](https://github.com/namikingsoft/interv-timer/pull/379) Improve navigation UI ([@namikingsoft](https://github.com/namikingsoft))
+* [#376](https://github.com/namikingsoft/interv-timer/pull/376) Register global shortcut keys ([@namikingsoft](https://github.com/namikingsoft))
+* [#377](https://github.com/namikingsoft/interv-timer/pull/377) Improve drag area ([@namikingsoft](https://github.com/namikingsoft))
+
+#### :house: Internal
+* [#378](https://github.com/namikingsoft/interv-timer/pull/378) Avoid dependabot preview settings ([@namikingsoft](https://github.com/namikingsoft))
+
+#### Committers: 1
+- Namiki ([@namikingsoft](https://github.com/namikingsoft))
+
+
 ## v0.6.0-beta.1 (2023-01-02)
 
 #### :rocket: Enhancement
