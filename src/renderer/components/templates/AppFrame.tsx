@@ -16,7 +16,9 @@ const ContainerDiv = styled('div')(() => ({
   left: 0,
   right: 0,
   bottom: 0,
-  WebkitAppRegion: 'drag',
+  // if apply this whole then do not receive mouse events on windows
+  // refs. https://stackoverflow.com/questions/56338939/hover-in-css-is-not-working-with-electron
+  // WebkitAppRegion: 'drag',
 }))
 
 const HeaderDiv = styled('div')(() => ({
