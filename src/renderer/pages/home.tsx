@@ -35,6 +35,8 @@ const Home: React.FC = () => {
 
   const isPlay = useSelector((state) => state.timer.isPlay)
 
+  const isFinished = lapRemains.length <= lapSeconds.length
+
   const togglePlay = React.useCallback(() => {
     if (isPlay) dispatch({ type: 'timer/stop' })
     else dispatch({ type: 'timer/start' })
@@ -55,6 +57,16 @@ const Home: React.FC = () => {
   }, [dispatch])
 
   const goToSetting = React.useCallback(() => navigate('/settings'), [history])
+
+  const onDoubleClickLayout = React.useCallback(() => {
+    if (isPlay) {
+      dispatch({ type: 'timer/lap' })
+    } else if (isFinished) {
+      dispatch({ type: 'timer/reset' })
+    } else {
+      dispatch({ type: 'timer/start' })
+    }
+  }, [dispatch, isPlay, isFinished])
 
   const finishedAll = lapRemains.length <= lapSeconds.length
 
@@ -144,6 +156,7 @@ const Home: React.FC = () => {
           </Grid>
         </Grid>
       }
+      onDoubleClick={onDoubleClickLayout}
     />
   )
 }

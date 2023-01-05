@@ -46,6 +46,7 @@ interface Props {
   navRight?: React.ReactNode
   body: React.ReactNode
   footer?: React.ReactNode
+  onDoubleClick?: () => void
 }
 
 export const AppLayout: React.FC<Props> = ({
@@ -54,9 +55,10 @@ export const AppLayout: React.FC<Props> = ({
   navRight,
   body,
   footer,
+  onDoubleClick,
 }) => {
   return (
-    <ContainerDiv className={className}>
+    <ContainerDiv className={className} onDoubleClick={onDoubleClick}>
       <NavDiv>
         <div>{nav}</div>
         <div>{navRight}</div>
