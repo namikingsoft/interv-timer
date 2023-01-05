@@ -1,7 +1,8 @@
-import { BrowserWindow, ipcMain, app } from 'electron'
+import { BrowserWindow, ipcMain, globalShortcut, app } from 'electron'
 import { autoUpdater } from 'electron-updater'
 import log from 'electron-log'
 import * as appIpc from './app'
+import * as shortcut from './shortcut'
 import * as updater from './updater'
 
 const channelName = 'ipcAction'
@@ -22,4 +23,5 @@ export const initialize = (win: BrowserWindow, isProd: boolean): void => {
 
   appIpc.initialize({ app, win })(receiver, sender)
   updater.initialize({ autoUpdater, isProd })(receiver, sender)
+  shortcut.initialize({ globalShortcut })(receiver, sender)
 }

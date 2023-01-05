@@ -12,8 +12,15 @@ import {
   SetBaseTimeAction,
   SetStopTimeAction,
   ElapsedSecondAction,
+  LapAction,
+  UndoAction,
 } from './type'
 import { parseTextToAgendaList } from './util'
+import {
+  ShortcutLapAction,
+  ShortcutToggleAction,
+  ShortcutUndoAction,
+} from '../ipc/type'
 
 const renderIntervalMsec = 1000
 
@@ -93,5 +100,34 @@ export const initAfterChangeSetting: Epic<Action, InitAction, State> = (
     map((agendaList) => ({
       type: 'timer/init',
       payload: { agendaList },
+    })),
+  )
+
+export const shortcutToggle: Epic<Action, StartAction | StopAction, State> = (
+  action$,
+  state$,
+) =>
+  action$.pipe(
+    ofType<Action, 'ipc/shortcutToggle', ShortcutToggleAction>(
+      'ipc/shortcutToggle',
+    ),
+    map(() => ({
+      type: state$.value.timer.isPlay ? 'timer/stop' : 'timer/start',
+    })),
+  )
+
+export const shortcutLap: Epic<Action, LapAction> = (action$) =>
+  action$.pipe(
+    ofType<Action, 'ipc/shortcutLap', ShortcutLapAction>('ipc/shortcutLap'),
+    map(() => ({
+      type: 'timer/lap',
+    })),
+  )
+
+export const shortcutUndo: Epic<Action, UndoAction> = (action$) =>
+  action$.pipe(
+    ofType<Action, 'ipc/shortcutUndo', ShortcutUndoAction>('ipc/shortcutUndo'),
+    map(() => ({
+      type: 'timer/undo',
     })),
   )
