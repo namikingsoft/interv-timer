@@ -41,9 +41,11 @@ const HeaderDiv = styled('div')(() => ({
 
 const DragAreaDiv = styled('div')(() => ({
   flex: '1 0 auto',
-  cursor: 'move', // TODO: no effect on windows
   userSelect: 'none',
   WebkitAppRegion: 'drag',
+  // TODO: no effect on windows, because do not receive mouse events
+  // refs. https://stackoverflow.com/questions/56338939/hover-in-css-is-not-working-with-electron
+  cursor: 'move',
 }))
 
 const CloseAreaDiv = styled('div')(() => ({
