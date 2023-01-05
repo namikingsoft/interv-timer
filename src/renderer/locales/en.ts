@@ -11,5 +11,13 @@ export const en = {
     skinMode: 'Circle Graph Mode', // TODO: Skin Mode Select, only 2 mode not yet
     newVersion: 'New Version',
     restart: 'Restart',
+    play: 'Play',
+    pause: 'Pause',
+    lap: 'Lap',
+    undo: 'Undo',
+    reset: 'Reset',
+    settings: 'Settings',
+    back: 'Back',
+    save: 'Save',
   },
 }

@@ -9,6 +9,7 @@ import FormGroup from '@mui/material/FormGroup'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Switch from '@mui/material/Switch'
 import Slider from '@mui/material/Slider'
+import Tooltip from '@mui/material/Tooltip'
 import TextareaAutosize from '@mui/material/TextareaAutosize'
 import { AppLayout } from '../components/atoms/AppLayout'
 import { useSelector, useDispatch } from '../hooks/redux'
@@ -117,12 +118,16 @@ const Home: React.FC = () => {
           onClick={resetAndGotoHome}
           data-testid="BackIcon"
         >
-          <NavigateBeforeIcon />
+          <Tooltip title={t(k.back)} arrow>
+            <NavigateBeforeIcon />
+          </Tooltip>
         </IconButton>
       }
       navRight={
         <IconButton color="inherit" onClick={saveAndGotoHome}>
-          <SaveIcon data-testid="SaveIcon" />
+          <Tooltip title={t(k.save)} arrow>
+            <SaveIcon data-testid="SaveIcon" />
+          </Tooltip>
         </IconButton>
       }
       body={
