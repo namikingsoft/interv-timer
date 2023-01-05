@@ -16,6 +16,7 @@ const ContainerDiv = styled('div')(() => ({
   left: 0,
   right: 0,
   bottom: 0,
+  WebkitAppRegion: 'drag',
 }))
 
 const HeaderDiv = styled('div')(() => ({
@@ -76,6 +77,8 @@ export const AppFrame: React.FC<Props> = ({ className, children }) => {
 
   const [isOpenUpdater, setIsOpenUpdater] = React.useState(false)
 
+  const [isHover, setIsHover] = React.useState(false)
+
   React.useEffect(() => {
     setIsOpenUpdater(!!updaterNewVersion)
   }, [updaterNewVersion])
@@ -93,25 +96,31 @@ export const AppFrame: React.FC<Props> = ({ className, children }) => {
   }, [dispatch])
 
   return (
-    <ContainerDiv className={className}>
-      <HeaderDiv>
-        <DragAreaDiv>
-          <DragIndicatorIcon
-            sx={{
-              color: '#666',
-            }}
-          />
-        </DragAreaDiv>
-        <CloseAreaDiv>
-          <CloseIcon
-            sx={{
-              cursor: 'pointer',
-            }}
-            onClick={onCloseApp}
-            data-testid="CloseIcon"
-          />
-        </CloseAreaDiv>
-      </HeaderDiv>
+    <ContainerDiv
+      className={className}
+      onMouseEnter={() => setIsHover(true)}
+      onMouseLeave={() => setIsHover(false)}
+    >
+      {isHover && (
+        <HeaderDiv>
+          <DragAreaDiv>
+            <DragIndicatorIcon
+              sx={{
+                color: '#666',
+              }}
+            />
+          </DragAreaDiv>
+          <CloseAreaDiv>
+            <CloseIcon
+              sx={{
+                cursor: 'pointer',
+              }}
+              onClick={onCloseApp}
+              data-testid="CloseIcon"
+            />
+          </CloseAreaDiv>
+        </HeaderDiv>
+      )}
       <MainDiv
         sx={{ backgroundColor: `rgba(0, 0, 0, ${backgroundAlphaRate || 0})` }}
       >

@@ -7,12 +7,6 @@ const styleGlobal = {
   },
   body: {
     height: '100%',
-    // cannot drag by visibility or display
-    '&:not(:hover) $header': {
-      // TODO: -webkit-app-region: drag eats all click events on windows
-      // https://github.com/electron/electron/issues/1354
-      opacity: /^win/i.test(window.platform) ? 1 : 0,
-    },
   },
   '::-webkit-scrollbar': {
     width: 10,
