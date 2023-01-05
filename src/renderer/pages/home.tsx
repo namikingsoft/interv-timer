@@ -92,9 +92,18 @@ const Home: React.FC = () => {
         </>
       }
       navRight={
-        <IconButton color="inherit" onClick={goToSetting}>
-          <SettingsIcon data-testid="SettingIcon" />
-        </IconButton>
+        <>
+          <IconButton
+            color="inherit"
+            onClick={dispatchReset}
+            data-testid="ResetIcon"
+          >
+            <RestoreIcon />
+          </IconButton>
+          <IconButton color="inherit" onClick={goToSetting}>
+            <SettingsIcon data-testid="SettingIcon" />
+          </IconButton>
+        </>
       }
       body={
         skinMode === 'circle' ? (
