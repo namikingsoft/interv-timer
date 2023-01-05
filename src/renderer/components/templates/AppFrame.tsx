@@ -55,13 +55,16 @@ const CloseAreaDiv = styled('div')(() => ({
   },
 }))
 
-const MainDiv = styled('div')(() => ({
-  position: 'absolute',
-  top: 30,
-  left: 0,
-  right: 0,
-  bottom: 0,
-}))
+const MainDiv = styled('div')<{ backgroundAlphaRate: number }>(
+  ({ backgroundAlphaRate }) => ({
+    position: 'absolute',
+    top: 30,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: `rgba(0, 0, 0, ${backgroundAlphaRate || 0})`,
+  }),
+)
 
 const MainRelativeDiv = styled('div')(() => ({
   position: 'relative',
@@ -128,9 +131,7 @@ export const AppFrame: React.FC<Props> = ({ className, children }) => {
           </CloseAreaDiv>
         </HeaderDiv>
       )}
-      <MainDiv
-        sx={{ backgroundColor: `rgba(0, 0, 0, ${backgroundAlphaRate || 0})` }}
-      >
+      <MainDiv backgroundAlphaRate={backgroundAlphaRate}>
         <MainRelativeDiv>{children}</MainRelativeDiv>
       </MainDiv>
 
