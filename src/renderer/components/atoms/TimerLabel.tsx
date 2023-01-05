@@ -10,9 +10,12 @@ interface Props {
 
 const textBorderColorActive = '#36f'
 
-const ContainerDiv = styled('div')(() => ({
+const ContainerDiv = styled('div')<Pick<Props, 'isActive'>>(({ isActive }) => ({
   fontSize: 13,
   marginBottom: -5,
+  textShadow: isActive
+    ? `${textBorderColorActive} 1px 1px 0, ${textBorderColorActive} -1px -1px 0, ${textBorderColorActive} -1px 1px 0, ${textBorderColorActive} 1px -1px 0, ${textBorderColorActive} 0px 1px 0, ${textBorderColorActive}  0 -1px 0, ${textBorderColorActive} -1px 0 0, ${textBorderColorActive} 1px 0 0`
+    : undefined,
 }))
 
 export const TimerLabel: React.FC<Props> = ({
@@ -24,12 +27,8 @@ export const TimerLabel: React.FC<Props> = ({
   return (
     <ContainerDiv
       className={className}
-      sx={
-        isActive && {
-          textShadow: `${textBorderColorActive} 1px 1px 0, ${textBorderColorActive} -1px -1px 0, ${textBorderColorActive} -1px 1px 0, ${textBorderColorActive} 1px -1px 0, ${textBorderColorActive} 0px 1px 0, ${textBorderColorActive}  0 -1px 0, ${textBorderColorActive} -1px 0 0, ${textBorderColorActive} 1px 0 0`,
-        }
-      }
       data-testid={testId}
+      isActive={isActive}
     >
       {children}
     </ContainerDiv>

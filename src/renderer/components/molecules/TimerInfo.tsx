@@ -13,8 +13,9 @@ interface Props {
   'data-testid'?: string
 }
 
-const ContainerDiv = styled('div')(() => ({
+const ContainerDiv = styled('div')<Pick<Props, 'disabled'>>(({ disabled }) => ({
   userSelect: 'none',
+  opacity: disabled ? 0.25 : undefined,
 }))
 
 export const TimerInfo: React.FC<Props> = ({
@@ -28,8 +29,8 @@ export const TimerInfo: React.FC<Props> = ({
   return (
     <ContainerDiv
       className={className}
-      sx={disabled && { opacity: 0.25 }}
       data-testid={testId}
+      disabled={disabled}
     >
       <TimerLabel isActive={isActive} data-testid={`${testId}Label`}>
         {label}
