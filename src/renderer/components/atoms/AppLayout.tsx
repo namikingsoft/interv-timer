@@ -17,7 +17,7 @@ const ContainerDiv = styled('div')(() => ({
   textShadow: `${textBorderColor} 1px 1px 0, ${textBorderColor} -1px -1px 0, ${textBorderColor} -1px 1px 0, ${textBorderColor} 1px -1px 0, ${textBorderColor} 0px 1px 0, ${textBorderColor}  0 -1px 0, ${textBorderColor} -1px 0 0, ${textBorderColor} 1px 0 0`,
 }))
 
-const NavDiv = styled('div')(() => ({
+const Nav = styled('nav')(() => ({
   flex: '0 1 50px',
   display: 'flex',
   flexFlow: 'row nowrap',
@@ -31,6 +31,13 @@ const NavDiv = styled('div')(() => ({
     filter: 'drop-shadow(0px 0px 1.5px black);',
   },
 }))
+
+const NavLeftDiv = styled('div')(() => ({
+  display: 'flex',
+  alignItems: 'center',
+}))
+
+const NavRightDiv = NavLeftDiv
 
 const BodyDiv = styled('div')<IsDragRegionProps>(({ isDragRegion }) => ({
   flex: '1 1 auto',
@@ -73,10 +80,10 @@ export const AppLayout: React.FC<Props> = ({
 }) => {
   return (
     <ContainerDiv className={className} onDoubleClick={onDoubleClick}>
-      <NavDiv>
-        <div>{nav}</div>
-        <div>{navRight}</div>
-      </NavDiv>
+      <Nav>
+        <NavLeftDiv>{nav}</NavLeftDiv>
+        <NavRightDiv>{navRight}</NavRightDiv>
+      </Nav>
       <BodyDiv isDragRegion={bodyIsDragRegion}>
         <Container>{body}</Container>
       </BodyDiv>

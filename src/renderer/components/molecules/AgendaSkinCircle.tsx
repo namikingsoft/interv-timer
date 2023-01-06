@@ -1,6 +1,6 @@
 import React, { CSSProperties } from 'react'
 import CircularProgress from '@mui/material/CircularProgress'
-import ThumbUpIcon from '@mui/icons-material/ThumbUp'
+import DoneOutlineIcon from '@mui/icons-material/DoneOutline'
 import { styled } from '@mui/material/styles'
 import { Agenda, LapRemain } from '../../modules/timer/type'
 import { TimerInfo } from './TimerInfo'
@@ -216,7 +216,7 @@ export const AgendaSkinCircle: React.FC<Props> = ({
       />
       <CenteringDiv style={styleTimer}>
         {finishedAll ? (
-          <ThumbUpIcon fontSize="large" data-testid="FinishedIcon" />
+          <DoneOutlineIcon fontSize="large" data-testid="FinishedIcon" />
         ) : (
           <TimerInfo
             label={remainLabel}
