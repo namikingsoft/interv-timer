@@ -17,7 +17,7 @@ const ContainerDiv = styled('div')(() => ({
   textShadow: `${textBorderColor} 1px 1px 0, ${textBorderColor} -1px -1px 0, ${textBorderColor} -1px 1px 0, ${textBorderColor} 1px -1px 0, ${textBorderColor} 0px 1px 0, ${textBorderColor}  0 -1px 0, ${textBorderColor} -1px 0 0, ${textBorderColor} 1px 0 0`,
 }))
 
-const NavDiv = styled('div')(() => ({
+const Nav = styled('nav')(() => ({
   flex: '0 1 50px',
   display: 'flex',
   flexFlow: 'row nowrap',
@@ -80,10 +80,10 @@ export const AppLayout: React.FC<Props> = ({
 }) => {
   return (
     <ContainerDiv className={className} onDoubleClick={onDoubleClick}>
-      <NavDiv>
+      <Nav>
         <NavLeftDiv>{nav}</NavLeftDiv>
         <NavRightDiv>{navRight}</NavRightDiv>
-      </NavDiv>
+      </Nav>
       <BodyDiv isDragRegion={bodyIsDragRegion}>
         <Container>{body}</Container>
       </BodyDiv>
