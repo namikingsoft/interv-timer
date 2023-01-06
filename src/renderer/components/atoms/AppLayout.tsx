@@ -32,6 +32,13 @@ const NavDiv = styled('div')(() => ({
   },
 }))
 
+const NavLeftDiv = styled('div')(() => ({
+  display: 'flex',
+  alignItems: 'center',
+}))
+
+const NavRightDiv = NavLeftDiv
+
 const BodyDiv = styled('div')<IsDragRegionProps>(({ isDragRegion }) => ({
   flex: '1 1 auto',
   position: 'relative',
@@ -74,8 +81,8 @@ export const AppLayout: React.FC<Props> = ({
   return (
     <ContainerDiv className={className} onDoubleClick={onDoubleClick}>
       <NavDiv>
-        <div>{nav}</div>
-        <div>{navRight}</div>
+        <NavLeftDiv>{nav}</NavLeftDiv>
+        <NavRightDiv>{navRight}</NavRightDiv>
       </NavDiv>
       <BodyDiv isDragRegion={bodyIsDragRegion}>
         <Container>{body}</Container>
