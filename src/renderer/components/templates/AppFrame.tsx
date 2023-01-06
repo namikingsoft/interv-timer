@@ -10,12 +10,16 @@ interface Props {
   children: React.ReactNode
 }
 
+const radiusSize = 10
+
 const ContainerDiv = styled('div')(() => ({
   position: 'fixed',
   top: 0,
   left: 0,
   right: 0,
   bottom: 0,
+  overflow: 'hidden',
+  borderRadius: `${radiusSize}px`,
   // if apply this whole then do not receive mouse events on windows
   // refs. https://stackoverflow.com/questions/56338939/hover-in-css-is-not-working-with-electron
   // WebkitAppRegion: 'drag',
@@ -36,7 +40,6 @@ const HeaderDiv = styled('div')(() => ({
   paddingRight: 6,
   backgroundColor: '#262626',
   borderTop: '1px solid #555',
-  borderRadius: '5px 5px 0 0',
 }))
 
 const DragAreaDiv = styled('div')(() => ({
@@ -55,14 +58,22 @@ const CloseAreaDiv = styled('div')(() => ({
   },
 }))
 
-const MainDiv = styled('div')<{ backgroundAlphaRate: number }>(
-  ({ backgroundAlphaRate }) => ({
+interface MainDivProps {
+  backgroundAlphaRate: number
+  showHeader: boolean
+}
+
+const MainDiv = styled('div')<MainDivProps>(
+  ({ backgroundAlphaRate, showHeader }) => ({
     position: 'absolute',
     top: 30,
     left: 0,
     right: 0,
     bottom: 0,
     backgroundColor: `rgba(0, 0, 0, ${backgroundAlphaRate || 0})`,
+    borderRadius: showHeader
+      ? undefined
+      : `${radiusSize}px ${radiusSize}px 0 0`,
   }),
 )
 
@@ -131,7 +142,10 @@ export const AppFrame: React.FC<Props> = ({ className, children }) => {
           </CloseAreaDiv>
         </HeaderDiv>
       )}
-      <MainDiv backgroundAlphaRate={backgroundAlphaRate}>
+      <MainDiv
+        backgroundAlphaRate={backgroundAlphaRate}
+        showHeader={showHeader}
+      >
         <MainRelativeDiv>{children}</MainRelativeDiv>
       </MainDiv>
 
