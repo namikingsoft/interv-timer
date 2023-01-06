@@ -44,6 +44,9 @@ const main = async () => {
     titleBarStyle: 'customButtonsOnHover',
     // required on fullscreen
     show: false,
+    // avoid rounded corners for macOS
+    // https://github.com/electron/electron/issues/414
+    roundedCorners: false,
     // cannot exit by cmd + q
     // closable: false,
   })
