@@ -1,5 +1,14 @@
 
-## v0.6.0-beta.3 (2023-01-06)
+## v0.6.0-beta.4 (2023-01-08)
+
+#### :bug: Bug Fix
+* [#385](https://github.com/namikingsoft/interv-timer/pull/385) Fix step forwarding on double click timer at windows ([@namikingsoft](https://github.com/namikingsoft))
+
+#### Committers: 1
+- Namiki ([@namikingsoft](https://github.com/namikingsoft))
+
+
+## v0.6.0-beta.3 (2023-01-07)
 
 #### :rocket: Enhancement
 * [#383](https://github.com/namikingsoft/interv-timer/pull/383) Adjust UI visuals ([@namikingsoft](https://github.com/namikingsoft))
