@@ -74,6 +74,10 @@ const Home: React.FC = () => {
     if (finishedAll) dispatch({ type: 'timer/stop' })
   }, [finishedAll])
 
+  // For increase priority of step forwarding on double click at windows
+  // https://github.com/electron/electron/issues/1354
+  const enabledDragRegion = window.platform === 'darwin'
+
   return (
     <AppLayout
       nav={
@@ -157,8 +161,7 @@ const Home: React.FC = () => {
         </Grid>
       }
       onDoubleClick={onDoubleClickLayout}
-      bodyIsDragRegion
-      footerIsDragRegion
+      isDragRegion={enabledDragRegion}
     />
   )
 }
