@@ -8,13 +8,14 @@ interface IsDragRegionProps {
   isDragRegion?: boolean
 }
 
-const ContainerDiv = styled('div')(() => ({
+const ContainerDiv = styled('div')<IsDragRegionProps>(({ isDragRegion }) => ({
   display: 'flex',
   flexFlow: 'column nowrap',
   width: '100%',
   height: '100%',
   color: 'white',
   textShadow: `${textBorderColor} 1px 1px 0, ${textBorderColor} -1px -1px 0, ${textBorderColor} -1px 1px 0, ${textBorderColor} 1px -1px 0, ${textBorderColor} 0px 1px 0, ${textBorderColor}  0 -1px 0, ${textBorderColor} -1px 0 0, ${textBorderColor} 1px 0 0`,
+  WebkitAppRegion: isDragRegion ? 'drag' : undefined,
 }))
 
 const Nav = styled('nav')(() => ({
@@ -39,22 +40,20 @@ const NavLeftDiv = styled('div')(() => ({
 
 const NavRightDiv = NavLeftDiv
 
-const BodyDiv = styled('div')<IsDragRegionProps>(({ isDragRegion }) => ({
+const BodyDiv = styled('div')(() => ({
   flex: '1 1 auto',
   position: 'relative',
   overflowX: 'hidden',
   overflowY: 'auto',
   padding: '15px 0',
   borderTop: '1px solid rgba(255,255,255,0.05)',
-  WebkitAppRegion: isDragRegion ? 'drag' : undefined,
 }))
 
-const FooterDiv = styled('div')<IsDragRegionProps>(({ isDragRegion }) => ({
+const FooterDiv = styled('div')(() => ({
   flex: '0 1 auto',
   paddingTop: '12px',
   paddingBottom: '7px',
   borderTop: '1px solid rgba(255,255,255,0.05)',
-  WebkitAppRegion: isDragRegion ? 'drag' : undefined,
 }))
 
 interface Props {
@@ -64,8 +63,7 @@ interface Props {
   body: React.ReactNode
   footer?: React.ReactNode
   onDoubleClick?: () => void
-  bodyIsDragRegion?: boolean
-  footerIsDragRegion?: boolean
+  isDragRegion?: boolean
 }
 
 export const AppLayout: React.FC<Props> = ({
@@ -75,20 +73,23 @@ export const AppLayout: React.FC<Props> = ({
   body,
   footer,
   onDoubleClick,
-  bodyIsDragRegion,
-  footerIsDragRegion,
+  isDragRegion,
 }) => {
   return (
-    <ContainerDiv className={className} onDoubleClick={onDoubleClick}>
+    <ContainerDiv
+      className={className}
+      onDoubleClick={onDoubleClick}
+      isDragRegion={isDragRegion}
+    >
       <Nav>
         <NavLeftDiv>{nav}</NavLeftDiv>
         <NavRightDiv>{navRight}</NavRightDiv>
       </Nav>
-      <BodyDiv isDragRegion={bodyIsDragRegion}>
+      <BodyDiv>
         <Container>{body}</Container>
       </BodyDiv>
       {footer && (
-        <FooterDiv isDragRegion={footerIsDragRegion}>
+        <FooterDiv>
           <Container>{footer}</Container>
         </FooterDiv>
       )}

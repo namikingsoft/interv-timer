@@ -74,6 +74,8 @@ const Home: React.FC = () => {
     if (finishedAll) dispatch({ type: 'timer/stop' })
   }, [finishedAll])
 
+  const enabledDragRegion = window.platform === 'darwin'
+
   return (
     <AppLayout
       nav={
@@ -157,8 +159,7 @@ const Home: React.FC = () => {
         </Grid>
       }
       onDoubleClick={onDoubleClickLayout}
-      bodyIsDragRegion
-      footerIsDragRegion
+      isDragRegion={enabledDragRegion}
     />
   )
 }
