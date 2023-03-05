@@ -1,4 +1,14 @@
 
+## 0.6.0-beta.5 (2023-03-05)
+
+#### :bug: Bug Fix
+* [#389](https://github.com/namikingsoft/interv-timer/pull/389) Disable verifying certification on update only windows ([@namikingsoft](https://github.com/namikingsoft))
+* [#388](https://github.com/namikingsoft/interv-timer/pull/388) Fixed prevented clicking updater snackbar on windows ([@namikingsoft](https://github.com/namikingsoft))
+
+#### Committers: 1
+- Namiki ([@namikingsoft](https://github.com/namikingsoft))
+
+
 ## v0.6.0-beta.4 (2023-01-08)
 
 #### :bug: Bug Fix
