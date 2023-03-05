@@ -14,7 +14,7 @@
     "compile": "vite build",
     "build": "electron-builder",
     "build:dir": "npm run build -- --dir -c.compression=store -c.mac.identity=null",
-    "release": "npm run build -- --publish always",
+    "release": "npm run build -- --publish always -c.win.verifyUpdateCodeSignature=false",
     "test": "jest",
     "e2e": "playwright test",
     "fmt": "prettier --write .",
