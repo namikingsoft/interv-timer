@@ -9,6 +9,7 @@ export const en = {
     backgroundTransparentRate: 'Background Transparent Rate',
     visibleOnAllWorkspaces: 'Visible on all workspaces',
     skinMode: 'Circle Graph Mode', // TODO: Skin Mode Select, only 2 mode not yet
+    enabledAutoUpdater: 'Enabled auto updater',
     newVersion: 'New Version',
     restart: 'Restart',
     play: 'Play',

@@ -9,6 +9,7 @@ export const ja = {
     skinMode: '進捗を円グラフで表示', // TODO: スキンモード選択 (現在、2 つのモードしかない)
     backgroundTransparentRate: '背景透過率 (Alpha)',
     visibleOnAllWorkspaces: 'すべてのワークスペースで表示',
+    enabledAutoUpdater: '自動更新を有効化',
     newVersion: '新しいバージョン',
     restart: '再起動',
     play: '開始',
