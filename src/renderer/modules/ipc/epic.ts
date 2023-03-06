@@ -76,7 +76,7 @@ export const localStorageToVisibleOnAllWorkspaces: Epic<
 
 export const localStorageToUpdaterCheckForUpdates: Epic<
   Action,
-  UpdaterCheckForUpdatesAction
+  UpdaterCheckForUpdatesAction | NoopAction
 > = (action$) =>
   action$.pipe(
     ofType<
@@ -84,7 +84,11 @@ export const localStorageToUpdaterCheckForUpdates: Epic<
       'setting/saveSuccess' | 'setting/loadSuccess',
       SaveSuccessAction | LoadSuccessAction
     >('setting/saveSuccess', 'setting/loadSuccess'),
-    map(() => ({
-      type: 'ipc/updaterCheckForUpdates',
-    })),
+    map(({ payload }) =>
+      payload.enabledAutoUpdater
+        ? {
+            type: 'ipc/updaterCheckForUpdates',
+          }
+        : { type: 'noop' },
+    ),
   )
