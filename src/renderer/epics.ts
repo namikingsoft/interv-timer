@@ -10,6 +10,7 @@ export const rootEpic = combineEpics(
   ipcEpics.recieve,
   ipcEpics.send,
   ipcEpics.setVisibleOnAllWorkspaces,
+  ipcEpics.localStorageToUpdaterCheckForUpdates,
   timerEpics.calcBaseTime,
   timerEpics.initAfterChangeSetting,
   timerEpics.setStopTime,

@@ -16,13 +16,11 @@ import * as api from './api'
 
 const recieveSubject = new Subject()
 
-export const initialize: Epic<Action, UpdaterCheckForUpdatesAction> = (
-  action$,
-) =>
+export const initialize: Epic<Action, NoopAction> = (action$) =>
   action$.pipe(
     ofType<Action, 'app/init', AppInitAction>('app/init'),
     tap(() => api.on((_, action) => recieveSubject.next(action))),
-    map(() => ({ type: 'ipc/updaterCheckForUpdates' })),
+    map(() => ({ type: 'noop' })),
   )
 
 export const send: Epic<Action, NoopAction> = (action$) =>
@@ -73,5 +71,20 @@ export const localStorageToVisibleOnAllWorkspaces: Epic<
     map(({ payload }) => ({
       type: 'ipc/setVisibleOnAllWorkspaces',
       payload: payload.visibleOnAllWorkspaces,
+    })),
+  )
+
+export const localStorageToUpdaterCheckForUpdates: Epic<
+  Action,
+  UpdaterCheckForUpdatesAction
+> = (action$) =>
+  action$.pipe(
+    ofType<
+      Action,
+      'setting/saveSuccess' | 'setting/loadSuccess',
+      SaveSuccessAction | LoadSuccessAction
+    >('setting/saveSuccess', 'setting/loadSuccess'),
+    map(() => ({
+      type: 'ipc/updaterCheckForUpdates',
     })),
   )
