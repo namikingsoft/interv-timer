@@ -74,6 +74,18 @@ const Home: React.FC = () => {
     [dispatch],
   )
 
+  const onChangeEnabledAutoUpdater = React.useCallback(
+    (event: React.SyntheticEvent<HTMLInputElement>) => {
+      // @ts-expect-error want React.SyntheticEvent<CheckboxElement>
+      const checked = !!event.target.checked
+      dispatch({
+        type: 'setting/setEnabledAutoUpdater',
+        payload: checked,
+      })
+    },
+    [dispatch],
+  )
+
   const onChangeBackgroundAlphaRate = React.useCallback(
     (_, payload: number) => {
       dispatch({
@@ -212,6 +224,20 @@ const Home: React.FC = () => {
                   />
                 }
                 label={t(k.skinMode)}
+              />
+            </FormGroup>
+          </InputBlockDiv>
+          <InputBlockDiv>
+            <FormGroup>
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={setting.enabledAutoUpdater}
+                    onChange={onChangeEnabledAutoUpdater}
+                    data-testid="EnabledAutoUpdater"
+                  />
+                }
+                label={t(k.enabledAutoUpdater)}
               />
             </FormGroup>
           </InputBlockDiv>
