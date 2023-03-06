@@ -8,6 +8,7 @@ const initialState: State = {
   backgroundAlphaRate: 0,
   visibleOnAllWorkspaces: false,
   skinMode: undefined,
+  enabledAutoUpdater: false,
 }
 
 export const setting: Reducer<State, Action> = (
@@ -28,6 +29,8 @@ export const setting: Reducer<State, Action> = (
       return { ...state, visibleOnAllWorkspaces: action.payload }
     case 'setting/setSkinMode':
       return { ...state, skinMode: action.payload }
+    case 'setting/setEnabledAutoUpdater':
+      return { ...state, enabledAutoUpdater: action.payload }
     default:
       return state
   }

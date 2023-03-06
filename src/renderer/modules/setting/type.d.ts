@@ -8,6 +8,7 @@ export interface State {
   backgroundAlphaRate: number
   visibleOnAllWorkspaces: boolean
   skinMode: SkinMode
+  enabledAutoUpdater: boolean
 }
 
 export interface SetAgendaListText {
@@ -35,6 +36,11 @@ export interface SetSkinMode {
   payload: SkinMode
 }
 
+export interface SetEnabledAutoUpdater {
+  type: 'setting/setEnabledAutoUpdater'
+  payload: boolean
+}
+
 export interface SaveRequestAction {
   type: 'setting/saveRequest'
   payload: State
@@ -60,6 +66,7 @@ export type Action =
   | SetBackgroundAlphaRate
   | SetVisibleOnAllWorkspaces
   | SetSkinMode
+  | SetEnabledAutoUpdater
   | SaveRequestAction
   | SaveSuccessAction
   | LoadRequestAction
