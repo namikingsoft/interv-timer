@@ -9,6 +9,7 @@ const defaultState: State = {
   backgroundAlphaRate: 0.7,
   visibleOnAllWorkspaces: false,
   skinMode: undefined,
+  enabledAutoUpdater: true,
 }
 
 export const save = (state: State): void => {

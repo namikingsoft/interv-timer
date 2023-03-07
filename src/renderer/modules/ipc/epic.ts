@@ -1,6 +1,6 @@
 import { Epic, ofType } from 'redux-observable'
 import { Subject } from 'rxjs'
-import { tap, map, mapTo } from 'rxjs/operators'
+import { tap, map } from 'rxjs/operators'
 import { Action, AppInitAction, NoopAction } from '../type'
 import {
   SetVisibleOnAllWorkspaces,
@@ -16,13 +16,11 @@ import * as api from './api'
 
 const recieveSubject = new Subject()
 
-export const initialize: Epic<Action, UpdaterCheckForUpdatesAction> = (
-  action$,
-) =>
+export const initialize: Epic<Action, NoopAction> = (action$) =>
   action$.pipe(
     ofType<Action, 'app/init', AppInitAction>('app/init'),
     tap(() => api.on((_, action) => recieveSubject.next(action))),
-    mapTo({ type: 'ipc/updaterCheckForUpdates' }),
+    map(() => ({ type: 'noop' })),
   )
 
 export const send: Epic<Action, NoopAction> = (action$) =>
@@ -41,7 +39,7 @@ export const send: Epic<Action, NoopAction> = (action$) =>
       'ipc/updaterQuitAndInstall',
     ),
     tap((action) => api.send(action)),
-    mapTo({ type: 'noop' }),
+    map(() => ({ type: 'noop' })),
   )
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Epic<unknown>
@@ -74,4 +72,23 @@ export const localStorageToVisibleOnAllWorkspaces: Epic<
       type: 'ipc/setVisibleOnAllWorkspaces',
       payload: payload.visibleOnAllWorkspaces,
     })),
+  )
+
+export const localStorageToUpdaterCheckForUpdates: Epic<
+  Action,
+  UpdaterCheckForUpdatesAction | NoopAction
+> = (action$) =>
+  action$.pipe(
+    ofType<
+      Action,
+      'setting/saveSuccess' | 'setting/loadSuccess',
+      SaveSuccessAction | LoadSuccessAction
+    >('setting/saveSuccess', 'setting/loadSuccess'),
+    map(({ payload }) =>
+      payload.enabledAutoUpdater
+        ? {
+            type: 'ipc/updaterCheckForUpdates',
+          }
+        : { type: 'noop' },
+    ),
   )
