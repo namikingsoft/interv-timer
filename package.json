@@ -50,6 +50,7 @@
   },
   "devDependencies": {
     "@emotion/react": "11.10.6",
+    "@emotion/styled": "11.10.6",
     "@mui/icons-material": "5.11.11",
     "@mui/material": "5.11.12",
     "@playwright/test": "1.31.2",
