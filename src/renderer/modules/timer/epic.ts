@@ -16,13 +16,12 @@ import {
   UndoAction,
 } from './type'
 import { parseTextToAgendaList } from './util'
+import { renderIntervalMsec } from './const'
 import {
   ShortcutLapAction,
   ShortcutToggleAction,
   ShortcutUndoAction,
 } from '../ipc/type'
-
-const renderIntervalMsec = 1000
 
 export const calcBaseTime: Epic<Action, SetBaseTimeAction, State> = (
   action$,

@@ -2,6 +2,7 @@ import { Action as IpcAction } from './ipc/type'
 import { State as TimerState, Action as TimerAction } from './timer/type'
 import { State as SettingState, Action as SettingAction } from './setting/type'
 import { State as UpdaterState, Action as UpdaterAction } from './updater/type'
+import { Action as SoundAction } from './sound/type'
 
 export interface State {
   timer: TimerState
@@ -24,3 +25,4 @@ export type Action =
   | TimerAction
   | SettingAction
   | UpdaterAction
+  | SoundAction
