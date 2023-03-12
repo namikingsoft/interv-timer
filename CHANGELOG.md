@@ -1,5 +1,21 @@
 
-## 0.6.0-beta.5 (2023-03-05)
+## 0.6.0-beta.6 (2023-03-12)
+
+#### :rocket: Enhancement
+* [#393](https://github.com/namikingsoft/interv-timer/pull/393) Play sound on hurry and timeup ([@namikingsoft](https://github.com/namikingsoft))
+* [#390](https://github.com/namikingsoft/interv-timer/pull/390) Add setting of Enabled auto updater ([@namikingsoft](https://github.com/namikingsoft))
+
+#### :bug: Bug Fix
+* [#394](https://github.com/namikingsoft/interv-timer/pull/394) Downgrade electron to 22 for fix degradation ([@namikingsoft](https://github.com/namikingsoft))
+
+#### :house: Internal
+* [#391](https://github.com/namikingsoft/interv-timer/pull/391) Upgrade dependencies to latest ([@namikingsoft](https://github.com/namikingsoft))
+
+#### Committers: 1
+- Namiki ([@namikingsoft](https://github.com/namikingsoft))
+
+
+## v0.6.0-beta.5 (2023-03-06)
 
 #### :bug: Bug Fix
 * [#389](https://github.com/namikingsoft/interv-timer/pull/389) Disable verifying certification on update only windows ([@namikingsoft](https://github.com/namikingsoft))
