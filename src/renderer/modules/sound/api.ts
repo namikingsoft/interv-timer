@@ -1,6 +1,7 @@
 import timeupSound from './assets/timeup.mp3'
 import hurrySound from './assets/hurry.mp3'
 
+// create audio on root for preload
 const timeupAudio = new Audio(timeupSound)
 const hurryAudio = new Audio(hurrySound)
 
