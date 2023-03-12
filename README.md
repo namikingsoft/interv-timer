@@ -18,3 +18,11 @@ npm install
 # development mode
 npm run dev
 ```
+
+## Thanks for
+
+### Sounds
+
+- [効果音ラボ](https://soundeffect-lab.info/)
+    - 試合開始のゴング
+    - 木製バットで打つ2
