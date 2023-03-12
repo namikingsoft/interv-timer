@@ -3,6 +3,7 @@ import { styled } from '@mui/material/styles'
 import { TimerLabel } from '../atoms/TimerLabel'
 import { TimerValue } from '../atoms/TimerValue'
 import { HurryAnimationText } from '../atoms/HurryAnimationText'
+import { hurrySecond, hurryUpSecond } from '../../modules/timer/const'
 
 interface Props {
   label: string
@@ -36,8 +37,10 @@ export const TimerInfo: React.FC<Props> = ({
         {label}
       </TimerLabel>
       <HurryAnimationText
-        hurry={isActive && remainSecond > 10 && remainSecond < 30}
-        hurryUp={isActive && remainSecond >= 0 && remainSecond <= 10}
+        hurry={
+          isActive && remainSecond > hurryUpSecond && remainSecond < hurrySecond
+        }
+        hurryUp={isActive && remainSecond >= 0 && remainSecond <= hurryUpSecond}
       >
         <TimerValue
           remainSecond={remainSecond}
