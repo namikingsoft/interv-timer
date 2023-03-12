@@ -28,11 +28,13 @@ interface TimerLabel {
 
 const zeroPad2 = (x: number) => String(x).padStart(2, '0')
 
+export const roundSecond = Math.round
+
 export const calcTimerLabelFromRemainSecond = (
   remainSecond: number,
 ): TimerLabel => {
   const remainSecondAbs = Math.abs(remainSecond)
-  const roundedSecond = Math.round(remainSecondAbs) // NOTE: 58.999 => 59 not 58
+  const roundedSecond = roundSecond(remainSecondAbs) // NOTE: 58.999 => 59 not 58
   const remainMinute = Math.floor(roundedSecond / 60)
   const remainHour = Math.floor(remainMinute / 60)
   return {
