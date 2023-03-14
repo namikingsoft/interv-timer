@@ -51,6 +51,12 @@ test('save settings', async () => {
   const agendaTime1 = window.getByTestId('AgendaTimer1Value')
   const totalTime = window.getByTestId('TotalTimerValue')
   const idealTime = window.getByTestId('IdealTimerValue')
+  // There is a time lag for the value to change on windows
+  await expect
+    .poll(() => agendaLabel0.innerText(), {
+      intervals: [...Array(20)].map((_, i) => i * 100),
+    })
+    .toBe('Test1')
   expect(await agendaLabel0.innerText()).toBe('Test1')
   expect(await agendaLabel1.innerText()).toBe('Test2')
   expect(await agendaTime0.innerText()).toBe('00:01:30')
