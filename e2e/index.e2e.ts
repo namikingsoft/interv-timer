@@ -16,6 +16,10 @@ const captureScreenshot = async (window: Page, identifier: string) => {
   return window.screenshot({ path: filepath })
 }
 
+const defaultPollingOptions = {
+  intervals: [...Array(20)].map((_, i) => i * 100),
+}
+
 let electronApp: ElectronApplication
 
 test.beforeEach(async () => {
@@ -53,9 +57,7 @@ test('save settings', async () => {
   const idealTime = window.getByTestId('IdealTimerValue')
   // There is a time lag for the value to change on windows
   await expect
-    .poll(() => agendaLabel0.innerText(), {
-      intervals: [...Array(20)].map((_, i) => i * 100),
-    })
+    .poll(() => agendaLabel0.innerText(), defaultPollingOptions)
     .toBe('Test1')
   expect(await agendaLabel0.innerText()).toBe('Test1')
   expect(await agendaLabel1.innerText()).toBe('Test2')
@@ -144,9 +146,7 @@ test('behave agenda timer', async () => {
   await pauseIcon.waitFor({ state: 'visible' })
   await captureScreenshot(window, 'circle-played')
   await expect
-    .poll(() => agendaTime0.innerText(), {
-      intervals: [...Array(20)].map((_, i) => i * 100),
-    })
+    .poll(() => agendaTime0.innerText(), defaultPollingOptions)
     .toBe('00:00:59')
   await pauseIcon.click()
   await playIcon.waitFor({ state: 'visible' })
@@ -158,9 +158,7 @@ test('behave agenda timer', async () => {
   const lapIcon = window.getByTestId('LapIcon')
   await lapIcon.click()
   await expect
-    .poll(() => agendaTime1.innerText(), {
-      intervals: [...Array(20)].map((_, i) => i * 100),
-    })
+    .poll(() => agendaTime1.innerText(), defaultPollingOptions)
     .toBe('00:02:59')
   await pauseIcon.click()
   expect(await agendaTime0.isVisible()).toBe(false)
@@ -200,9 +198,7 @@ test('behave agenda timer using circle skin', async () => {
   await playIcon.click()
   await captureScreenshot(window, 'circle-played')
   await expect
-    .poll(() => agendaTime.innerText(), {
-      intervals: [...Array(20)].map((_, i) => i * 100),
-    })
+    .poll(() => agendaTime.innerText(), defaultPollingOptions)
     .toBe('00:00:59')
   const pauseIcon = window.getByTestId('PauseIcon')
   await pauseIcon.click()
@@ -214,9 +210,7 @@ test('behave agenda timer using circle skin', async () => {
   const lapIcon = window.getByTestId('LapIcon')
   await lapIcon.click()
   await expect
-    .poll(() => agendaTime.innerText(), {
-      intervals: [...Array(20)].map((_, i) => i * 100),
-    })
+    .poll(() => agendaTime.innerText(), defaultPollingOptions)
     .toBe('00:02:59')
   expect(await totalTime.innerText()).toBe('00:03:58')
   expect(await idealTime.innerText()).toBe('00:03:58')
