@@ -33,7 +33,7 @@ test.beforeEach(async () => {
 
 test.afterEach(async () => {
   // clear localStorage
-  // NOTE: The following code is slow to clear storage data.
+  // NOTE: The following code occurred hung up test on afterEach
   // await electronApp.evaluate(async (electron) => {
   //   return electron.session.defaultSession.clearStorageData()
   // })
