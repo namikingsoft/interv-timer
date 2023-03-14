@@ -29,9 +29,13 @@ test.beforeEach(async () => {
         ? `release/mac/${productName}.app/Contents/MacOS/${productName}`
         : `release/win-unpacked/${productName}.exe`,
   })
-  await electronApp.evaluate(async (electron) => {
-    return electron.session.defaultSession.clearStorageData()
-  })
+  // clear localStorage
+  // NOTE: The following code is slow to clear storage data.
+  // await electronApp.evaluate(async (electron) => {
+  //   return electron.session.defaultSession.clearStorageData()
+  // })
+  const page = await electronApp.firstWindow()
+  await page.evaluate(() => window.localStorage.clear())
 })
 
 test.afterEach(async () => {
@@ -55,10 +59,6 @@ test('save settings', async () => {
   const agendaTime1 = window.getByTestId('AgendaTimer1Value')
   const totalTime = window.getByTestId('TotalTimerValue')
   const idealTime = window.getByTestId('IdealTimerValue')
-  // There is a time lag for the value to change on windows
-  await expect
-    .poll(() => agendaLabel0.innerText(), defaultPollingOptions)
-    .toBe('Test1')
   expect(await agendaLabel0.innerText()).toBe('Test1')
   expect(await agendaLabel1.innerText()).toBe('Test2')
   expect(await agendaTime0.innerText()).toBe('00:01:30')
