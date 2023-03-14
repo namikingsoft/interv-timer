@@ -29,6 +29,9 @@ test.beforeEach(async () => {
         ? `release/mac/${productName}.app/Contents/MacOS/${productName}`
         : `release/win-unpacked/${productName}.exe`,
   })
+})
+
+test.afterEach(async () => {
   // clear localStorage
   // NOTE: The following code is slow to clear storage data.
   // await electronApp.evaluate(async (electron) => {
@@ -36,9 +39,6 @@ test.beforeEach(async () => {
   // })
   const page = await electronApp.firstWindow()
   await page.evaluate(() => window.localStorage.clear())
-})
-
-test.afterEach(async () => {
   await electronApp.close()
 })
 
