@@ -1,5 +1,18 @@
 
-## 0.6.0-beta.6 (2023-03-12)
+## 0.6.0-beta.7 (2023-03-16)
+
+#### :rocket: Enhancement
+* [#397](https://github.com/namikingsoft/interv-timer/pull/397) Shorten hurry sound playback time ([@namikingsoft](https://github.com/namikingsoft))
+* [#396](https://github.com/namikingsoft/interv-timer/pull/396) Change sound to like microwave oven ([@namikingsoft](https://github.com/namikingsoft))
+
+#### :house: Internal
+* [#395](https://github.com/namikingsoft/interv-timer/pull/395) Move clearing localStorage to afterEach for stable e2e on windows ([@namikingsoft](https://github.com/namikingsoft))
+
+#### Committers: 1
+- Namiki ([@namikingsoft](https://github.com/namikingsoft))
+
+
+## v0.6.0-beta.6 (2023-03-13)
 
 #### :rocket: Enhancement
 * [#393](https://github.com/namikingsoft/interv-timer/pull/393) Play sound on hurry and timeup ([@namikingsoft](https://github.com/namikingsoft))
@@ -9,6 +22,7 @@
 * [#394](https://github.com/namikingsoft/interv-timer/pull/394) Downgrade electron to 22 for fix degradation ([@namikingsoft](https://github.com/namikingsoft))
 
 #### :house: Internal
+* [#392](https://github.com/namikingsoft/interv-timer/pull/392) Install @emotion/styled for upgrade @mui to latest ([@namikingsoft](https://github.com/namikingsoft))
 * [#391](https://github.com/namikingsoft/interv-timer/pull/391) Upgrade dependencies to latest ([@namikingsoft](https://github.com/namikingsoft))
 
 #### Committers: 1
