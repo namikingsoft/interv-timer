@@ -12,7 +12,8 @@ export const playTimeup = async (): Promise<void> =>
   cloneAudio(timeupAudio).play()
 
 export const playHurry = async (): Promise<void> => {
-  await cloneAudio(hurryAudio).play()
-  await new Promise((resolve) => setTimeout(resolve, 250))
-  await cloneAudio(hurryAudio).play()
+  const audio = cloneAudio(hurryAudio)
+  await audio.play()
+  await new Promise((resolve) => setTimeout(resolve, 2500))
+  await audio.pause()
 }
