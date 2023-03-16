@@ -14,6 +14,6 @@ export const playTimeup = async (): Promise<void> =>
 export const playHurry = async (): Promise<void> => {
   const audio = cloneAudio(hurryAudio)
   await audio.play()
-  await new Promise((resolve) => setTimeout(resolve, 2500))
+  await new Promise((resolve) => setTimeout(resolve, 1750)) // 4 ticks
   await audio.pause()
 }
