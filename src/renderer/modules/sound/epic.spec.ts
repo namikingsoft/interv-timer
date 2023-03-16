@@ -22,7 +22,7 @@ describe('mapToPlayOnElapsedSecond', () => {
           lapRemains: [
             {
               label: 'Agenda1',
-              second: 0.1,
+              second: 0.1, // round to 0
             },
           ],
         },
@@ -54,7 +54,7 @@ describe('mapToPlayOnElapsedSecond', () => {
           lapRemains: [
             {
               label: 'Agenda1',
-              second: 29.9,
+              second: 29.9, // round to 30
             },
           ],
         },
@@ -86,7 +86,7 @@ describe('mapToPlayOnElapsedSecond', () => {
           lapRemains: [
             {
               label: 'Agenda1',
-              second: 0.5,
+              second: 0.5, // round to 1
             },
           ],
         },
