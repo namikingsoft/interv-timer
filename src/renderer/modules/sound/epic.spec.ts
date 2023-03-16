@@ -30,7 +30,7 @@ describe('mapToPlayOnElapsedSecond', () => {
 
       const output$ = mapToPlayOnElapsedSecond(action$, state$, {})
 
-      expectObservable(output$).toBe('--a', {
+      expectObservable(output$).toBe('--a--', {
         a: {
           type: 'sound/playTimeup',
         },
