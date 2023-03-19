@@ -4,6 +4,7 @@ import DragIndicatorIcon from '@mui/icons-material/DragIndicator'
 import CloseIcon from '@mui/icons-material/Close'
 import { UpdaterSnackbar } from '../organisms/UpdaterSnackbar'
 import { useSelector, useDispatch } from '../../hooks/redux'
+import { useDragWindow } from '../../hooks/useDragWindow'
 
 interface Props {
   className?: string
@@ -110,6 +111,8 @@ export const AppFrame: React.FC<Props> = ({ className, children }) => {
   }, [dispatch])
 
   const showHeader = isHover
+
+  useDragWindow()
 
   return (
     <ContainerDiv
