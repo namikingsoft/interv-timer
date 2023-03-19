@@ -4,18 +4,13 @@ import Container from '@mui/material/Container'
 
 const textBorderColor = '#333'
 
-interface IsDragRegionProps {
-  isDragRegion?: boolean
-}
-
-const ContainerDiv = styled('div')<IsDragRegionProps>(({ isDragRegion }) => ({
+const ContainerDiv = styled('div')(() => ({
   display: 'flex',
   flexFlow: 'column nowrap',
   width: '100%',
   height: '100%',
   color: 'white',
   textShadow: `${textBorderColor} 1px 1px 0, ${textBorderColor} -1px -1px 0, ${textBorderColor} -1px 1px 0, ${textBorderColor} 1px -1px 0, ${textBorderColor} 0px 1px 0, ${textBorderColor}  0 -1px 0, ${textBorderColor} -1px 0 0, ${textBorderColor} 1px 0 0`,
-  WebkitAppRegion: isDragRegion ? 'drag' : undefined,
 }))
 
 const Nav = styled('nav')(() => ({
@@ -23,10 +18,6 @@ const Nav = styled('nav')(() => ({
   display: 'flex',
   flexFlow: 'row nowrap',
   justifyContent: 'space-between',
-  WebkitAppRegion: 'drag',
-  '& button': {
-    WebkitAppRegion: 'no-drag',
-  },
   // Icon
   '& svg': {
     filter: 'drop-shadow(0px 0px 1.5px black);',
@@ -63,7 +54,6 @@ interface Props {
   body: React.ReactNode
   footer?: React.ReactNode
   onDoubleClick?: () => void
-  isDragRegion?: boolean
 }
 
 export const AppLayout: React.FC<Props> = ({
@@ -73,14 +63,9 @@ export const AppLayout: React.FC<Props> = ({
   body,
   footer,
   onDoubleClick,
-  isDragRegion,
 }) => {
   return (
-    <ContainerDiv
-      className={className}
-      onDoubleClick={onDoubleClick}
-      isDragRegion={isDragRegion}
-    >
+    <ContainerDiv className={className} onDoubleClick={onDoubleClick}>
       <Nav>
         <NavLeftDiv>{nav}</NavLeftDiv>
         <NavRightDiv>{navRight}</NavRightDiv>

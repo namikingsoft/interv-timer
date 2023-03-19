@@ -1,3 +1,4 @@
+import { of, NEVER } from 'rxjs'
 import { Epic, ofType } from 'redux-observable'
 import { tap, ignoreElements, mergeMap } from 'rxjs/operators'
 import { Action, State } from '../type'
@@ -5,7 +6,6 @@ import * as api from './api'
 import { roundSecond } from '../timer/util'
 import { hurrySecond } from '../timer/const'
 import { PlayHurryAction, PlayTimeupAction } from './type'
-import { of, NEVER } from 'rxjs'
 
 export const mapToPlayOnElapsedSecond: Epic<
   Action,
