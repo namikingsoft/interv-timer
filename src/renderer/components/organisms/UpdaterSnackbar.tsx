@@ -6,7 +6,6 @@ import IconButton from '@mui/material/IconButton'
 import LinearProgress from '@mui/material/LinearProgress'
 import Alert from '@mui/material/Alert'
 import CloseIcon from '@mui/icons-material/Close'
-import { styled } from '@mui/material/styles'
 import { useTranslationWithKey } from '../../hooks/useTranslationWithKey'
 
 interface Props {
@@ -17,10 +16,6 @@ interface Props {
   onClose: () => void
   onRestart: () => void
 }
-
-const StyledAlert = styled(Alert)(() => ({
-  WebkitAppRegion: 'no-drag',
-}))
 
 export const UpdaterSnackbar: React.FC<Props> = ({
   className,
@@ -39,7 +34,7 @@ export const UpdaterSnackbar: React.FC<Props> = ({
       className={className}
       open={open}
       action={
-        <StyledAlert
+        <Alert
           severity="info"
           icon={false}
           onClose={onClose}
@@ -80,7 +75,7 @@ export const UpdaterSnackbar: React.FC<Props> = ({
             variant="determinate"
             value={percent}
           />
-        </StyledAlert>
+        </Alert>
       }
     />
   )
