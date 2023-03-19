@@ -7,6 +7,14 @@ export interface SetVisibleOnAllWorkSpacesAction {
   payload: boolean
 }
 
+export interface DragWindowAction {
+  type: 'ipc/dragWindow'
+  payload: {
+    startX: number
+    startY: number
+  }
+}
+
 export interface ShortcutToggleAction {
   type: 'ipc/shortcutToggle'
 }
@@ -50,6 +58,7 @@ export interface UpdaterErrorAction {
 export type RequestAction =
   | QuitAction
   | SetVisibleOnAllWorkSpacesAction
+  | DragWindowAction
   | ShortcutToggleAction
   | ShortcutLapAction
   | ShortcutUndoAction

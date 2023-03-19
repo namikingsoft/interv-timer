@@ -1,6 +1,6 @@
 import { Epic, ofType } from 'redux-observable'
 import { Subject } from 'rxjs'
-import { tap, map } from 'rxjs/operators'
+import { tap, map, ignoreElements } from 'rxjs/operators'
 import { Action, AppInitAction, NoopAction } from '../type'
 import {
   SetVisibleOnAllWorkspaces,
@@ -23,23 +23,24 @@ export const initialize: Epic<Action, NoopAction> = (action$) =>
     map(() => ({ type: 'noop' })),
   )
 
-export const send: Epic<Action, NoopAction> = (action$) =>
+export const send: Epic<Action> = (action$) =>
   action$.pipe(
     ofType<
       Action,
       | 'ipc/quit'
       | 'ipc/setVisibleOnAllWorkspaces'
+      | 'ipc/dragWindow'
       | 'ipc/updaterCheckForUpdates'
-      | 'ipc/updaterQuitAndInstall',
-      RequestAction
+      | 'ipc/updaterQuitAndInstall'
     >(
       'ipc/quit',
       'ipc/setVisibleOnAllWorkspaces',
+      'ipc/dragWindow',
       'ipc/updaterCheckForUpdates',
       'ipc/updaterQuitAndInstall',
     ),
-    tap((action) => api.send(action)),
-    map(() => ({ type: 'noop' })),
+    tap<RequestAction>((action) => api.send(action)),
+    ignoreElements(),
   )
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Epic<unknown>
