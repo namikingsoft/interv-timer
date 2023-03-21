@@ -1,5 +1,18 @@
 
-## 0.6.0-beta.7 (2023-03-16)
+## 0.6.0-beta.8 (2023-03-21)
+
+#### :rocket: Enhancement
+* [#399](https://github.com/namikingsoft/interv-timer/pull/399) Drag frameless window via IPC instead of -webkit-app-region ([@namikingsoft](https://github.com/namikingsoft))
+
+#### :house: Internal
+* [#400](https://github.com/namikingsoft/interv-timer/pull/400) Upgrade electron to v23 and other devDeps ([@namikingsoft](https://github.com/namikingsoft))
+* [#398](https://github.com/namikingsoft/interv-timer/pull/398) Upgrade typescript to v5 ([@namikingsoft](https://github.com/namikingsoft))
+
+#### Committers: 1
+- Namiki ([@namikingsoft](https://github.com/namikingsoft))
+
+
+## v0.6.0-beta.7 (2023-03-17)
 
 #### :rocket: Enhancement
 * [#397](https://github.com/namikingsoft/interv-timer/pull/397) Shorten hurry sound playback time ([@namikingsoft](https://github.com/namikingsoft))
